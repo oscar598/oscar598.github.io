@@ -94,7 +94,7 @@ def page_html(w, h, edit):
 </section>''')
         elif opt.get("text"):
             els.append(f'''<section class="over" id="o{i}">
-  <div class="cap {opt.get('pos') or ('low' if lower or kind == 'clip' else 'mid')}"><span>{html.escape(opt["text"])}</span></div>
+  <div class="cap {opt.get('pos') or ('low' if lower or kind == 'clip' else 'mid')}{' small' if opt.get('small') else ''}"><span>{html.escape(opt["text"])}</span></div>
   {f'<div class="corner">{html.escape(opt["corner"])}</div>' if opt.get("corner") else ''}
 </section>''')
     return f'''<!doctype html><html><head><meta charset="utf-8">
@@ -119,6 +119,7 @@ def page_html(w, h, edit):
   .cap.top {{ top: {round((120 if lower else 330) * s)}px; }}
   .cap span {{ font: 400 {round((54 if lower else 58) * s)}px/1.25 "Michroma", sans-serif; color: #f4efe6; text-align: center; letter-spacing: .01em;
               text-shadow: 0 2px {round(24 * s)}px rgba(0,0,0,.9), 0 0 {round(6 * s)}px rgba(0,0,0,.8); max-width: 20ch; }}
+  .cap.small span {{ font-size: {round((40 if lower else 44) * s)}px; max-width: 24ch; }}
   .corner {{ position: absolute; right: {round(44 * s)}px; top: {round(40 * s)}px; font: 500 {round(18 * s)}px "JetBrains Mono", monospace;
              letter-spacing: .2em; color: rgba(244,239,230,.75); text-shadow: 0 1px 8px rgba(0,0,0,.9); }}
 </style></head><body>{"".join(els)}</body></html>'''

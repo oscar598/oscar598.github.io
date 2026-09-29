@@ -37,6 +37,14 @@ milestone) to answer "why?". Teleprompter: open `teleprompter.html` on a laptop 
 - B. "How many people can own one car? I'm going to find out."
 
 ## After the shoot
-Put the clips in `own-a-car/marketing/video/raw/` (gitignored) and ask for the edit. It cuts the takes against the
-existing site recordings and renders, burns in captions (Michroma, all caps, two lines max) and exports 9:16 + 16:9,
-and a 30 s cut without lines 7–8.
+1. Pick your best take of each line and save it as `own-a-car/marketing/video/raw/01.mp4` … `10.mp4`
+   (gitignored; any phone format works).
+2. Optional: edit `founder.json`. Change a caption, set `"trim": [in, out]` on a line whose automatic trim is off,
+   or delete lines 7–8 for the 30 s cut.
+3. Run it (needs the site recordings from the launch video, see `tools/launch_video.py`):
+   ```bash
+   python3 own-a-car/tools/founder_video.py <frames> both
+   ```
+   → `marketing/x/clips/founder-9x16.mp4` and `founder-16x9.mp4`. Silence at both ends of each take is cut
+   automatically, with a breath kept. Captions are burned in, cutaways keep your voice underneath, and the audio
+   is levelled to −16 LUFS.

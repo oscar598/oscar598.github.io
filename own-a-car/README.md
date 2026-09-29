@@ -25,16 +25,16 @@ python3 -m http.server 8080   # from the repo root, then open http://localhost:8
 | `tools/test_ops.py` | End-to-end test against a fake Stripe |
 | `tools/render.js` · `wordmark.py` · `packaging.py` | Rebuild PNG cards, logos and print files |
 | `tools/fetch_assets.sh` | Pulls the Runway renders into `assets/` |
-| `tools/record_clips.js` · `launch_video.py` | Record the site's physics (clean, 16:9 + 9:16) and cut the launch video, teasers and the shatter clip |
+| `tools/record_clips.js` · `launch_video.py` · `founder_video.py` | Record the site's physics (clean, 16:9 + 9:16); cut the launch video, teasers and shatter clip; cut the founder video from your takes |
 | `tools/xpost.py` · `../.github/workflows/own-a-car-xpost.yml` | The X auto-poster: posts approved, due entries from the queue (inert until X keys are added) |
 | `marketing/research/` | Sourced research: how X launches and launch videos went viral, and the frameworks drawn from them |
 | `marketing/x/queue.json` · `posts.md` | Every scheduled post (the source of truth) and its readable view (generated) |
 | `marketing/x/clips/` | Launch video, teasers and the shatter clip, 9:16 and 16:9 |
-| `marketing/video/` | Founder video shoot sheet and teleprompter |
+| `marketing/video/` | Founder video: shoot sheet, teleprompter, edit plan (`founder.json`) |
 | `../.github/workflows/own-a-car-sync.yml` | Syncs Stripe → registry every 15 min |
 | `brand/` | Logos, key mark, favicon, OG, X avatar and header, `BRAND.md`, visual guide (`brand/index.html`) |
 | `assets/` | Runway renders + `RUNWAY.md` (task IDs, prompts, what's where) |
-| `fonts/` | Self-hosted Fraunces, Inter, JetBrains Mono (OFL) |
+| `fonts/` | Self-hosted Michroma, Saira, JetBrains Mono (OFL) |
 | `marketing/x/` | X playbook, launch thread + post bank, 15 rendered post cards, tracker |
 | `marketing/press/` | Press release, fact sheet, pitches |
 | `marketing/email/` | Owner emails: welcome, milestone, funded, refund, shipped |

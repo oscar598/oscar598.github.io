@@ -1,0 +1,16 @@
+{
+  "about": "The founder video edit (Script C). One entry per line. 'take' is the file in marketing/video/raw/ (your best take of that line). 'cutaway' swaps the picture for footage while your voice keeps playing: a recorded scene (rain, shatter, names) or a still (assets/...). 'trim' is [in, out] seconds; leave it out and the silence at each end is cut automatically. Delete a line to drop it (the 30 s cut drops 7 and 8).",
+  "lines": [
+    { "take": "01.mp4", "caption": "I'M SELLING ONE LAMBORGHINI TO AS MANY PEOPLE AS WANT IT." },
+    { "take": "02.mp4", "caption": "IT'S FIFTY DOLLARS. YOU GET A KEY.", "cutaway": "assets/key.jpg", "corner": "CONCEPT RENDER" },
+    { "take": "03.mp4", "caption": "THERE'S NO LIMIT. IF A HUNDRED THOUSAND PEOPLE BUY ONE, A HUNDRED THOUSAND PEOPLE OWN IT." },
+    { "take": "04.mp4", "caption": "EVERY NEW OWNER MAKES THE CAR MORE OWNED, AND EVERY OWNER LESS OF AN OWNER.", "cutaway": "shatter", "corner": "SCREEN RECORDING" },
+    { "take": "05.mp4", "caption": "YOU CAN'T DRIVE IT. THE KEY DOESN'T START IT." },
+    { "take": "06.mp4", "caption": "YOUR NAME GOES ON THE CAR. AT 6,000 OWNERS, IT'S ABOUT 18 MM TALL.", "cutaway": "names", "corner": "SCREEN RECORDING" },
+    { "take": "07.mp4", "caption": "IT ISN'T AN INVESTMENT. IT'S WORSE. IT'S ART." },
+    { "take": "08.mp4", "caption": "I WANTED TO KNOW WHAT OWNERSHIP MEANS WHEN EVERYBODY HAS IT.", "cutaway": "rain", "corner": "SCREEN RECORDING" },
+    { "take": "09.mp4", "caption": "IF 6,000 PEOPLE DON'T BUY A KEY BY DEC 9, EVERYONE GETS THEIR MONEY BACK, AND THE CAR STAYS A PICTURE." },
+    { "take": "10.mp4", "caption": "RIGHT NOW IT'S A RENDER.", "cutaway": "assets/car.jpg", "corner": "CONCEPT RENDER" }
+  ],
+  "end": { "kicker": "$50 · NO LIMIT · DEC 9", "headline": "OWN A CAR.", "seconds": 2.2 }
+}
