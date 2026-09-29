@@ -72,15 +72,20 @@
     </section>
 
     <!-- 03 · Names on the car. -->
-    <section class="split band">
-      <figure class="media media--wide"><img src="assets/names.jpg" alt="The car wrapped in thousands of owners' names" loading="lazy" onerror="this.parentElement.classList.add('empty')"></figure>
-      <div>
-        <p class="kicker mono">03 · Proof of ownership</p>
-        <h2>Every owner's name goes on the car.</h2>
-        <p>When the presale closes, the car is wrapped, bumper to bumper, in the name of every owner. One name per key. The more keys, the smaller the names.</p>
-        <p class="stat">At <b id="n-owners">—</b> keys, each name is <b id="n-mm">—</b> tall.</p>
-        <p class="dim">Leave the name field blank at checkout and you're listed as your key number instead.</p>
+    <section class="names-band band">
+      <div class="names-copy">
+        <div>
+          <p class="kicker mono">03 · Proof of ownership</p>
+          <h2>Every owner's name goes on the car.</h2>
+        </div>
+        <div>
+          <p>When the presale closes, the car is wrapped, bumper to bumper, in the name of every owner. One name per key. The more keys, the smaller the names.</p>
+          <p class="stat">At <b id="n-owners">—</b> keys, each name is <b id="n-mm">—</b> tall.</p>
+          <p class="dim">Hover the car to read it. Leave the name field blank at checkout and you're listed as your key number.</p>
+        </div>
       </div>
+      <!-- The Name Wrap: every owner's name on the car, to scale (physics/names.js) -->
+      <div class="namewrap"><canvas id="n-canvas" role="img" aria-label="The car wrapped in every owner's name, drawn to scale"></canvas></div>
     </section>
 
     <!-- 04 · How it works. -->
@@ -184,6 +189,7 @@
 
   <script src="own.js"></script>
   <script src="physics/shatter.js"></script>
+  <script src="physics/names.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

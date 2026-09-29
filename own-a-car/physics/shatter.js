@@ -714,5 +714,6 @@ class Shatter {
   }
 }
 
-window.OACShatter = { Shatter: Shatter, owners: shOwners, share: shShare, thing: shThing, pad: shPad };
+window.OACShatter = { Shatter: Shatter, owners: shOwners, share: shShare, thing: shThing, pad: shPad,
+  traceBody: shTraceBody, traceWheels: shTraceWheels, x: shX, y: shY, wheels: { front: SH_FW, rear: SH_RW, r: SH_WR } };
 })();

@@ -30,7 +30,14 @@
       : `At ${fmt(n)} keys, each one owns about ${OAC.thing(g)}.`;
     $("n-owners").textContent = fmt(n);
     $("n-mm").textContent = OAC.nameHeightMm(cfg, n).toFixed(0) + " mm";
+    names.setOwners(n);
   }
+  // One name slot per key, in key order; anonymous keys show their number.
+  const slots = [];
+  reg.orders.filter((o) => !o.refunded).forEach((o) => { for (let k = o.from; k <= o.to; k++) slots.push({ n: k, name: o.name }); });
+  const names = new OACNames.NameWrap($("n-canvas"), {
+    names: slots, youAt: sold + 1, owners: sold + 1, mmFor: (n) => OAC.nameHeightMm(cfg, n),
+  });
   range.value = toValue(sold + 1);
   range.addEventListener("input", () => {
     shatter.setValue(+range.value);
