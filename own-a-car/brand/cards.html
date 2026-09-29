@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OWN A CAR · brand renders</title>
+<!-- Source for brand/og.png, x-avatar.png, x-header.png. Rebuild: see brand/BRAND.md § Rebuilding. -->
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  :root { --bg: #0a0a0a; --ink: #f4efe6; --dim: #8d877c; --gold: #c9a24a; --hi: #f3dc9a; --lo: #7a5a1c; }
+  body { margin: 0; background: #222; display: grid; gap: 40px; padding: 40px; justify-content: start; }
+  .card { position: relative; overflow: hidden; background: radial-gradient(70% 80% at 50% 0%, #2c2517 0%, #0f0e0c 55%, var(--bg) 100%); color: var(--ink); font-family: "Fraunces", serif; }
+  .card::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .08;
+                 background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .mono { font-family: "JetBrains Mono", monospace; letter-spacing: .14em; text-transform: uppercase; }
+  .gold { background: linear-gradient(180deg, var(--hi), var(--gold) 55%, var(--lo)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  #og { width: 1200px; height: 630px; }
+  #og .key { position: absolute; width: 520px; right: -40px; top: 70px; transform: rotate(-10deg); filter: drop-shadow(0 30px 60px rgba(201,162,74,.35)); }
+  #og h1 { position: absolute; left: 72px; bottom: 150px; margin: 0; font: 900 124px/.9 "Fraunces"; letter-spacing: -.035em; }
+  #og p { position: absolute; left: 76px; bottom: 76px; margin: 0; font: italic 400 30px "Fraunces"; color: #d8d1c4; }
+  #og .top { position: absolute; left: 76px; top: 64px; font-size: 18px; color: var(--gold); }
+  #og .wm { position: absolute; right: 72px; bottom: 80px; width: 240px; }
+
+  #avatar { width: 400px; height: 400px; display: grid; place-items: center; background: radial-gradient(60% 60% at 50% 40%, #2c2517, var(--bg)); }
+  #avatar img { width: 300px; transform: rotate(-35deg); filter: drop-shadow(0 16px 30px rgba(201,162,74,.35)); }
+
+  #header { width: 1500px; height: 500px; }
+  #header .row { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%) rotate(-4deg); display: flex; gap: 38px; padding-left: 30px; }
+  #header .row img { width: 170px; opacity: .22; }
+  #header .row img:nth-child(5) { opacity: 1; filter: drop-shadow(0 20px 40px rgba(201,162,74,.5)); width: 230px; }
+  #header .cap { position: absolute; right: 60px; bottom: 44px; font-size: 18px; color: var(--dim); text-align: right; }
+  #header .cap b { color: var(--gold); font-weight: 500; }
+</style>
+</head>
+<body>
+  <section class="card" id="og">
+    <div class="top mono">An art project · Edition of ∞</div>
+    <img class="key" src="key.svg" alt="">
+    <h1>You now<br>own a car.</h1>
+    <p>$50 buys a key to a Lamborghini. No limit on keys.</p>
+    <img class="wm" src="wordmark.svg" alt="">
+  </section>
+
+  <section class="card" id="avatar"><img src="key.svg" alt=""></section>
+
+  <section class="card" id="header">
+    <div class="row">
+      <img src="key.svg" alt=""><img src="key.svg" alt=""><img src="key.svg" alt=""><img src="key.svg" alt=""><img src="key.svg" alt="">
+      <img src="key.svg" alt=""><img src="key.svg" alt=""><img src="key.svg" alt=""><img src="key.svg" alt=""><img src="key.svg" alt="">
+      <img src="key.svg" alt=""><img src="key.svg" alt="">
+    </div>
+    <div class="cap mono">Unlimited keys · <b>one car</b></div>
+  </section>
+</body>
+</html>

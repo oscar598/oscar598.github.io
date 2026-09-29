@@ -6,3 +6,4 @@ story/oscar-story-dossier.md
 # OWN A CAR: buyer names, emails and addresses. Never commit.
 own-a-car/ops/private/
 __pycache__/
+own-a-car/assets/raw/

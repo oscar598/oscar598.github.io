@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Brand Guide · OWN A CAR</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../fonts/fonts.css">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-top: 24px; }
+    .sw { border: 1px solid var(--line); }
+    .sw div { height: 96px; }
+    .sw p { margin: 0; padding: 10px 12px; font: 500 12px/1.5 var(--mono); color: var(--dim); }
+    .sw b { color: var(--ink); font-weight: 500; display: block; }
+    .logos { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 24px; }
+    .logos figure { margin: 0; border: 1px solid var(--line); padding: 40px 28px; display: grid; place-items: center; min-height: 180px; }
+    .logos figure.light { background: var(--ink); }
+    .logos img { max-width: 100%; max-height: 90px; }
+    .logos figcaption { font: 500 11px var(--mono); color: var(--dim); margin-top: 18px; letter-spacing: .08em; }
+    .type p { margin: 18px 0 0; }
+    .t1 { font: 900 clamp(48px, 9vw, 96px)/.95 var(--serif); letter-spacing: -.03em; }
+    .t2 { font: italic 400 26px/1.35 var(--serif); color: #d8d1c4; }
+    .t3 { font: 500 14px var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--gold); }
+    .t4 { font: 400 17px/1.6 var(--sans); color: #cfc8bb; max-width: 60ch; }
+    .voice { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 24px; }
+    .voice div { background: var(--bg); padding: 18px 20px; }
+    .voice h3 { font: 500 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin: 0 0 8px; }
+    .voice p { margin: 8px 0 0; color: #cfc8bb; }
+    .voice .no p { color: var(--dim); text-decoration: line-through; text-decoration-color: #7a3a2a; }
+    .renders { display: grid; gap: 12px; margin-top: 24px; }
+    .renders img { border: 1px solid var(--line); }
+  </style>
+</head>
+<body>
+  <header class="bar"><a class="mark" href="../">OWN A CAR</a><nav class="nav mono"><a href="BRAND.md">BRAND.md</a></nav></header>
+  <main>
+    <section class="band">
+      <p class="kicker mono">Brand guide · v1</p>
+      <h2>Unlimited keys. One car.</h2>
+      <p class="t4" style="margin-top:20px">Deadpan, exact, a little dry. The brand reads like a title deed for a joke that isn't one. Night-garage black, one brass accent, numbers set in mono.</p>
+    </section>
+
+    <section class="band">
+      <p class="kicker mono">Logos</p>
+      <div class="logos">
+        <figure><img src="lockup.svg" alt="Lockup"><figcaption>lockup.svg</figcaption></figure>
+        <figure class="light"><img src="lockup-black.svg" alt="Lockup, black"><figcaption>lockup-black.svg</figcaption></figure>
+        <figure><img src="wordmark.svg" alt="Wordmark"><figcaption>wordmark.svg</figcaption></figure>
+        <figure><img src="wordmark-gold.svg" alt="Wordmark, gold"><figcaption>wordmark-gold.svg</figcaption></figure>
+        <figure><img src="key.svg" alt="Key mark"><figcaption>key.svg</figcaption></figure>
+        <figure><img src="x-avatar.png" alt="X avatar" style="max-height:140px;border-radius:50%"><figcaption>x-avatar.png</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="band">
+      <p class="kicker mono">Color</p>
+      <div class="swatches">
+        <div class="sw"><div style="background:#0a0a0a"></div><p><b>Garage black</b>#0a0a0a</p></div>
+        <div class="sw"><div style="background:#f4efe6"></div><p><b>Bone</b>#f4efe6</p></div>
+        <div class="sw"><div style="background:#8d877c"></div><p><b>Dim</b>#8d877c</p></div>
+        <div class="sw"><div style="background:#262420"></div><p><b>Line</b>#262420</p></div>
+        <div class="sw"><div style="background:linear-gradient(180deg,#f3dc9a,#c9a24a 55%,#7a5a1c)"></div><p><b>Brass</b>#c9a24a · foil in print</p></div>
+      </div>
+    </section>
+
+    <section class="band type">
+      <p class="kicker mono">Type</p>
+      <p class="t1">You now own a car.</p>
+      <p class="t2">$50 buys a key to a Lamborghini. There's no limit on keys.</p>
+      <p class="t3">Key Nº 0042 · Edition of ∞</p>
+      <p class="t4">Fraunces Black for headlines, Fraunces Italic for ledes, JetBrains Mono for every number and label, Inter for body. All open-source and self-hosted.</p>
+    </section>
+
+    <section class="band">
+      <p class="kicker mono">Voice</p>
+      <div class="voice">
+        <div><h3>We say</h3><p>1,212 people own this car now.</p><p>Each key is 683 g of Lamborghini. About a football.</p><p>Miss the goal and you're refunded. Automatically.</p></div>
+        <div class="no"><h3>We never say</h3><p>Invest in a Lambo.</p><p>Your key will be worth more.</p><p>One lucky key wins the car.</p></div>
+      </div>
+    </section>
+
+    <section class="band">
+      <p class="kicker mono">Renders</p>
+      <div class="renders">
+        <img src="og.png" alt="Link preview image">
+        <img src="x-header.png" alt="X header">
+      </div>
+    </section>
+  </main>
+</body>
+</html>

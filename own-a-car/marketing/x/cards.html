@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OWN A CAR · X post cards</title>
+<!-- Source for marketing/x/cards/*.png (1200×1200). Rebuild all: bash own-a-car/marketing/x/render.sh -->
+<link rel="stylesheet" href="../../fonts/fonts.css">
+<style>
+  :root { --bg: #0a0a0a; --ink: #f4efe6; --dim: #8d877c; --line: #2a2723; --gold: #c9a24a; --hi: #f3dc9a; --lo: #7a5a1c; }
+  body { margin: 0; background: #222; display: grid; gap: 40px; padding: 40px; }
+  .c { position: relative; width: 1200px; height: 1200px; overflow: hidden; box-sizing: border-box; padding: 96px;
+       background: radial-gradient(80% 70% at 50% 0%, #2a2417 0%, #0f0e0c 55%, var(--bg) 100%); color: var(--ink);
+       font-family: "Fraunces", serif; display: flex; flex-direction: column; }
+  .c::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .07;
+              background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+  .mono { font-family: "JetBrains Mono", monospace; letter-spacing: .14em; text-transform: uppercase; }
+  .gold { background: linear-gradient(180deg, var(--hi), var(--gold) 55%, var(--lo)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .kick { font-size: 22px; color: var(--gold); }
+  .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; font-size: 20px; color: var(--dim); }
+  .foot img { width: 250px; }
+  h1 { font-weight: 900; letter-spacing: -.035em; margin: 0; line-height: .92; }
+  .xl { font-size: 150px; } .l { font-size: 112px; } .m { font-size: 84px; }
+  p.lede { font: italic 400 42px/1.3 "Fraunces"; color: #d8d1c4; margin: 40px 0 0; max-width: 24ch; }
+  .keyart { position: absolute; width: 640px; right: -80px; top: 120px; transform: rotate(-12deg); filter: drop-shadow(0 30px 60px rgba(201,162,74,.35)); }
+
+  /* counter */
+  .num { font: 900 330px/.85 "Fraunces"; letter-spacing: -.05em; margin: auto 0 0; }
+  .counter .foot { margin-top: 90px; }
+  .under { font: 900 76px/1 "Fraunces"; letter-spacing: -.03em; margin: 26px 0 0; }
+  .bar { height: 10px; background: var(--line); margin-top: 60px; position: relative; }
+  .bar i { position: absolute; inset: 0 auto 0 0; background: linear-gradient(90deg, var(--lo), var(--hi)); }
+  .barlab { display: flex; justify-content: space-between; margin-top: 18px; font-size: 20px; color: var(--dim); }
+
+  /* table */
+  table { width: 100%; border-collapse: collapse; margin-top: 56px; }
+  td { padding: 22px 0; border-top: 1px solid var(--line); font-size: 38px; }
+  td:first-child { font: 500 34px "JetBrains Mono"; color: var(--dim); width: 34%; }
+  td:nth-child(2) { font-weight: 900; font-size: 46px; }
+  td:last-child { text-align: right; font-style: italic; color: #cfc8bb; }
+  tr.you td { color: var(--gold); }
+  tr.you td:nth-child(2) { color: var(--gold); }
+
+  /* stack */
+  .stack { display: flex; height: 90px; gap: 3px; margin-top: 64px; }
+  .stack i { display: block; }
+  .legend { list-style: none; padding: 0; margin: 34px 0 0; display: grid; gap: 14px; font-size: 32px; }
+  .legend li { display: flex; align-items: center; gap: 18px; }
+  .legend li span { margin-left: auto; font: 500 30px "JetBrains Mono"; }
+  .legend b { width: 26px; height: 26px; display: inline-block; }
+
+  /* cert */
+  .paper { margin: 30px auto 0; width: 620px; height: 868px; background: var(--ink); color: #151310; padding: 60px 52px; box-sizing: border-box;
+           display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; box-shadow: 0 40px 90px rgba(0,0,0,.7); transform: rotate(-3deg); }
+  .paper::before { content: ""; position: absolute; inset: 20px; border: 1.5px solid #b38b3a; }
+  .paper .wm { width: 200px; }
+  .paper .k { font-size: 14px; color: #6d665b; margin-top: 30px; }
+  .paper .t { font: 300 38px "Fraunces"; margin-top: 10px; }
+  .paper .n { font: 900 44px "Fraunces"; margin-top: 60px; }
+  .paper .no { margin-top: auto; font: 500 64px "JetBrains Mono"; }
+  .paper .no small { display: block; font-size: 14px; letter-spacing: .24em; color: #6d665b; }
+
+  .names { margin-top: 40px; font: 400 19px/1.55 "Fraunces"; color: #6c665c; text-align: justify; hyphens: none; flex: 1; overflow: hidden;
+           -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent); }
+  .names b { color: var(--gold); font-weight: 900; }
+  .quote { font: 300 76px/1.2 "Fraunces"; margin: auto 0 0; letter-spacing: -.01em; }
+  #statement .foot { margin-top: 90px; }
+  .sig { font: italic 400 34px "Fraunces"; color: var(--dim); margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<!-- 01 · Launch: the whole idea in one image. -->
+<section class="c" id="launch">
+  <div class="kick mono">An art project · Edition of ∞</div>
+  <img class="keyart" src="../../brand/key.svg" alt="">
+  <h1 class="xl" style="margin-top:auto">You now<br>own a car.</h1>
+  <p class="lede">$50 buys a key to a Lamborghini. There's no limit on keys. Everyone who holds one owns it.</p>
+  <div class="foot mono" style="margin-top:70px"><span>ownacar · link in bio</span><img src="../../brand/wordmark.svg" alt=""></div>
+</section>
+
+<!-- 02 · The shrinking share: the most screenshot-able fact. -->
+<section class="c" id="shrink">
+  <div class="kick mono">How much Lamborghini is $50?</div>
+  <h1 class="m" style="margin-top:26px">The more owners,<br>the less car.</h1>
+  <table>
+    <tr><td>1 owner</td><td>1,430 kg</td><td>the whole car</td></tr>
+    <tr><td>100</td><td>14 kg</td><td>a car tire</td></tr>
+    <tr><td>1,000</td><td>1.4 kg</td><td>a liter of water</td></tr>
+    <tr class="you"><td>6,000</td><td>238 g</td><td>a phone</td></tr>
+    <tr><td>100,000</td><td>14 g</td><td>a lug nut, roughly</td></tr>
+  </table>
+  <div class="foot mono"><span>$50 · one key · no limit</span><img src="../../brand/wordmark.svg" alt=""></div>
+</section>
+
+<!-- 03 · The math. -->
+<section class="c" id="math">
+  <div class="kick mono">The math</div>
+  <h1 class="l" style="margin-top:26px">6,000 × $50<br>= 1 Lamborghini.</h1>
+  <div class="stack">
+    <i style="flex:1.75;background:#4a453c"></i><i style="flex:13;background:#8d877c"></i><i style="flex:6;background:#cfc8bb"></i><i style="flex:8.8;background:#7a5a1c"></i><i style="flex:20.45;background:#c9a24a"></i>
+  </div>
+  <ul class="legend">
+    <li><b style="background:#c9a24a"></b>The car fund<span>$20.45</span></li>
+    <li><b style="background:#8d877c"></b>Key, box &amp; certificate<span>$13.00</span></li>
+    <li><b style="background:#7a5a1c"></b>Tax reserve<span>$8.80</span></li>
+    <li><b style="background:#cfc8bb"></b>Shipping to your door<span>$6.00</span></li>
+    <li><b style="background:#4a453c"></b>Card fees<span>$1.75</span></li>
+  </ul>
+  <div class="foot mono"><span>Open books. Every receipt, posted.</span><img src="../../brand/wordmark.svg" alt=""></div>
+</section>
+
+<!-- 04 · Counters: milestone posts. Duplicate for 100 / 1,000 / 2,500 / 5,000 / 6,000. -->
+<section class="c counter" id="count-100"   data-n="100"></section>
+<section class="c counter" id="count-1000"  data-n="1000"></section>
+<section class="c counter" id="count-2500"  data-n="2500"></section>
+<section class="c counter" id="count-5000"  data-n="5000"></section>
+<section class="c counter" id="count-6000"  data-n="6000"></section>
+
+<!-- 05 · Names on the car. -->
+<section class="c" id="names">
+  <div class="kick mono">Proof of ownership</div>
+  <h1 class="m" style="margin-top:26px">Every owner's name goes on the car.</h1>
+  <p class="lede" style="max-width:none;font-size:38px">At 6,000 owners, yours is <span class="gold" style="font-weight:900;font-style:normal">18 mm</span> tall.</p>
+  <div class="names" id="namewall"></div>
+  <div class="foot mono"><span>The more owners, the smaller the names</span><img src="../../brand/wordmark.svg" alt=""></div>
+</section>
+
+<!-- 06 · The promise. -->
+<section class="c" id="refund">
+  <div class="kick mono">All or nothing</div>
+  <h1 class="l" style="margin-top:auto">Miss the goal,<br>get it all back.</h1>
+  <p class="lede">If we don't sell 6,000 keys by the deadline, every order is refunded in full. Automatically. No forms.</p>
+  <div class="foot mono" style="margin-top:70px"><span>ownacar</span><img src="../../brand/wordmark.svg" alt=""></div>
+</section>
+
+<!-- 07 · Owner certificate (what buyers post). -->
+<section class="c" id="certificate">
+  <div class="kick mono" style="text-align:center">This is what $50 looks like on paper</div>
+  <div class="paper">
+    <img class="wm" src="../../brand/wordmark-black.svg" alt="">
+    <div class="k mono">Certificate of ownership</div>
+    <div class="t">You now own a car.</div>
+    <div class="n">Your Name Here</div>
+    <div class="no"><small>KEY Nº</small>0042</div>
+  </div>
+</section>
+
+<!-- 08 · Deadline. -->
+<section class="c" id="deadline">
+  <div class="kick mono">Presale closes Dec 9 · 11:59 pm ET</div>
+  <h1 class="xl" style="margin-top:auto"><span class="gold">48 hours</span><br>left to own a<br>Lamborghini.</h1>
+  <div class="foot mono" style="margin-top:70px"><span>$50 · no limit on keys</span><img src="../../brand/wordmark.svg" alt=""></div>
+</section>
+
+<!-- 09 · Not an investment. -->
+<section class="c" id="notinvest">
+  <div class="kick mono">Straight answer</div>
+  <h1 class="l" style="margin-top:auto">This is not an investment.</h1>
+  <p class="lede" style="font-size:52px;max-width:18ch">It's worse.<br>It's art.</p>
+  <div class="foot mono" style="margin-top:70px"><span>No returns. No resale. Just a key.</span><img src="../../brand/wordmark.svg" alt=""></div>
+</section>
+
+<!-- 10 · The statement. -->
+<section class="c" id="statement">
+  <div class="kick mono">Own a Car · statement</div>
+  <p class="quote">"At some number of owners, a Lamborghini belongs to everybody, and to nobody."</p>
+  <div class="sig">— Oscar Lu</div>
+  <div class="foot mono"><span>Edition of ∞</span><img src="../../brand/wordmark.svg" alt=""></div>
+</section>
+
+<!-- 11 · The key doesn't start the car. -->
+<section class="c" id="nostart">
+  <div class="kick mono">FAQ</div>
+  <img class="keyart" src="../../brand/key.svg" alt="" style="top:300px">
+  <h1 class="l" style="margin-top:auto">Does the key<br>start the car?</h1>
+  <p class="lede">No. Nothing does, for you. That's what owning something with 6,000 people is like.</p>
+  <div class="foot mono" style="margin-top:70px"><span>ownacar</span><img src="../../brand/wordmark.svg" alt=""></div>
+</section>
+
+<script>
+  const fmt = (n) => n.toLocaleString("en-US");
+  const grams = (n) => { const g = 1430000 / n; return g >= 1000 ? (g / 1000).toFixed(1) + " kg" : Math.round(g) + " g"; };
+  document.querySelectorAll(".counter").forEach((el) => {
+    const n = +el.dataset.n, goal = 6000;
+    const done = n >= goal;
+    el.innerHTML = `
+      <div class="kick mono">${done ? "Goal reached" : "Presale · live count"}</div>
+      <div class="num gold">${fmt(n)}</div>
+      <div class="under">${done ? "owners. One Lamborghini." : "owners of this Lamborghini, so far."}</div>
+      <div class="bar"><i style="width:${Math.min(100, n / goal * 100)}%"></i></div>
+      <div class="barlab mono"><span>${fmt(n)} / ${fmt(goal)} keys</span><span>each key: ${grams(n)}</span></div>
+      <div class="foot mono"><span>${done ? "We're buying the car." : "$50 · no limit on keys"}</span><img src="../../brand/wordmark.svg" alt=""></div>`;
+  });
+  // Placeholder names for the wall card; one lands in brass.
+  const first = ["Maya","Jordan","Priya","Leo","Sam","Ava","Noah","Zoe","Kai","Ines","Theo","Nia","Omar","Lucy","Ben","Mei","Ari","Jo","Rafa","Tess","Wren","Eli","Suki","Dev"];
+  let s = 7, out = [];
+  const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
+  for (let i = 0; i < 900; i++) out.push(first[Math.floor(rnd() * first.length)] + " " + "ABCDEFGHJKLMNPRSTW"[Math.floor(rnd() * 18)] + ".");
+  out[333] = "<b>You</b>";
+  document.getElementById("namewall").innerHTML = out.join(" · ");
+</script>
+</body>
+</html>
