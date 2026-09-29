@@ -5,6 +5,7 @@
 import { createWorld } from "../core/world.js";
 import { rand, reduceMotion, onResize } from "../core/util.js";
 import { scrollState } from "../core/smooth.js";
+import { stats } from "../core/stats.js";
 
 const { Bodies, Body, Composite } = window.Matter;
 
@@ -32,6 +33,7 @@ export async function initOpen(site) {
     walls: { floor: true, left: true, right: true, ceiling: false },
     wallInset: 0,
     floorOffset: 78, // keep the pile above the film-strip nav
+    onGrab: () => stats.letters++,
     beforeDraw(ctx, w, h) {
       // Floor line + frame marks
       ctx.strokeStyle = "rgba(242,237,227,0.14)";

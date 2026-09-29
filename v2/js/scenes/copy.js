@@ -3,8 +3,15 @@
 
 import { esc, splitWords, reduceMotion } from "../core/util.js";
 import { scrollState } from "../core/smooth.js";
+import { sound } from "../core/sound.js";
 
 const { gsap, ScrollTrigger } = window;
+
+// Tiny clapperboard icon: the striped stick (top) hinges shut onto the slate.
+const CLAPPER = `<svg class="clapper" viewBox="0 0 24 20" aria-hidden="true">
+  <g class="clap-stick"><rect x="1" y="2" width="22" height="5" rx="1"/><path d="M5 2 8 7M11 2l3 5M17 2l3 5" stroke="var(--ink)" stroke-width="1.6"/></g>
+  <rect x="1" y="8" width="22" height="11" rx="1.5"/>
+</svg>`;
 
 export function renderCopy(site) {
   document.querySelectorAll("[data-chapter]").forEach((block) => {
@@ -13,7 +20,7 @@ export function renderCopy(site) {
     if (!ch) return;
     const n = String(i + 1).padStart(2, "0");
     block.innerHTML = `
-      <p class="label">SC. ${n} · ${esc(ch.years)}</p>
+      <p class="label">${CLAPPER}SC. ${n} · ${esc(ch.years)}</p>
       <p class="place">${esc(ch.place)}</p>
       <h2>${esc(ch.title)}</h2>
       ${ch.body.map((line) => `<p class="line">${esc(line)}</p>`).join("")}
@@ -28,6 +35,7 @@ export function renderCopy(site) {
     if (reduceMotion) return;
 
     gsap.set(words, { yPercent: 110, rotate: 6, opacity: 0 });
+    gsap.set(block.querySelector(".clap-stick"), { rotate: -32, transformOrigin: "0% 100%" });
     gsap.set(block.querySelectorAll(".line, .proof li, blockquote, .label, .place"), { y: 24, opacity: 0 });
 
     ScrollTrigger.create({
@@ -35,6 +43,15 @@ export function renderCopy(site) {
       start: "top 80%",
       once: true,
       onEnter: () => {
+        // Clapperboard snaps shut as the chapter begins.
+        const stick = block.querySelector(".clap-stick");
+        if (stick) {
+          gsap.fromTo(
+            stick,
+            { rotate: -32, transformOrigin: "0% 100%" },
+            { rotate: 0, transformOrigin: "0% 100%", duration: 0.22, delay: 0.1, ease: "power4.in", onComplete: () => sound.clap() }
+          );
+        }
         gsap.to(words, { yPercent: 0, rotate: 0, opacity: 1, duration: 1, stagger: 0.06, ease: "expo.out" });
         gsap.to(block.querySelectorAll(".label, .place"), { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" });
         gsap.to(block.querySelectorAll(".line"), { y: 0, opacity: 1, duration: 0.9, stagger: 0.12, delay: 0.25, ease: "power3.out" });

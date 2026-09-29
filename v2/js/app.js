@@ -58,6 +58,12 @@ async function boot() {
     ["next", "./scenes/next.js", "initNext"],
   ];
   for (const [name, path, fn] of order) await load(name, path, fn);
+  try {
+    const { initCredits } = await import("./scenes/credits.js");
+    scenes.credits = initCredits(site, scenes);
+  } catch (err) {
+    console.error('[v2] scene "credits" failed:', err);
+  }
   window.__ol = scenes; // handy for debugging in the console
 
   // ?debug: helpers for testing when animation frames are paused (e.g. a hidden tab).

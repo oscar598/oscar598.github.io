@@ -70,6 +70,12 @@ export const sound = {
     setTimeout(() => blip({ freq: 1320, type: "sine", decay: 0.6, gain: 0.1 }), 90);
   },
 
+  // Clapperboard: a sharp noise-like crack (two detuned square blips)
+  clap() {
+    blip({ freq: 2400, type: "square", decay: 0.025, gain: 0.07 });
+    blip({ freq: 180, type: "triangle", decay: 0.05, gain: 0.12, slideTo: 90 });
+  },
+
   pop() {
     blip({ freq: 500 + Math.random() * 400, type: "sine", decay: 0.06, gain: 0.08, slideTo: 1200 });
   },

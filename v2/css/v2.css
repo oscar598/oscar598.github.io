@@ -264,6 +264,14 @@ body.has-cursor .cursor { display: grid; place-items: center; }
   color: var(--accent);
   margin: 0 0 18px;
 }
+.clapper {
+  width: 22px;
+  height: 18px;
+  margin-right: 10px;
+  vertical-align: -4px;
+  fill: var(--accent);
+  overflow: visible;
+}
 .copy h2 {
   font-family: var(--serif);
   font-weight: 900;
@@ -738,6 +746,33 @@ body.has-cursor .cursor { display: grid; place-items: center; }
 }
 .blank-cursor { display: inline-block; width: 3px; height: 28px; background: var(--accent); animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
+
+/* ---------- Credits ---------- */
+
+.credits {
+  position: relative;
+  min-height: 160vh;
+  overflow: hidden;
+  display: grid;
+  justify-items: center;
+  padding: 120px var(--pad) 140px;
+  background: #000;
+  text-align: center;
+}
+.credits-roll { max-width: 560px; }
+.credits-title {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(32px, 5vw, 60px);
+  margin: 0 0 64px;
+}
+.credit { margin: 0 0 40px; }
+.credit span { display: block; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.credit b { font-family: var(--serif); font-weight: 600; font-size: 22px; line-height: 1.35; }
+.credits-fin { font-family: var(--serif); font-style: italic; font-size: 44px; margin: 80px 0 0; }
+.credits-fin span { font-style: normal; font-size: 12px; color: var(--muted); }
+.credits-end { position: relative; z-index: 2; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-self: end; margin-top: 60px; }
 
 .foot {
   display: flex;

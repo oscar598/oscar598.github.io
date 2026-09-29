@@ -5,6 +5,7 @@
 
 import { createWorld } from "../core/world.js";
 import { rand, reduceMotion } from "../core/util.js";
+import { stats } from "../core/stats.js";
 
 const { Bodies, Body } = window.Matter;
 const { ScrollTrigger } = window;
@@ -32,6 +33,7 @@ export function initOrigin() {
 
   const world = createWorld(canvas, {
     walls: { floor: true, left: true, right: true, ceiling: false },
+    onGrab: () => stats.objects++,
     beforeDraw(ctx, w, h) {
       // Faint ruled paper
       ctx.strokeStyle = "rgba(242,237,227,0.05)";

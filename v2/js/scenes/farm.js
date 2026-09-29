@@ -6,6 +6,7 @@
 
 import { createWorld } from "../core/world.js";
 import { rand, reduceMotion, onVisible, onResize } from "../core/util.js";
+import { stats } from "../core/stats.js";
 
 const { Bodies, Body } = window.Matter;
 
@@ -37,6 +38,7 @@ export function initFarm() {
   const world = createWorld(canvas, {
     sizeFrom: pile,
     domTarget: pile,
+    onGrab: () => stats.cards++,
     walls: { floor: true, left: true, right: true, ceiling: false },
     draw: sync, // no canvas drawing; we move DOM nodes instead
   });

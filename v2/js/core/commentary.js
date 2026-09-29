@@ -12,6 +12,7 @@ const NOTES = {
   farm: "Achievements as physical yearbook cards you can knock over, because a list of honors is forgettable and a pile you threw isn't.",
   tested: "Scroll is the climb: 3 a.m. to sunrise, 10,152 ft to 14,000. The sky, ridges, sun and altimeter are all tied to one number.",
   now: "The slip 'n slide actually runs: 200+ freshmen slide down and get counted. It shows the same move again, at college scale.",
+  credits: "The credits count what you did here: letters thrown, cards knocked over, whether you sent the email. Every visitor gets their own ending.",
   next: "It ends on a blank page. The recruiter is the next chapter, so the call to action is the story's last beat, not a footer.",
 };
 
