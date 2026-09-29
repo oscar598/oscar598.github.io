@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>OG card generator</title>
+  <!-- Renders the 1200x630 link-preview image. Open this page, then right-click → save the canvas,
+       or read window.ogDataURL from the console. Output lives at v2/assets/og.jpg. -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <style>body{margin:0;background:#222}canvas{display:block;width:1200px;height:630px}</style>
+</head>
+<body>
+  <canvas id="c" width="1200" height="630"></canvas>
+  <script src="../../js/data.js"></script>
+  <script>
+    (async () => {
+      await Promise.all([
+        document.fonts.load('900 200px "Fraunces"'),
+        document.fonts.load('italic 400 40px "Fraunces"'),
+        document.fonts.load('500 20px "JetBrains Mono"'),
+      ]);
+      const c = document.getElementById("c");
+      const x = c.getContext("2d");
+      const W = 1200, H = 630;
+      const site = window.SITE;
+
+      x.fillStyle = "#0e0d0b";
+      x.fillRect(0, 0, W, H);
+
+      // Film perforations top and bottom
+      x.fillStyle = "rgba(242,237,227,0.12)";
+      for (let i = 0; i < W; i += 36) {
+        x.fillRect(i + 8, 14, 18, 12);
+        x.fillRect(i + 8, H - 26, 18, 12);
+      }
+
+      // Label
+      x.fillStyle = "#ff4b2b";
+      x.font = '500 20px "JetBrains Mono"';
+      x.fillText("SC. 00 · A LIFE IN SEVEN CHAPTERS", 72, 104);
+
+      // Name, with the letters slightly tumbled like the physics intro
+      const letters = "OSCAR LU".split("");
+      x.font = '900 158px "Fraunces"';
+      let cx = 64;
+      const rot = [-0.04, 0.03, -0.02, 0.05, -0.03, 0, 0.08, -0.12];
+      letters.forEach((ch, i) => {
+        const w = x.measureText(ch).width;
+        if (ch === " ") { cx += 40; return; }
+        x.save();
+        x.translate(cx + w / 2, 380);
+        x.rotate(rot[i]);
+        x.fillStyle = i >= 6 ? "#ff4b2b" : "#f2ede3";
+        x.textAlign = "center";
+        x.fillText(ch, 0, 0);
+        x.restore();
+        cx += w + 2;
+      });
+
+      // Basketball resting on the U
+      const bx = Math.min(cx + 50, W - 70), by = 338, r = 40;
+      window.ogLayout = { nameEnd: cx, ballX: bx };
+      x.fillStyle = "#e86a2c";
+      x.beginPath(); x.arc(bx, by, r, 0, Math.PI * 2); x.fill();
+      x.strokeStyle = "#0e0d0b"; x.lineWidth = 3.5;
+      x.beginPath(); x.moveTo(bx - r, by); x.lineTo(bx + r, by); x.moveTo(bx, by - r); x.lineTo(bx, by + r); x.stroke();
+      x.beginPath(); x.arc(bx - r * 1.3, by, r, -0.85, 0.85); x.stroke();
+      x.beginPath(); x.arc(bx + r * 1.3, by, r, Math.PI - 0.85, Math.PI + 0.85); x.stroke();
+
+      // Floor line
+      x.strokeStyle = "rgba(242,237,227,0.2)";
+      x.lineWidth = 2;
+      x.beginPath(); x.moveTo(64, 404); x.lineTo(W - 64, 404); x.stroke();
+
+      // Tagline
+      x.fillStyle = "#f2ede3";
+      x.font = 'italic 400 40px "Fraunces"';
+      x.fillText(site.person.tagline, 72, 480);
+
+      // Footer
+      x.fillStyle = "#9a9387";
+      x.font = '500 20px "JetBrains Mono"';
+      x.fillText("Princeton '30 · designer · founder · grab the letters", 72, 548);
+
+      window.ogDataURL = c.toDataURL("image/jpeg", 0.9);
+      document.title = "ready";
+    })();
+  </script>
+</body>
+</html>

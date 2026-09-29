@@ -3,7 +3,7 @@
 //   C       director's commentary
 //   ?       show this list
 
-import { scrollTo } from "./smooth.js";
+import { cutTo as scrollTo } from "./smooth.js";
 import { toast } from "./util.js";
 
 export function initKeys({ commentary, tldr }) {

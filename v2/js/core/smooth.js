@@ -36,6 +36,35 @@ export function initSmooth() {
   });
 }
 
+// A film "cut": flash to black, jump instantly, fade back in. Used for chapter navigation
+// so jumping from 00 to 07 doesn't scroll through (and trigger) every scene in between.
+let cutEl = null;
+export function cutTo(target) {
+  const el = typeof target === "string" ? document.querySelector(target) : target;
+  if (!el) return;
+  if (reduceMotion) {
+    scrollTo(el, { immediate: true });
+    return;
+  }
+  if (!cutEl) {
+    cutEl = document.createElement("div");
+    cutEl.className = "cut";
+    document.body.appendChild(cutEl);
+  }
+  window.gsap
+    .timeline()
+    .to(cutEl, { opacity: 1, duration: 0.16, ease: "power2.in" })
+    .add(() => {
+      // A pinned section reports top=0 while pinned; its pin-spacer wrapper has the real position.
+      const box = el.parentElement?.classList.contains("pin-spacer") ? el.parentElement : el;
+      const y = box.getBoundingClientRect().top + window.scrollY;
+      if (lenis) lenis.scrollTo(y, { immediate: true, force: true });
+      else window.scrollTo(0, y);
+      window.ScrollTrigger.update();
+    })
+    .to(cutEl, { opacity: 0, duration: 0.45, ease: "power2.out", delay: 0.05 });
+}
+
 export function scrollTo(target, opts = {}) {
   if (lenis) lenis.scrollTo(target, { duration: 1.4, ...opts });
   else {
