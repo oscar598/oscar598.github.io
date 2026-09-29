@@ -35,6 +35,11 @@ const links = p.links
   .map((link) => ` · <a href="${esc(link.url)}">${esc(link.label)}</a>`)
   .join("");
 
+// Opened from v2's "Download PDF" button: go straight to the print dialog.
+if (location.hash === "#print") {
+  window.addEventListener("load", () => setTimeout(() => window.print(), 400));
+}
+
 // Came here from v2? Send "← Watch the story" back there instead of v1.
 if (document.referrer.includes("/v2/")) {
   document.getElementById("back-link")?.setAttribute("href", "v2/");

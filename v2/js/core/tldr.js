@@ -17,6 +17,7 @@ export function initTldr(site) {
   modal.setAttribute("role", "dialog");
   modal.setAttribute("aria-modal", "true");
   modal.setAttribute("aria-label", "The short version");
+  modal.setAttribute("data-lenis-prevent", "");
   modal.innerHTML = `
     <div class="tldr-card">
       <button class="tldr-close" type="button" aria-label="Close">×</button>

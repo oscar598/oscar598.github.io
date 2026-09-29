@@ -16,6 +16,7 @@ import { initKeys } from "./core/keys.js";
 import { initTldr } from "./core/tldr.js";
 import { initTab } from "./core/tab.js";
 import { initFilm } from "./core/film.js";
+import { initResumeDrop } from "./core/resume-drop.js";
 
 const { ScrollTrigger } = window;
 const site = window.SITE;
@@ -108,6 +109,7 @@ async function boot() {
   initKeys({ commentary, tldr });
   initTab();
   initFilm();
+  initResumeDrop(site);
 
   // Yosemite strip drifts slower than the page (parallax).
   const strip = document.querySelector(".now-media .media");
