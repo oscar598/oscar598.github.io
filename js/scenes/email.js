@@ -29,6 +29,7 @@ export function initEmail() {
   const plane = document.getElementById("plane");
   const reply = document.getElementById("reply");
   const card = document.getElementById("harvard-card");
+  const meeting = document.getElementById("meeting-photo");
   const odo = document.querySelector("#impressions .odo-num");
 
   // Small honesty note: the email text is a reconstruction.
@@ -74,7 +75,9 @@ export function initEmail() {
       { opacity: 1, y: 0, rotate: 4, scale: 1, duration: 0.9, ease: "bounce.out" },
       "+=0.1"
     )
-    .to(card, { rotate: 2.5, duration: 0.8, ease: "elastic.out(1, 0.35)" });
+    .to(card, { rotate: 2.5, duration: 0.8, ease: "elastic.out(1, 0.35)" })
+    // ...and the call became a meeting: the real photo drops onto the table.
+    .fromTo(meeting, { opacity: 0, y: -300, rotate: 12 }, { opacity: 1, y: 0, rotate: -7, duration: 0.7, ease: "back.out(1.6)" }, "-=0.5");
 
   function send() {
     if (sent) return;
@@ -93,7 +96,7 @@ export function initEmail() {
     sendBtn.textContent = "Send";
     flight.pause(0);
     gsap.set([reply], { opacity: 0, y: -20, scale: 0.96 });
-    gsap.set(card, { opacity: 0 });
+    gsap.set([card, meeting], { opacity: 0 });
     gsap.set(mail, { opacity: 1, filter: "none", scale: 1, rotate: 0, y: 0 });
     gsap.set(plane, { opacity: 0 });
   }

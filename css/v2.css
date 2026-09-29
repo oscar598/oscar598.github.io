@@ -457,6 +457,28 @@ body.has-cursor .cursor { display: grid; place-items: center; }
   color: var(--ink);
 }
 .polaroid .tag { display: none; }
+.polaroid .media--tall { aspect-ratio: 3 / 4; }
+.polaroid img { object-position: center 30%; }
+
+/* Rows of small polaroids under copy (Spark, Dublin) */
+.photo-row { display: flex; gap: 18px; margin-top: 26px; pointer-events: none; }
+.polaroid--inline { position: relative; width: min(190px, 44%); transform: rotate(var(--tilt, 0deg)); }
+.photo-row--dublin { grid-column: 1 / -1; justify-content: center; gap: 28px; margin: 12px 0 0; }
+.photo-row--dublin .polaroid--inline { width: min(240px, 44%); }
+
+/* The meeting photo drops in after Harvard replies (email.js animates it) */
+.polaroid--meeting { width: 30%; left: 2%; top: 14%; opacity: 0; transform: rotate(-7deg); z-index: 4; }
+.odometer { z-index: 5; }
+
+/* Portrait beside the final ask */
+.scene--next { position: relative; }
+@media (min-width: 861px) { .scene--next .next-inner { max-width: calc(100% - min(300px, 24vw) - 80px); } }
+.polaroid--portrait { width: min(300px, 24vw); right: calc(var(--pad) + 2vw); top: 50%; transform: translateY(-50%) rotate(4deg); z-index: 2; }
+@media (max-width: 860px) {
+  .polaroid--portrait { position: relative; right: auto; top: auto; transform: rotate(3deg); width: 52%; margin: 90px auto -60px; display: block; }
+  .polaroid--meeting { width: 38%; top: 16%; }
+  .photo-row { gap: 12px; }
+}
 .polaroid--origin { width: 34%; top: -26px; right: -18px; transform: rotate(5deg); }
 .polaroid--farm { position: relative; width: 100%; margin-top: 70px; transform: rotate(-4deg); }
 @media (max-width: 860px) {

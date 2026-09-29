@@ -14,7 +14,8 @@ export function initMedia() {
         <video src="${esc(a.video)}" ${a.img ? `poster="${esc(a.img)}"` : ""} muted loop playsinline autoplay preload="metadata" aria-label="${esc(a.alt || "")}"></video>
         <span class="tag">placeholder · AI</span>`;
     } else if (a.img) {
-      slot.innerHTML = `<img src="${esc(a.img)}" alt="${esc(a.alt || "")}" loading="lazy"><span class="tag">placeholder · AI</span>`;
+      // Real photos get no tag; AI placeholders are labeled so nobody mistakes them for the real thing.
+      slot.innerHTML = `<img src="${esc(a.img)}" alt="${esc(a.alt || "")}" loading="lazy">${a.real ? "" : '<span class="tag">placeholder · AI</span>'}`;
     } else {
       slot.innerHTML = `<span class="tag">placeholder</span>`;
       slot.setAttribute("role", "img");
