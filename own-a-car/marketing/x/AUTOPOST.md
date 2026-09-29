@@ -19,11 +19,12 @@ python3 own-a-car/tools/xpost.py post --live
 4. Save as GitHub Actions secrets (repo Settings → Secrets):
    `X_OWNACAR_API_KEY`, `X_OWNACAR_API_SECRET`, `X_OWNACAR_ACCESS_TOKEN`, `X_OWNACAR_ACCESS_SECRET`,
    and the same four with `X_OSCAR_…`.
-5. A scheduled Action runs `xpost.py post --live` every 5 minutes and commits `queue.json` back (so posted
-   IDs are recorded and threads can chain). It isn't switched on yet. Ask, and it ships with the X secrets check.
+5. That's it: `.github/workflows/own-a-car-xpost.yml` runs every 10 minutes (from `main`), posts whatever is approved
+   and due, and commits `queue.json` back so posted IDs are recorded and threads chain. It skips itself until the
+   secrets exist.
 
 The media upload uses X's 2025 v2 endpoints and hasn't been run against a live account yet. Do the first
-real run by hand (`--id P1`) and watch it.
+real run by hand (`--id T1`) and watch it.
 
 ## Route B: the Claude desktop app's built-in browser
 

@@ -1,0 +1,36 @@
+# OWN A CAR: posts approved, due entries from own-a-car/marketing/x/queue.json to X every 10 minutes,
+# then commits the queue back so posted IDs are recorded and threads can chain.
+# Inert until the X credentials exist as repository secrets (see own-a-car/marketing/x/AUTOPOST.md).
+# Nothing in the queue posts unless its status is "approved".
+name: own-a-car xpost
+on:
+  schedule: [{ cron: "*/10 * * * *" }]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: own-a-car-xpost
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    env:
+      X_OWNACAR_API_KEY: ${{ secrets.X_OWNACAR_API_KEY }}
+      X_OWNACAR_API_SECRET: ${{ secrets.X_OWNACAR_API_SECRET }}
+      X_OWNACAR_ACCESS_TOKEN: ${{ secrets.X_OWNACAR_ACCESS_TOKEN }}
+      X_OWNACAR_ACCESS_SECRET: ${{ secrets.X_OWNACAR_ACCESS_SECRET }}
+      X_OSCAR_API_KEY: ${{ secrets.X_OSCAR_API_KEY }}
+      X_OSCAR_API_SECRET: ${{ secrets.X_OSCAR_API_SECRET }}
+      X_OSCAR_ACCESS_TOKEN: ${{ secrets.X_OSCAR_ACCESS_TOKEN }}
+      X_OSCAR_ACCESS_SECRET: ${{ secrets.X_OSCAR_ACCESS_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Post what's due
+        run: |
+          if [ -z "$X_OWNACAR_API_KEY" ]; then echo "No X credentials yet; skipping."; exit 0; fi
+          python3 own-a-car/tools/xpost.py due
+          python3 own-a-car/tools/xpost.py post --live
+      - name: Record posted IDs
+        run: |
+          git config user.name "own-a-car bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add own-a-car/marketing/x/queue.json
+          git diff --cached --quiet || (git commit -m "own-a-car: posted to X" && git pull --rebase -q && git push)

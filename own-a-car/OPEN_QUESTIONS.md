@@ -30,7 +30,7 @@ said first by Oscar, not discovered by commenters:
 - **Shared, not competitive:** everyone owns it at once, nobody drives off with it. (That's also why there's no prize and no sweepstakes problem.)
 - **The name wrap and the open books:** the owners are on the object, and every dollar is accounted for.
 - **A custody plan:** publish where the car lives, who insures it, how often it's shown, and what happens in 1, 5 and 10 years.
-  **This is a new open question for you** (post D4 in the queue waits on it).
+  I drafted one (decision 25, site FAQ `#custody`). **Confirm or change it**; post D4 links to it.
 
 Sources: `marketing/research/x-launch-frameworks.md` § 1, § 2b, § 5.
 
@@ -62,6 +62,7 @@ Sources: `marketing/research/x-launch-frameworks.md` § 1, § 2b, § 5.
 | 22 | Dark-only site | No light mode | Night-garage brand; everything is designed dark | `style.css` |
 | 23 | Typeface | **Michroma / Saira / JetBrains Mono** | You asked for type that feels like a real Lamborghini. Theirs is proprietary, so these open fonts carry the same wide, squared DNA | `fonts/`, `brand/BRAND.md` |
 | 24 | Site direction | Night Garage + physics (keys pile up, the car shatters, names wrap it) | The wow factor; other directions (Homologation, Certificate) are on the design canvas | Design canvas, `physics/` |
+| 25 | Custody plan | NJ collector-car storage near Princeton, agreed-value collector insurance, owners' days + a voted tour in year 1, offered to a museum by year 10, never sold | The Key4All car got impounded; buyers need to know where theirs lives. Now in the site FAQ (`#custody`) and post D4 | `index.html` FAQ |
 
 ---
 

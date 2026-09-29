@@ -147,7 +147,7 @@
       "status": "draft",
       "text": "How much of it is yours depends on how many of you there are.\n\nAt 6,000 owners: 238 grams. About a phone.\nAt 100,000: a lug nut.\n\nThe count is public: @ownacar",
       "media": [
-        "own-a-car/marketing/x/clips/shatter.mp4"
+        "own-a-car/marketing/x/clips/shatter-9x16.mp4"
       ],
       "reply_to": "L4",
       "quote": null,
@@ -252,11 +252,11 @@
       "account": "ownacar",
       "at": "2026-11-13T12:00:00-05:00",
       "status": "draft",
-      "text": "Where the car will live, who insures it, and what happens to it in 1, 5 and 10 years: {link}#faq",
+      "text": "Where the car will live, who insures it, and what happens to it in 1, 5 and 10 years: {link}#custody",
       "media": [],
       "reply_to": null,
       "quote": null,
-      "note": "NEEDS the custody plan written into the site FAQ first (OPEN_QUESTIONS.md). Pre-empts the Key4All impound story."
+      "note": "Links to the custody plan in the site FAQ (#custody, decision 25 in OPEN_QUESTIONS.md: confirm it first). Pre-empts the Key4All impound story."
     },
     {
       "id": "D5",

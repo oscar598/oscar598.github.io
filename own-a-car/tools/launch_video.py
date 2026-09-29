@@ -57,6 +57,11 @@ EDITS = {
         ("clip", "shatter", 6.0, {"start": 1.0, "speed": 1.3, "text": "ONE CAR. HOW MANY OWNERS?", "corner": "SCREEN RECORDING"}),
         ("card", DATE, 1.6, {"end": True}),
     ],
+    # The full slider sweep for the thread reply that explains "how much of it is yours".
+    "shatter": [
+        ("clip", "shatter", 7.5, {"start": 1.0, "speed": 1.1, "text": "OWNERS: 1 → 100,000", "corner": "SCREEN RECORDING"}),
+        ("card", ("", "OWN A CAR."), 1.6, {"end": True, "small": "THE MORE OWNERS, THE LESS CAR."}),
+    ],
     "teaser-names": [
         ("clip", "names", 4.5, {"start": 0.6, "text": "EVERY OWNER'S NAME. ON THE CAR.", "corner": "SCREEN RECORDING"}),
         ("card", DATE, 1.6, {"end": True}),

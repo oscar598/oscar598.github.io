@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teleprompter · OWN A CAR</title>
+<link rel="stylesheet" href="../../fonts/fonts.css">
+<style>
+  html, body { margin: 0; height: 100%; background: #000; color: #f4efe6; overflow: hidden; }
+  body { font-family: "Saira", sans-serif; }
+  #roll { position: absolute; left: 0; right: 0; top: 0; padding: 45vh 8vw 60vh; }
+  #roll p { font: 500 clamp(36px, 6vw, 72px)/1.25 "Saira", sans-serif; margin: 0 0 1.4em; }
+  #roll p small { display: block; font: 500 14px "JetBrains Mono", monospace; letter-spacing: .2em; color: #c9a24a; margin-bottom: .6em; }
+  .mirror #roll { transform: scaleX(-1); }
+  .guide { position: fixed; left: 0; right: 0; top: 42vh; height: 0; border-top: 1px solid rgba(201,162,74,.5); pointer-events: none; }
+  .hud { position: fixed; right: 16px; bottom: 16px; font: 500 12px "JetBrains Mono", monospace; letter-spacing: .12em; color: #8d877c; }
+</style>
+</head>
+<body>
+<div class="guide"></div>
+<div id="roll">
+  <p><small>01</small>I'm selling one Lamborghini to as many people as want it.</p>
+  <p><small>02</small>It's fifty dollars. You get a key.</p>
+  <p><small>03</small>There's no limit. If a hundred thousand people buy one, a hundred thousand people own it.</p>
+  <p><small>04</small>Every new owner makes the car more owned, and every owner less of an owner.</p>
+  <p><small>05</small>You can't drive it. The key doesn't start it.</p>
+  <p><small>06</small>Your name goes on the car. At six thousand owners, it's about eighteen millimetres tall.</p>
+  <p><small>07</small>It isn't an investment. It's worse. It's art.</p>
+  <p><small>08</small>I wanted to know what ownership means when everybody has it.</p>
+  <p><small>09</small>If six thousand people don't buy a key by December ninth, everyone gets their money back, and the car stays a picture.</p>
+  <p><small>10</small>Right now it's a render.</p>
+  <p><small>ALT A</small>This key doesn't start anything. It costs fifty dollars.</p>
+  <p><small>ALT B</small>How many people can own one car? I'm going to find out.</p>
+</div>
+<div class="hud" id="hud">SPACE play · ↑↓ speed · R restart · M mirror</div>
+<script>
+  // Scrolls at `speed` px/s while playing. Keys: space, arrows, R, M.
+  let y = 0, speed = 40, playing = false, last = 0;
+  const roll = document.getElementById("roll"), hud = document.getElementById("hud");
+  function frame(t) {
+    if (playing) { y += speed * (t - last) / 1000; roll.style.top = -y + "px"; }
+    last = t; requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  addEventListener("keydown", (e) => {
+    if (e.code === "Space") { playing = !playing; e.preventDefault(); }
+    else if (e.key === "ArrowUp") speed += 5;
+    else if (e.key === "ArrowDown") speed = Math.max(5, speed - 5);
+    else if (e.key === "r" || e.key === "R") { y = 0; roll.style.top = "0px"; playing = false; }
+    else if (e.key === "m" || e.key === "M") document.body.classList.toggle("mirror");
+    hud.textContent = `${playing ? "PLAYING" : "PAUSED"} · ${speed} px/s · SPACE ↑↓ R M`;
+  });
+  addEventListener("click", () => { playing = !playing; });
+</script>
+</body>
+</html>

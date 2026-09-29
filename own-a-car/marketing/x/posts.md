@@ -106,7 +106,7 @@ _R3, the honest no-list. The 'isn't an investment' line is the one approved nega
 > At 100,000: a lug nut.
 >
 > The count is public: @ownacar
-> `[marketing/x/clips/shatter.mp4]`
+> `[marketing/x/clips/shatter-9x16.mp4]`
 
 _R4._
 
@@ -174,9 +174,9 @@ _Debate about the idea, never about the audience._
 
 **D4** · @ownacar · 2026-11-13 12:00 ET · _draft_
 
-> Where the car will live, who insures it, and what happens to it in 1, 5 and 10 years: {link}#faq
+> Where the car will live, who insures it, and what happens to it in 1, 5 and 10 years: {link}#custody
 
-_NEEDS the custody plan written into the site FAQ first (OPEN_QUESTIONS.md). Pre-empts the Key4All impound story._
+_Links to the custody plan in the site FAQ (#custody, decision 25 in OPEN_QUESTIONS.md: confirm it first). Pre-empts the Key4All impound story._
 
 **D5** · @ownacar · 2026-11-14 12:00 ET · _draft_
 
