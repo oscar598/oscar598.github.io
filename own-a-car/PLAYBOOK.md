@@ -1,135 +1,92 @@
-# Own a Car: the playbook
+# OWN A CAR · master plan
 
-Everything needed to go from brief to shipped keys, in order. **[auto]** marks steps that are already
-automated in this folder or that Claude can run for you. **[you]** marks steps that need you, a signature
-or a professional.
+**Thesis:** a viral art project. $50 buys a key to a Lamborghini, the key is mailed to your door, and every buyer is an owner.
+**Status:** every draft is built. Nothing takes money until the steps marked **[you]** in Phase 0 are done.
+
+What's where: `README.md`. Every guess I made and every question for you: `OPEN_QUESTIONS.md`.
 
 ---
 
-## 0. Decide these first, because the law turns on them
+## The money
 
-The same idea can be an artwork, a lottery or an unregistered security depending on the wording.
-
-| Decision | Keep it art | Don't do this |
-|---|---|---|
-| What the buyer gets | A numbered sculptural key + a place in the piece | A legal share of the car |
-| Money | No return, ever | Resale profits, rental income, "your key will be worth more" |
-| Chance | Every buyer gets the same thing | "One key starts the car and wins it" (prize + chance + payment = **illegal lottery**) |
-| The car's future | Decide now: displayed, never sold (or donated) | Selling it later and splitting the proceeds with key holders (that makes it a **security**) |
-| The key | Cast from the real key, non-functional | Unlimited working copies of a real car key |
-| Brand | "a Lambo" named as the subject, plus a "not affiliated" disclaimer | The bull logo, the wordmark, their fonts on your box. Lamborghini enforces its trademarks hard |
-
-The page copy and `terms.html` already follow the left-hand column.
-
-## 1. Legal and money setup **[you]**
-
-1. **Form an LLC** (~$50–$500 depending on state). The car is titled to the LLC, not to you personally.
-2. **EIN** (free, irs.gov, 10 min) → **business bank account**.
-3. **Attorney review (~$500–$2,000 flat).** Ask exactly: "Is this a security or a lottery? Please approve
-   my terms of sale." Bring `terms.html`. Look for an art-law or startup attorney; many law schools run
-   free clinics for students.
-4. **CPA, before launch.** This one bites: presale money is taxable income to the LLC, and buying the car
-   probably isn't a full deduction that year (it's an asset). You could owe tax on most of what you raise.
-   The goal has to cover that.
-5. **Sales tax.** Keys are physical goods, so you owe sales tax in states where you cross thresholds.
-   Kickstarter or Stripe Tax can collect it.
-6. **FTC Mail Order Rule.** You must ship by the date you promise, or email buyers a new date and offer a refund.
-   That's why `config.js` has `shipWindow`.
-7. **Insurance and storage** for the car once bought (~$3k–$8k/yr for insurance, more for secure storage).
-
-## 2. The math **[auto: edit `config.js` when you settle it]**
-
-Per $50 key, shipping included:
-
-| | |
+### Per $50 key (`config.json → perKeyBreakdownUsd`, shown on the site as "Open books")
+| | $ |
 |---|---|
-| Payment fees (~2.9% + 30¢) | −$1.75 |
-| Key + premium box, at volume | −$10 to −$18 |
-| Domestic shipping | −$5 to −$7 |
-| **Left toward the car** | **≈ $25–$33** |
+| Card processing (2.9% + 30¢) | 1.75 |
+| Key, box, certificate | 13.00 |
+| Shipping (US) | 6.00 |
+| Tax reserve (~30% of the margin; confirm with the CPA) | 8.80 |
+| **Car fund** | **20.45** |
 
-Suggestion: charge shipping separately, which gets you to ≈ $32–$38 a key.
+International buyers pay +$15 shipping, and sales tax is collected on top of the $50, so neither eats the margin.
 
-| Car | Typical used price | + tax/title/insurance (~12%) | Keys needed at $30 net | Before income tax |
-|---|---|---|---|---|
-| Gallardo (2004–13) | $85k–$130k | ~$120k | **~4,000** | add 20–35% |
-| Huracán (2015+) | $180k–$260k | ~$250k | ~8,300 | add 20–35% |
-| Urus | $180k–$230k | ~$230k | ~7,700 | add 20–35% |
-
-`goalKeys` is currently 4,000, which is a Gallardo with no tax buffer. Change it once your CPA gives you a number.
-
-## 3. Taking the money: all-or-nothing
-
-**Recommended: Kickstarter.** All-or-nothing is how it works: nobody is charged unless the goal is hit,
-so there are no refunds to process. It also has an Art category and its own audience.
-Fees are 5% plus about 3–5% for payments. Put the Kickstarter URL in `config.checkoutUrl`, and this site
-is the gallery that points to it.
-
-**Alternative: Stripe Payment Link.** It collects name, email and shipping address at checkout, which
-covers your whole form. The catch is that you charge at purchase and refund if the goal is missed,
-and **Stripe doesn't return its fees on refunds**, so a miss costs you ~$1.75 a key out of pocket.
-Stripe can't hold a card authorization for a presale-length window. If you go this route:
-
-- **[auto]** `tools/stripe_keys.py count` → updates `progress.json` → the page's meter.
-- **[auto]** `.github/workflows/own-a-car-progress.yml` runs that hourly once you add the `STRIPE_SECRET_KEY`
-  secret and the `PAYMENT_LINK_ID` variable (it only schedules from the default branch).
-- **[auto]** `tools/stripe_keys.py refund` shows a dry run of every refund. `--execute` refunds everyone. It's safe to re-run.
-- Set the Payment Link's confirmation page to `https://oscarludesign.com/own-a-car/thanks.html`.
-
-Either way: **don't open checkout until step 1 is done.** The button stays "Presale opens soon" while `checkoutUrl` is empty.
-
-## 4. The website **[auto: done]**
-
-`/own-a-car/`: hero, live key meter, how it works, artist statement, straight-answer FAQ,
-terms and a thanks page with the Discord button. It's all driven by `config.js`, so you don't need to touch the HTML.
-
-## 5. Discord **[you: 20 min, then auto]**
-
-1. Create the server with channels: `#welcome`, `#announcements` (read-only), `#the-car`, `#owners`, `#show-your-key`.
-2. Create a non-expiring invite and put it in `config.discordUrl`. It then appears on the thanks page.
-   Put it in the Kickstarter/Stripe receipt too.
-3. Later, when you want only buyers inside: a Stripe → Discord role bot (Zapier/Make, or a small bot).
-
-## 6. Finding the car **[auto: the search; you: the purchase]**
-
-- Sources: Cars.com, Autotrader, Bring a Trailer, duPont Registry, Lamborghini dealer CPO inventory.
-- **[auto]** Claude can sweep listings into a shortlist (price, miles, history, location) and write
-  outreach emails as Gmail **drafts** for you to send.
-- **[you]** Before any money moves: Carfax/AutoCheck, and a **pre-purchase inspection at a Lamborghini
-  dealer** ($500–$1,000). Gallardo clutches and e-gear pumps are expensive.
-- Buy only after the presale closes and the funds have settled.
-- Film the purchase, the pickup and the key. That footage is your best marketing asset.
-
-## 7. The key and the packaging **[you: choose vendors; auto: mockups]**
-
-The box is the piece people will keep. See `PACKAGING.md`.
-
-## 8. Marketing **[auto: content; you: face and voice]**
-
-The hook sells itself: *"I'm selling unlimited keys to one Lambo. $50 each. Everyone who buys one owns it."*
-
-- **The counter is the story.** Post daily: "1,212 people own this car now." The meter does the math for you.
-- Series: day 1 announce → the math → the dealer hunt → the key sample arriving → the unboxing → buying the car.
-- Press: art/culture writers and car media (Jalopnik, Hypebeast, Highsnobiety, The Drive).
-  The "is it art or a scam?" debate is coverage, and the FAQ answers it up front.
-- **[auto]** Claude can generate teaser video and stills (Higgsfield/Runway), mock up the box (Canva), and draft
-  and schedule TikTok posts through Higgsfield once you approve each one.
-- Don't claim a key will gain value. That's the security line again.
-
-## 9. Fulfilment **[auto: the list; you: the boxes]**
-
-1. Export orders (Kickstarter survey or Stripe) → CSV of name, email, address, key number (in purchase order).
-2. **[auto]** Claude turns the CSV into personalized ownership certificates (PDF) and a shipping-label batch.
-3. Ship with Pirate Ship (cheapest USPS rates, bulk CSV import) or hand it to a fulfilment house above ~2,000 keys.
-4. Email tracking plus a "post your key in #show-your-key" message.
-
-## Timeline (example)
-
-| Week | |
+### At the 6,000-key goal
+| | $ |
 |---|---|
-| 1–2 | LLC, EIN, bank, attorney and CPA calls, key sample ordered |
-| 3–4 | Key sample in hand, box sample, film teaser, Discord live |
-| 5 | Presale opens (Kickstarter: 30–45 days) |
-| 10 | Presale closes → funds settle (~2 weeks) |
-| 12 | Buy the car, cast production keys |
-| 16–20 | Pack and ship |
+| Gross | 300,000 |
+| Fees + keys + shipping | −124,500 |
+| Tax reserve | −52,800 |
+| **Car fund** | **122,700** |
+| Gallardo 2006–08, ~40k miles | ~95,000 |
+| Sales tax, title, registration (~8%) | ~7,600 |
+| Pre-purchase inspection + transport | ~2,500 |
+| Name wrap (design + print + install) | ~5,000 |
+| Year-1 insurance + storage | ~11,000 |
+| **Car all-in** | **~121,100** |
+| Contingency | ~1,600 |
+
+It's tight on purpose: the goal is the minimum that works. Every key past 6,000 adds $20.45 to the car fund.
+Stretch goals: **14,000 keys → Huracán** (car fund ~$286k vs ~$250k all-in) · **24,000 → Aventador** (~$490k vs ~$450k all-in).
+
+### Before the presale (out of pocket)
+| | $ |
+|---|---|
+| LLC filing + registered agent | 100–500 |
+| Attorney (flat-fee review of structure, terms, marketing claims) | 1,000–3,000 |
+| CPA consult | 200–500 |
+| Key, box and certificate samples (2 vendors each) | 500–1,200 |
+| Domain + email | 30 |
+| X Premium (2 accounts, 3 months) | ~50 |
+| Runway top-up for final renders | 15–35 |
+| Optional launch promotion on X | 300–500 |
+| **Total** | **≈ $2,200–5,800** |
+
+Plus the risk budget: if the goal is missed, refunds cost the unrecoverable card fees, ~$1.75 × orders (~$3,500 at 2,000 orders).
+
+---
+
+## Timeline
+
+| Dates | Phase | [you] | [auto] / built |
+|---|---|---|---|
+| **Sep 29 – Oct 10** | **0 · Legal and money** | Form the LLC, EIN, bank. Book the attorney and CPA (bring `terms.html`, `privacy.html`, `OPEN_QUESTIONS.md` § Legal). Apply for Stripe. Order key and box samples (`packaging/README.md`) | Site, systems, brand, posts: done |
+| **Oct 11 – Oct 25** | **1 · Make it real** | Buy the domain. Claim @ownacar. Build the Discord (`marketing/discord.md`). Run `fetch_assets.sh`. Photograph the samples | `ops.py setup-stripe` in test mode, end-to-end test purchase |
+| **Oct 26 – Nov 8** | **2 · Tease** | Post the pre-launch posts (`marketing/x/posts.md`). DM 40–60 people (`marketing/x/PLAYBOOK.md` § 7) | Counter at 0; site in "opens Nov 9" mode |
+| **Nov 9, 12 pm ET** | **3 · Launch** | The launch-day hour-by-hour | Buy buttons switch on by themselves at `presaleOpens` |
+| **Nov 9 – Dec 9** | **4 · Presale** | 45 min/day: posts, replies, wall moderation, welcome emails | Registry sync every 15 min |
+| **Dec 9, 11:59 pm ET** | **5 · Close** | Funded → `phase funded`. Missed → `refund --execute` | Payment Links close by themselves |
+| **Dec 10 – Jan 15** | **6 · The car** | Payout settles (watch for a Stripe reserve). Shortlist 3 cars, owners vote in Discord, inspection, buy, scan the key | — |
+| **Jan 15 – Mar 1** | **7 · Production** | Cast keys (4–6 weeks), print the wrap with every name, wrap the car, print certificates | `export`, `certificates` |
+| **Mar 1 – Apr 30** | **8 · Ship** | Pack and ship in batches; film it | `labels`, `mark shipped`, `emails shipped` |
+| **May 2027 →** | **9 · The life of the car** | Owners' days, the tour, the documentary | — |
+
+---
+
+## Who does what
+
+**Automated / built (done):**
+- Site with live counter, share calculator, name-size calculator, stretch goals, open books, owners' wall
+- Checkout (Stripe Payment Links: name, email, shipping address, tax, wall name, terms consent) created by one command
+- Order registry, private tracking links, public certificates, the "Post it on X" share
+- All-or-nothing: auto-close at the deadline, one-command full refunds
+- Fulfilment exports: engraving list, printable certificates, Pirate Ship labels, email mail-merge
+- Brand system, logos, OG and X images, 15 X post cards, launch thread and post bank, press kit, Discord blueprint, packaging print files
+
+**Needs you (can't be automated):** signing things (LLC, Stripe, attorney), your face and voice on X, choosing and paying
+for the car, approving samples, packing boxes (or paying a fulfilment house above ~2,000 orders).
+
+**Can be automated next** (ask me):
+- Dealer search: a weekly shortlist of Gallardos (price, miles, history, location) + outreach drafts in Gmail
+- Welcome emails sent automatically (a Resend or Loops API key + an Action), not by CSV
+- Discord owner verification bot (hashes the private link, matches the registry)
+- Drafting and scheduling X posts from `posts.md` with the counter numbers filled in

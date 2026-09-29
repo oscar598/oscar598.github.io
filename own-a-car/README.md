@@ -1,28 +1,36 @@
-# Own a Car
+# OWN A CAR
 
-Art project. $50 buys a key. Unlimited keys. Every key holder owns the Lambo.
+Art project by Oscar Lu. **$50 buys a key to a Lamborghini. There's no limit on keys. Everyone who holds one owns it.**
+Your key is mailed to your door; your name goes on the car. All or nothing: if 6,000 keys don't sell, everyone is refunded.
 
-Live at `/own-a-car/` once merged.
+**Start here:** `OPEN_QUESTIONS.md` (every guess I made + what I need from you) → `PLAYBOOK.md` (plan, money, timeline) → `OPERATIONS.md` (how to run it).
 
-## Brief (v0)
-- $50 presale per key, no cap on keys
-- Refund everyone if the presale goal isn't hit
-- Checkout form: name, email, shipping address
-- Buyers get invited to a Discord server
-- Key ships in premium, branded packaging
+Live at `/own-a-car/` once this branch is merged. Preview locally:
+```bash
+python3 -m http.server 8080   # from the repo root, then open http://localhost:8080/own-a-car/
+```
 
-## Files
-| File | What |
+## Map
+
+| Path | What |
 |---|---|
-| `index.html` / `style.css` / `main.js` | The page: hero, live key meter, how it works, statement, FAQ |
-| `config.js` | **The only file you need to edit**: checkout URL, Discord invite, goal, deadline, ship date |
-| `thanks.html` | Post-checkout page with the Discord button |
-| `terms.html` | Draft terms of sale (needs a lawyer before launch) |
-| `progress.json` | Key count shown on the meter (updated by the Stripe sync) |
-| `tools/stripe_keys.py` | `count` → updates progress.json; `refund [--execute]` → refunds everyone if the goal is missed |
-| `PLAYBOOK.md` | Everything from LLC to shipping, in order |
-| `PACKAGING.md` | Box and key spec, costs, vendors |
-
-## Status
-Design phase. Nothing is live. The buy button stays disabled until `checkoutUrl` is set, and it shouldn't be
-set until the legal steps in `PLAYBOOK.md` §1 are done.
+| `config.json` | **The one file to edit.** Car, price, goal, stretch goals, dates, Stripe links, Discord, handles |
+| `index.html` · `main.js` · `own.js` · `style.css` | The site: hero, live counter, share calculator, name wrap, how it works, goal, open books, the key, owners' wall, FAQ |
+| `key.html` · `key.js` | A buyer's private tracking page (`?o=`), a public certificate (`?n=42`) and lookup |
+| `terms.html` · `privacy.html` | Drafts for attorney review |
+| `data/registry.json` | Public order registry (key numbers, wall names). Written by the sync |
+| `data/status.json` | Project phase + per-order shipping status + hidden names. Written by `ops.py` |
+| `tools/ops.py` | Stripe setup, sync, refunds, auto-close, exports, certificates, labels, emails, status |
+| `tools/test_ops.py` | End-to-end test against a fake Stripe |
+| `tools/render.js` · `wordmark.py` · `packaging.py` | Rebuild PNG cards, logos and print files |
+| `tools/fetch_assets.sh` | Pulls the Runway renders into `assets/` |
+| `../.github/workflows/own-a-car-sync.yml` | Syncs Stripe → registry every 15 min |
+| `brand/` | Logos, key mark, favicon, OG, X avatar and header, `BRAND.md`, visual guide (`brand/index.html`) |
+| `assets/` | Runway renders + `RUNWAY.md` (task IDs, prompts, what's where) |
+| `fonts/` | Self-hosted Fraunces, Inter, JetBrains Mono (OFL) |
+| `marketing/x/` | X playbook, launch thread + post bank, 15 rendered post cards, tracker |
+| `marketing/press/` | Press release, fact sheet, pitches |
+| `marketing/email/` | Owner emails: welcome, milestone, funded, refund, shipped |
+| `marketing/discord.md` | Owners' server blueprint |
+| `packaging/` | Print-ready SVGs (lid, sleeve, seal, insert card), certificate template, spec + vendor quote request |
+| `ops/private/` | Personal data exports. **Gitignored, never committed** |

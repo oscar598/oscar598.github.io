@@ -28,7 +28,7 @@ window.OAC = (() => {
   const thing = (g) => THINGS.find(([min]) => g >= min)[1];
 
   function grams(g) {
-    if (g >= 1000) return (g / 1000).toFixed(g >= 10000 ? 0 : 1) + " kg";
+    if (g >= 1000) return (g >= 10000 ? fmt(g / 1000) : (g / 1000).toFixed(1)) + " kg";
     if (g >= 10) return fmt(g) + " g";
     if (g >= 1) return g.toFixed(1) + " g";
     return (g * 1000).toFixed(0) + " mg";
