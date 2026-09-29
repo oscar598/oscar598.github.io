@@ -6,7 +6,7 @@
 
 *OWN A CAR asks what ownership means when there's no limit on owners. If 6,000 keys sell by Dec 9, the car is bought and wrapped in every owner's name. If not, everyone is refunded.*
 
-**PRINCETON, N.J., Nov 9, 2026.** Artist and designer Oscar Lu today opened the presale for *OWN A CAR*, an art project
+**PRINCETON, N.J., Nov 10, 2026.** Artist and designer Oscar Lu today opened the presale for *OWN A CAR*, an art project
 that sells an unlimited number of $50 keys to a single Lamborghini. Every buyer receives a numbered, solid-brass key cast
 from the car's real key, a signed certificate of ownership, and their name on the car itself: when the presale closes,
 the Lamborghini will be wrapped bumper to bumper in the names of every owner.

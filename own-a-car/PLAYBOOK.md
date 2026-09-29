@@ -61,9 +61,9 @@ Plus the risk budget: if the goal is missed, refunds cost the unrecoverable card
 |---|---|---|---|
 | **Sep 29 – Oct 10** | **0 · Legal and money** | Form the LLC, EIN, bank. Book the attorney and CPA (bring `terms.html`, `privacy.html`, `OPEN_QUESTIONS.md` § Legal). Apply for Stripe. Order key and box samples (`packaging/README.md`) | Site, systems, brand, posts: done |
 | **Oct 11 – Oct 25** | **1 · Make it real** | Buy the domain. Claim @ownacar. Build the Discord (`marketing/discord.md`). Run `fetch_assets.sh`. Photograph the samples | `ops.py setup-stripe` in test mode, end-to-end test purchase |
-| **Oct 26 – Nov 8** | **2 · Tease** | Post the pre-launch posts (`marketing/x/posts.md`). DM 40–60 people (`marketing/x/PLAYBOOK.md` § 7) | Counter at 0; site in "opens Nov 9" mode |
-| **Nov 9, 12 pm ET** | **3 · Launch** | The launch-day hour-by-hour | Buy buttons switch on by themselves at `presaleOpens` |
-| **Nov 9 – Dec 9** | **4 · Presale** | 45 min/day: posts, replies, wall moderation, welcome emails | Registry sync every 15 min |
+| **Oct 27 – Nov 9** | **2 · Tease** | Post the pre-launch posts (`marketing/x/posts.md`). DM 40–60 people (`marketing/x/PLAYBOOK.md` § 7) | Counter at 0; site in "opens Nov 9" mode |
+| **Nov 10, 10 am ET** | **3 · Launch** | The launch-day hour-by-hour | Buy buttons switch on by themselves at `presaleOpens` |
+| **Nov 10 – Dec 9** | **4 · Presale** | 45 min/day: posts, replies, wall moderation, welcome emails | Registry sync every 15 min |
 | **Dec 9, 11:59 pm ET** | **5 · Close** | Funded → `phase funded`. Missed → `refund --execute` | Payment Links close by themselves |
 | **Dec 10 – Jan 15** | **6 · The car** | Payout settles (watch for a Stripe reserve). Shortlist 3 cars, owners vote in Discord, inspection, buy, scan the key | — |
 | **Jan 15 – Mar 1** | **7 · Production** | Cast keys (4–6 weeks), print the wrap with every name, wrap the car, print certificates | `export`, `certificates` |

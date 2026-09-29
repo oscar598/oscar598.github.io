@@ -1,14 +1,15 @@
 // Records the site's physics pieces as frame sequences for video (CDP screencast, resampled to 30 fps).
 // Serve a copy of own-a-car/ with demo data (counter above 0) at SITE, then:
 //   node own-a-car/tools/record_clips.js <outDir> [landscape|portrait] [scene ...]
-// Scenes: rain, shatter, names. Landscape = 1280×720 at 1.5× (1920×1080); portrait = 432×768 at 2.5× (1080×1920).
+// Scenes: rain, shatter, names. Landscape = 1280×720 at 1.5× (1920×1080); portrait = 720×1280 at 1.5× (1080×1920).
 const { chromium } = require("playwright");
 const fs = require("fs");
 const path = require("path");
 
 const SITE = process.env.SITE || "http://localhost:8094/own-a-car/";
 const [outDir = "clips", format = "landscape", ...only] = process.argv.slice(2);
-const VIEW = format === "portrait" ? { width: 432, height: 768, dpr: 2.5 } : { width: 1280, height: 720, dpr: 1.5 };
+// Portrait records at tablet width so the key pile holds ~70 keys, not ~40.
+const VIEW = format === "portrait" ? { width: 720, height: 1280, dpr: 1.5 } : { width: 1280, height: 720, dpr: 1.5 };
 
 async function capture(page, dir, ms, action) {
   fs.mkdirSync(dir, { recursive: true });
@@ -45,13 +46,38 @@ const focus = (p, sel, offset = 0) => p.evaluate(([s, o]) => {
   window.scrollTo(0, document.querySelector(s).getBoundingClientRect().top + window.scrollY + o);
 }, [sel, offset]);
 
+// Scroll so an element's centre sits at `frac` of the viewport height.
+const center = (p, sel, frac = 0.5) => p.evaluate(([s, f]) => {
+  document.querySelector(".bar").style.display = "none";
+  const r = document.querySelector(s).getBoundingClientRect();
+  window.scrollTo(0, r.top + window.scrollY + r.height / 2 - innerHeight * f);
+}, [sel, frac]);
+
+// CLEAN=1 hides the page's own copy, and every other section, so the video's captions have the frame to
+// themselves. In portrait the canvases are drawn 20% wider so the car fills the narrow frame.
+const clean = (p, selectors, keep) => process.env.CLEAN === "1" && p.evaluate(([sels, keepSel, portrait]) => {
+  for (const s of sels) document.querySelectorAll(s).forEach((el) => { el.style.visibility = "hidden"; });
+  const mine = document.querySelector(keepSel);
+  document.querySelectorAll("main > section, .foot").forEach((el) => { if (el !== mine) el.style.visibility = "hidden"; });
+  if (portrait) for (const c of document.querySelectorAll(".shatter, .namewrap")) { c.style.width = "120%"; c.style.marginLeft = "-10%"; }
+}, [selectors, keep, format === "portrait"]);
+
 const scenes = {
   // Keys pour in and pile up; one is thrown; "Drop a key" lands YOU.
   async rain(b) {
     const p = await page(b);
+    if (process.env.CLEAN === "1") {
+      // The pile sizes itself at load, so the full-frame hero has to exist before the page's scripts run.
+      await p.addInitScript(() => document.addEventListener("DOMContentLoaded", () => {
+        const st = document.createElement("style");
+        st.textContent = ".bar{display:none!important}.hero{min-height:100vh!important}.hero-copy{visibility:hidden}";
+        document.head.append(st);
+      }));
+    }
     await capture(p, path.join(outDir, "rain"), 8000, async () => {
       await p.goto(SITE);
       await p.evaluate(() => { document.querySelector(".bar").style.display = "none"; });
+      await clean(p, [".hero-copy"], ".hero");
       await p.waitForTimeout(3000);
       const c = await p.locator("#rain").boundingBox();
       await p.mouse.move(c.x + c.width * 0.62, c.y + c.height - 30);
@@ -70,7 +96,9 @@ const scenes = {
   async shatter(b) {
     const p = await page(b);
     await p.goto(SITE);
-    await focus(p, "#share", format === "portrait" ? 60 : 150);
+    await clean(p, ["#share .kicker", "#share h2", "#share .sub", "#share .slider", "#share .note"], "#share");
+    if (process.env.CLEAN === "1") await center(p, ".shatter", 0.62);
+    else await focus(p, "#share", format === "portrait" ? 60 : 150);
     await p.evaluate(() => { const r = document.getElementById("s-range"); r.value = 0; r.dispatchEvent(new Event("input")); });
     await p.waitForTimeout(3000);
     await capture(p, path.join(outDir, "shatter"), 9500, () => p.evaluate(() => new Promise((res) => {
@@ -87,7 +115,9 @@ const scenes = {
   async names(b) {
     const p = await page(b);
     await p.goto(SITE);
-    await focus(p, ".names-band", format === "portrait" ? 40 : 120);
+    await clean(p, [".names-copy"], ".names-band");
+    if (process.env.CLEAN === "1") await center(p, "#n-canvas", 0.5);
+    else await focus(p, ".names-band", format === "portrait" ? 40 : 120);
     await p.waitForTimeout(2000);
     const c = await p.locator("#n-canvas").boundingBox();
     await capture(p, path.join(outDir, "names"), 6000, async () => {

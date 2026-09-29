@@ -13,8 +13,10 @@ const { chromium } = require("playwright");
   await page.goto("file://" + path.resolve(file) + (id ? "#" + id : ""));
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(300);
-  if (id) await page.locator("#" + id).screenshot({ path: out });
-  else await page.screenshot({ path: out });
+  // TRANSPARENT=1 keeps the page background out of the PNG (for video overlays).
+  const omitBackground = process.env.TRANSPARENT === "1";
+  if (id) await page.locator("#" + id).screenshot({ path: out, omitBackground });
+  else await page.screenshot({ path: out, omitBackground });
   await browser.close();
   console.log(out);
 })();

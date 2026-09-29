@@ -32,7 +32,7 @@ Tracking sheet: `tracker.csv`.
 - Name: `OWN A CAR`
 - Handle: `@ownacar` (fallbacks: `@ownacarkey`, `@ownacar_art`)
 - Avatar: `x-avatar.png` · Header: `x-header.png`
-- Bio: `$50 buys a key to a Lamborghini. No limit on keys. Everyone who holds one owns it. An art project by @[oscar]. Presale opens Nov 9.`
+- Bio: `$50 buys a key to a Lamborghini. No limit on keys. Everyone who holds one owns it. An art project by @[oscar]. Presale opens Nov 10.`
 - Link: the site. Location: `The garage`
 - Pinned: the launch thread (from launch day on). Before launch, pin the teaser.
 - Get **X Premium** on both accounts: longer posts, better reply ranking and the blue check that reduces "is this a scam" friction.
@@ -42,14 +42,14 @@ Tracking sheet: `tracker.csv`.
 | When | What | Posts |
 |---|---|---|
 | **T−14 to T−1** (Oct 26 – Nov 8) | Tease. Grow follows. No link to buy yet. | `posts.md` § Pre-launch |
-| **T−0** (Mon Nov 9, noon ET) | Launch thread from Oscar, quote from @ownacar, everything else that day | § Launch day |
+| **T−0** (Tue Nov 10, 10:00am ET) | Launch thread from Oscar, quote from @ownacar, everything else that day | § Launch day |
 | **Days 1–27** | 3–5 posts/day on @ownacar, 1–2 from Oscar, daily count at 8 pm ET | § Presale |
 | **Milestones** | 100 · 500 · 1,000 · 2,500 · 5,000 · 6,000 · stretch goals | § Milestones |
 | **Last 72 h** | Countdown, "we might not make it", owners recruiting owners | § Deadline |
 | **Close** | Funded → the car hunt series. Missed → the refund post (the honesty is the content) | § After close |
 | **Car → keys → doors** | Car hunt, pickup, name wrap, casting, packing, unboxings | § Fulfilment |
 
-**Launch timing:** a Monday or Tuesday, 12:00 pm ET (it catches both coasts at lunch and Europe in the evening).
+**Launch timing:** Tuesday Nov 10, 10:00am ET: the best-performing X slot in 2026 data (Tue–Wed, 9–11am ET), a week clear of the Nov 3 midterms. See `../research/x-launch-frameworks.md` § 3.7.
 Don't launch on the same day as a major Apple event or election news; check the week before.
 
 ## 4. Launch day, hour by hour
@@ -108,6 +108,17 @@ Categories, not names. Pick 10–20 from each that you'd genuinely be happy to b
 > owner, refund if we miss the goal. [link to thread]. No ask beyond: if it's your kind of thing, quote it.
 
 Never offer money or free keys for posts without an FTC `#ad` disclosure. If you gift a key to a creator, they must disclose it.
+
+## 7b. From the research (marketing/research/)
+
+- **Pre-sell the first 100–300 keys privately** (friends, classmates, early DMs) so they land at launch minute and the
+  first public count isn't "3". Momentum drives momentum (ConstitutionDAO, Exploding Kittens).
+- **Root post = native video, no link.** The link goes in the first self-reply. Author replies in the first two hours are the
+  strongest known ranking signal. Staff them.
+- **Space @ownacar posts 2–4 hours apart.** Use self-replies for rapid updates (author-diversity decay).
+- **Countdown posts carry the most weight.** Backing accelerates near a goal. They're in the queue as C3–C0.
+- **Never ask for engagement** ("reply for a follow", "RT to…"). X removes accounts for it in 2026.
+- **Name the MSCHF lineage yourself** (see `OPEN_QUESTIONS.md`).
 
 ## 8. Paid (optional)
 

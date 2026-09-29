@@ -22,6 +22,18 @@ in saying 'you own a car'?" If the answer is to soften it, the change is copy on
 
 ---
 
+## ⚠️ The precedent: MSCHF's Key4All (2022)
+
+MSCHF sold 1,000 working $20 keys to one PT Cruiser. It was a race: whoever found the car could keep it. It
+got wide press, then the car ended up impounded. Replies **will** say "MSCHF did this." What's different, and should be
+said first by Oscar, not discovered by commenters:
+- **Shared, not competitive:** everyone owns it at once, nobody drives off with it. (That's also why there's no prize and no sweepstakes problem.)
+- **The name wrap and the open books:** the owners are on the object, and every dollar is accounted for.
+- **A custody plan:** publish where the car lives, who insures it, how often it's shown, and what happens in 1, 5 and 10 years.
+  **This is a new open question for you** (post D4 in the queue waits on it).
+
+Sources: `marketing/research/x-launch-frameworks.md` § 1, § 2b, § 5.
+
 ## Decisions I made for you
 
 | # | Decision | My guess | Why | Change it in |
@@ -31,7 +43,7 @@ in saying 'you own a car'?" If the answer is to soften it, the change is copy on
 | 3 | The car | Used **Gallardo 2006–08**, ~$95k | Cheapest real Lamborghini, and the V10 wedge shape reads instantly | `config.json → car` |
 | 4 | Goal | **6,000 keys** ($300k gross) | The smallest number that buys the car after keys, fees, shipping and tax (see `PLAYBOOK.md` § money) | `goalKeys`, `stretchGoals` |
 | 5 | Stretch goals | Huracán at 14,000, Aventador at 24,000 | Gives momentum after the goal; the math covers both | `stretchGoals` |
-| 6 | Presale window | **Nov 9 – Dec 9, 2026** (30 days, Monday launch, noon ET) | ~6 weeks for legal and samples first; 30 days keeps urgency | `presaleOpens`, `presaleCloses` |
+| 6 | Presale window | **Nov 10 – Dec 9, 2026** (Tuesday launch, 10am ET) | Research: Tue–Wed 9–11am ET is the best X slot, and it clears the Nov 3 midterm news cycle; ~6 weeks for legal and samples first; 30 days keeps urgency | `presaleOpens`, `presaleCloses` |
 | 7 | Ship window | **March–April 2027** | Car purchase + scan + 4–6 weeks casting + packing | `shipWindow` |
 | 8 | Payments | **Stripe Payment Links**, charge now, refund if the goal is missed | No server needed, works with GitHub Pages; you said no Kickstarter | `ops.py setup-stripe` |
 | 9 | Shipping | Free in the US; +$15 for 34 countries | "Mailed to your door" for $50 flat in the US; the international cost is real | `intlShippingUsd`, `INTL_COUNTRIES` in `ops.py` |
@@ -59,7 +71,7 @@ in saying 'you own a car'?" If the answer is to soften it, the change is copy on
 2. **Whose name is on the LLC, the Stripe account and the bank account?** Stripe and banks require the account holder to be 18+.
 3. **How much can you front before presale money arrives?** (~$2–6k; see `PLAYBOOK.md`.) Stripe may also hold a reserve until keys ship.
 4. **The car:** Gallardo OK? Color preference? Where will it be stored and insured (you need a real answer before launch; buyers will ask)?
-5. **Dates:** is Nov 9 – Dec 9 realistic with your classes? Moving it is one field.
+5. **Dates:** is Nov 10 – Dec 9 realistic with your classes? Moving it is one field.
 6. **Price:** $50 flat with US shipping included, or $50 + shipping? (The latter adds ~$6/key to the car fund.)
 7. **Where do owners' days happen?** Princeton/NJ first seems natural.
 8. **The key design:** the ring-bow house key (`assets/key.jpg`) or the skeleton key (`assets/box.jpg`)?

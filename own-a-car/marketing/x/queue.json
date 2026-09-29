@@ -1,89 +1,500 @@
 {
-  "about": "OWN A CAR post queue. tools/xpost.py posts entries whose status is 'approved' once their time passes. Everything starts as 'draft': approve by changing the status. Times are ET (UTC-4 until Nov 1, UTC-5 after). Media paths are repo-relative. {placeholders} fill from the live registry at post time.",
-  "limits": { "oscar": 280, "ownacar": 280 },
+  "about": "OWN A CAR post queue (framework: marketing/research/x-launch-frameworks.md). tools/xpost.py posts entries whose status is 'approved' once their time passes. Everything starts as 'draft'. Times are ET (UTC-4 until Nov 1, UTC-5 after). Media paths are repo-relative. {placeholders} fill from the live registry at post time. when_keys = hold until that many keys sold; until_keys = skip once that many sold.",
+  "limits": {
+    "oscar": 280,
+    "ownacar": 280
+  },
   "posts": [
-    { "id": "P1", "account": "ownacar", "at": "2026-10-26T12:00:00-04:00", "status": "draft",
-      "text": "One car.\nUnlimited keys.\nNov 9.",
-      "media": ["own-a-car/brand/og.png"], "reply_to": null, "quote": null,
-      "note": "First post on the brand account. Pin it until launch." },
-
-    { "id": "P2", "account": "oscar", "at": "2026-10-27T13:00:00-04:00", "status": "draft",
-      "text": "Working on something dumb and beautiful. It involves a Lamborghini and a few thousand strangers.\n\nNov 9.",
-      "media": [], "reply_to": null, "quote": null, "note": "Tease from the founder account, no link." },
-
-    { "id": "P3", "account": "ownacar", "at": "2026-10-29T12:00:00-04:00", "status": "draft",
-      "text": "Poll: would you rather own\n\n100% of a Honda Civic\nor\n0.017% of a Lamborghini",
-      "media": [], "reply_to": null, "quote": null,
-      "note": "Make this a native X poll by hand (the API poll field needs extra setup): options 'The Civic' / 'The Lamborghini', 3 days." },
-
-    { "id": "P4", "account": "ownacar", "at": "2026-10-31T12:00:00-04:00", "status": "draft",
-      "text": "The key. Solid brass, numbered.\n\n(concept render)",
-      "media": ["own-a-car/assets/key.jpg"], "reply_to": null, "quote": null,
-      "note": "Swap for a photo of the real sample once it exists and drop '(concept render)'." },
-
-    { "id": "P5", "account": "oscar", "at": "2026-11-02T12:30:00-05:00", "status": "draft",
-      "text": "How many strangers would you co-own a Lamborghini with?",
-      "media": [], "reply_to": null, "quote": null, "note": "Reply bait. Answer every reply for the first hour." },
-
-    { "id": "P6", "account": "ownacar", "at": "2026-11-04T12:00:00-05:00", "status": "draft",
-      "text": "It will be wrapped in names.",
-      "media": ["own-a-car/marketing/x/cards/names.png"], "reply_to": null, "quote": null, "note": "" },
-
-    { "id": "P7", "account": "ownacar", "at": "2026-11-06T12:00:00-05:00", "status": "draft",
-      "text": "Key Nº 0001 goes to whoever's fastest on Nov 9 at noon ET.",
-      "media": ["own-a-car/marketing/x/clips/rain.mp4"], "reply_to": null, "quote": null, "note": "" },
-
-    { "id": "P8", "account": "ownacar", "at": "2026-11-08T12:00:00-05:00", "status": "draft",
-      "text": "Tomorrow, noon ET, you can own a car.",
-      "media": ["own-a-car/marketing/x/cards/launch.png"], "reply_to": null, "quote": null, "note": "" },
-
-    { "id": "L1", "account": "oscar", "at": "2026-11-09T12:00:00-05:00", "status": "draft",
-      "text": "I'm selling unlimited keys to one Lamborghini.\n\n$50 each. No limit.\n\nEveryone who buys one owns it.",
-      "media": ["own-a-car/marketing/x/clips/launch-16x9.mp4"], "reply_to": null, "quote": null,
-      "note": "THE launch post. No link here: it goes in L7 (X suppresses links in the main post)." },
-
-    { "id": "L2", "account": "oscar", "at": "2026-11-09T12:00:30-05:00", "status": "draft",
-      "text": "Here's the deal.\n\nYou buy a key. I buy the car. Your key, solid brass and numbered, gets mailed to your door with a certificate that has your name on it.\n\nIf we don't sell 6,000 keys by Dec 9, everyone is refunded. Automatically.",
-      "media": ["own-a-car/assets/key.jpg"], "reply_to": "L1", "quote": null, "note": "" },
-
-    { "id": "L3", "account": "oscar", "at": "2026-11-09T12:01:00-05:00", "status": "draft",
-      "text": "\"If 6,000 people own it, how much do I own?\"\n\nAbout 238 grams. Roughly a phone.\n\nAt 100,000 owners it's 14 grams. A lug nut.\n\nThat's the point.",
-      "media": ["own-a-car/marketing/x/clips/shatter.mp4"], "reply_to": "L2", "quote": null, "note": "" },
-
-    { "id": "L4", "account": "oscar", "at": "2026-11-09T12:01:30-05:00", "status": "draft",
-      "text": "When the presale closes, the car gets wrapped in every owner's name. Bumper to bumper.\n\nThe more owners, the smaller the names. At 6,000 they're 18 mm tall.",
-      "media": ["own-a-car/marketing/x/cards/names.png"], "reply_to": "L3", "quote": null, "note": "" },
-
-    { "id": "L5", "account": "oscar", "at": "2026-11-09T12:02:00-05:00", "status": "draft",
-      "text": "Every dollar is public.\n\n$20.45 → the car\n$13.00 → your key, box, certificate\n$8.80 → taxes\n$6.00 → shipping it to you\n$1.75 → card fees\n\nReceipts go up on the site as they happen.",
-      "media": ["own-a-car/marketing/x/cards/math.png"], "reply_to": "L4", "quote": null, "note": "" },
-
-    { "id": "L6", "account": "oscar", "at": "2026-11-09T12:02:30-05:00", "status": "draft",
-      "text": "What it isn't: something you'll make money on. No payout, no resale split, and the key doesn't start the car.\n\nIt's an art project about what owning something means when everyone does.",
-      "media": [], "reply_to": "L5", "quote": null, "note": "Pre-empts the 'scam / securities' replies before they start." },
-
-    { "id": "L7", "account": "oscar", "at": "2026-11-09T12:03:00-05:00", "status": "draft",
-      "text": "Key numbers go in order. Key Nº 0001 is still available.\n\n{link}",
-      "media": [], "reply_to": "L6", "quote": null, "note": "The link lives here, at the end of the thread." },
-
-    { "id": "L8", "account": "ownacar", "at": "2026-11-09T12:05:00-05:00", "status": "draft",
-      "text": "It's open.",
-      "media": ["own-a-car/marketing/x/cards/launch.png"], "reply_to": null, "quote": "L1", "note": "Brand account quotes the launch." },
-
-    { "id": "L9", "account": "ownacar", "at": "2026-11-09T14:00:00-05:00", "status": "draft",
-      "text": "How much Lamborghini is $50?\n\nDepends how many of you there are.",
-      "media": ["own-a-car/marketing/x/clips/shatter.mp4"], "reply_to": null, "quote": null, "note": "" },
-
-    { "id": "L10", "account": "ownacar", "at": "2026-11-09T16:00:00-05:00", "status": "draft",
-      "text": "{keys} keys sold. It's been 4 hours.\n\nEach one is {grams} of Lamborghini right now. About {thing}.",
-      "media": [], "reply_to": null, "quote": null, "note": "First counter. Numbers fill in live at post time." },
-
-    { "id": "L11", "account": "ownacar", "at": "2026-11-09T18:00:00-05:00", "status": "draft",
+    {
+      "id": "T1",
+      "account": "ownacar",
+      "at": "2026-10-27T10:00:00-04:00",
+      "status": "draft",
+      "text": "One car.\nUnlimited keys.\nNov 10.",
+      "media": [
+        "own-a-car/brand/og.png"
+      ],
+      "reply_to": null,
+      "quote": null,
+      "note": "First post on the brand account. Pin until launch."
+    },
+    {
+      "id": "T2",
+      "account": "oscar",
+      "at": "2026-10-28T10:00:00-04:00",
+      "status": "draft",
+      "text": "Working on something dumb and beautiful. It involves a Lamborghini and a few thousand strangers.\n\nNov 10.",
+      "media": [],
+      "reply_to": null,
+      "quote": null,
+      "note": "No explanation, no link."
+    },
+    {
+      "id": "T3",
+      "account": "ownacar",
+      "at": "2026-10-30T10:00:00-04:00",
+      "status": "draft",
+      "text": "Would you rather own 100% of a Corolla or 1/6000th of a Lamborghini.",
+      "media": [],
+      "reply_to": null,
+      "quote": null,
+      "note": "Post as a native X poll by hand (Corolla / Lamborghini, 3 days). The API needs extra setup for polls."
+    },
+    {
+      "id": "T4",
+      "account": "ownacar",
+      "at": "2026-11-04T10:00:00-05:00",
+      "status": "draft",
+      "text": "A key.\nTo a Lamborghini.\nNov 10.",
+      "media": [
+        "own-a-car/marketing/x/clips/teaser-key-9x16.mp4"
+      ],
+      "reply_to": null,
+      "quote": null,
+      "note": "Teaser B1. Day after the midterms: check the news cycle first."
+    },
+    {
+      "id": "T5",
+      "account": "oscar",
+      "at": "2026-11-05T10:00:00-05:00",
+      "status": "draft",
+      "text": "How many people can own one car?",
+      "media": [
+        "own-a-car/marketing/x/clips/teaser-shatter-9x16.mp4"
+      ],
+      "reply_to": null,
+      "quote": null,
+      "note": "Teaser B2. Answer replies for the first hour."
+    },
+    {
+      "id": "T6",
+      "account": "ownacar",
+      "at": "2026-11-06T10:00:00-05:00",
+      "status": "draft",
+      "text": "Every owner's name.\nOn the car.\nNov 10.",
+      "media": [
+        "own-a-car/marketing/x/clips/teaser-names-9x16.mp4"
+      ],
+      "reply_to": null,
+      "quote": null,
+      "note": "Teaser B3."
+    },
+    {
+      "id": "T7",
+      "account": "ownacar",
+      "at": "2026-11-09T10:00:00-05:00",
+      "status": "draft",
+      "text": "Tomorrow, 10am ET.\nKey Nº 0001 goes first.",
+      "media": [
+        "own-a-car/marketing/x/cards/launch.png"
+      ],
+      "reply_to": null,
+      "quote": null,
+      "note": "Send the private preview DMs today (marketing/x/PLAYBOOK.md § 7)."
+    },
+    {
+      "id": "L1",
+      "account": "oscar",
+      "at": "2026-11-10T10:00:00-05:00",
+      "status": "draft",
+      "text": "I'm selling unlimited keys to one Lamborghini.\n\n$50 each. Everyone who holds one owns it.",
+      "media": [
+        "own-a-car/marketing/x/clips/launch-9x16.mp4"
+      ],
+      "reply_to": null,
+      "quote": null,
+      "note": "ROOT. Native video, no link, under 120 chars. Then staff replies for 2 hours."
+    },
+    {
+      "id": "L2",
+      "account": "oscar",
+      "at": "2026-11-10T10:00:30-05:00",
+      "status": "draft",
+      "text": "$50 buys a numbered brass key. There is no limit on keys. Everyone who holds one owns the car.\n\n6,000 keys by Dec 9, or everyone is refunded in full, automatically.\n\n{link}",
+      "media": [],
+      "reply_to": "L1",
+      "quote": null,
+      "note": "R1: the mechanic and the link."
+    },
+    {
+      "id": "L3",
+      "account": "oscar",
+      "at": "2026-11-10T10:01:00-05:00",
+      "status": "draft",
+      "text": "What you get: a solid brass key with your number on it, a signed certificate, and your name printed on the car.",
+      "media": [
+        "own-a-car/assets/key.jpg"
+      ],
+      "reply_to": "L2",
+      "quote": null,
+      "note": "R2. Swap in a photo of the real key sample when it exists."
+    },
+    {
+      "id": "L4",
+      "account": "oscar",
+      "at": "2026-11-10T10:01:30-05:00",
+      "status": "draft",
+      "text": "What you don't get: to drive it, to sell your part of it, or any money from it.\n\nIt isn't an investment. It's worse. It's art.",
+      "media": [],
+      "reply_to": "L3",
+      "quote": null,
+      "note": "R3, the honest no-list. The 'isn't an investment' line is the one approved negation. Counsel may cut it."
+    },
+    {
+      "id": "L5",
+      "account": "oscar",
+      "at": "2026-11-10T10:02:00-05:00",
+      "status": "draft",
+      "text": "How much of it is yours depends on how many of you there are.\n\nAt 6,000 owners: 238 grams. About a phone.\nAt 100,000: a lug nut.\n\nThe count is public: @ownacar",
+      "media": [
+        "own-a-car/marketing/x/clips/shatter.mp4"
+      ],
+      "reply_to": "L4",
+      "quote": null,
+      "note": "R4."
+    },
+    {
+      "id": "L6",
+      "account": "oscar",
+      "at": "2026-11-10T10:02:30-05:00",
+      "status": "draft",
+      "text": "I wanted to know what ownership means when nobody can use the thing and everybody has the key.",
+      "media": [],
+      "reply_to": "L5",
+      "quote": null,
+      "note": "R5, the artist line."
+    },
+    {
+      "id": "L7",
+      "account": "ownacar",
+      "at": "2026-11-10T10:03:00-05:00",
+      "status": "draft",
+      "text": "Key Nº 0001 has been issued.",
+      "media": [
+        "own-a-car/marketing/x/cards/certificate.png"
+      ],
+      "reply_to": null,
+      "quote": "L1",
+      "note": "The registrar quotes the launch."
+    },
+    {
+      "id": "L8",
+      "account": "oscar",
+      "at": "2026-11-10T11:15:00-05:00",
+      "status": "draft",
+      "text": "Keys issued so far: {keys}.",
+      "media": [],
+      "reply_to": "L6",
+      "quote": null,
+      "note": "First-hour counter as a self-reply: gives the thread fresh activity."
+    },
+    {
+      "id": "L9",
+      "account": "ownacar",
+      "at": "2026-11-10T14:00:00-05:00",
+      "status": "draft",
+      "text": "{keys} owners. One car.\nFind your shard.",
+      "media": [
+        "own-a-car/marketing/x/cards/shard.png"
+      ],
+      "reply_to": null,
+      "quote": null,
+      "note": ""
+    },
+    {
+      "id": "L10",
+      "account": "ownacar",
+      "at": "2026-11-10T17:00:00-05:00",
+      "status": "draft",
       "text": "You have $50. Do you:\n\nBuy a Lamborghini\nor\nBuy three burritos",
-      "media": [], "reply_to": null, "quote": null, "note": "Native poll by hand, 24 h." },
-
-    { "id": "L12", "account": "ownacar", "at": "2026-11-09T20:00:00-05:00", "status": "draft",
+      "media": [],
+      "reply_to": null,
+      "quote": null,
+      "note": "Native poll by hand, 24 h."
+    },
+    {
+      "id": "L11",
+      "account": "ownacar",
+      "at": "2026-11-10T20:00:00-05:00",
+      "status": "draft",
       "text": "Day 1. {keys} keys. {days_left} days left.\n\nThe car doesn't know yet.",
-      "media": ["own-a-car/marketing/x/cards/shard.png"], "reply_to": null, "quote": null, "note": "The daily 8 pm count starts here." }
-  ]
+      "media": [],
+      "reply_to": null,
+      "quote": null,
+      "note": "The daily 8 pm count starts here."
+    },
+    {
+      "id": "D2",
+      "account": "ownacar",
+      "at": "2026-11-11T12:00:00-05:00",
+      "status": "draft",
+      "text": "A banana with a certificate sold for $6.2M.\n\nThis is a Lamborghini with a certificate for $50.\n\nWe are not going to explain the art market to you.",
+      "media": [
+        "own-a-car/marketing/x/cards/certificate.png"
+      ],
+      "reply_to": null,
+      "quote": null,
+      "note": "Cattelan's Comedian resold for $6.2M (Sotheby's, Nov 2024)."
+    },
+    {
+      "id": "D3",
+      "account": "oscar",
+      "at": "2026-11-12T11:00:00-05:00",
+      "status": "draft",
+      "text": "Is it still a Lamborghini if 6,000 people own it? Or does it become a public park?",
+      "media": [],
+      "reply_to": null,
+      "quote": null,
+      "note": "Debate about the idea, never about the audience."
+    },
+    {
+      "id": "D4",
+      "account": "ownacar",
+      "at": "2026-11-13T12:00:00-05:00",
+      "status": "draft",
+      "text": "Where the car will live, who insures it, and what happens to it in 1, 5 and 10 years: {link}#faq",
+      "media": [],
+      "reply_to": null,
+      "quote": null,
+      "note": "NEEDS the custody plan written into the site FAQ first (OPEN_QUESTIONS.md). Pre-empts the Key4All impound story."
+    },
+    {
+      "id": "D5",
+      "account": "ownacar",
+      "at": "2026-11-14T12:00:00-05:00",
+      "status": "draft",
+      "text": "Each key is {grams} of Lamborghini right now. About {thing}.\n\nEvery new owner makes yours smaller. That's the piece.",
+      "media": [
+        "own-a-car/marketing/x/cards/shrink.png"
+      ],
+      "reply_to": null,
+      "quote": null,
+      "note": ""
+    },
+    {
+      "id": "M100",
+      "account": "ownacar",
+      "at": "2026-11-10T10:00:00-05:00",
+      "when_keys": 100,
+      "status": "draft",
+      "text": "100.\nMost of them just met.",
+      "media": [
+        "own-a-car/marketing/x/cards/count-100.png"
+      ],
+      "reply_to": null,
+      "quote": null,
+      "note": "Milestone."
+    },
+    {
+      "id": "M1000",
+      "account": "ownacar",
+      "at": "2026-11-10T10:00:00-05:00",
+      "when_keys": 1000,
+      "status": "draft",
+      "text": "1,000.\nThe car now has more owners than most companies have employees.",
+      "media": [
+        "own-a-car/marketing/x/cards/count-1000.png"
+      ],
+      "reply_to": null,
+      "quote": null,
+      "note": "Oscar quote-posts this one."
+    },
+    {
+      "id": "M2500",
+      "account": "ownacar",
+      "at": "2026-11-10T10:00:00-05:00",
+      "when_keys": 2500,
+      "status": "draft",
+      "text": "2,500.\nEach key is now {grams} of car. About {thing}.",
+      "media": [
+        "own-a-car/marketing/x/cards/count-2500.png"
+      ],
+      "reply_to": null,
+      "quote": null,
+      "note": ""
+    },
+    {
+      "id": "M3000",
+      "account": "ownacar",
+      "at": "2026-11-10T10:00:00-05:00",
+      "when_keys": 3000,
+      "status": "draft",
+      "text": "3,000 owners. Halfway.\nThe car is aware.",
+      "media": [],
+      "reply_to": null,
+      "quote": null,
+      "note": "Oscar quote-posts this one."
+    },
+    {
+      "id": "M5000",
+      "account": "ownacar",
+      "at": "2026-11-10T10:00:00-05:00",
+      "when_keys": 5000,
+      "status": "draft",
+      "text": "5,000.\n1,000 keys between this and a car.",
+      "media": [
+        "own-a-car/marketing/x/cards/count-5000.png"
+      ],
+      "reply_to": null,
+      "quote": null,
+      "note": ""
+    },
+    {
+      "id": "M6000",
+      "account": "ownacar",
+      "at": "2026-11-10T10:00:00-05:00",
+      "when_keys": 6000,
+      "status": "draft",
+      "text": "6,000.\nIt's yours. All of you.",
+      "media": [
+        "own-a-car/marketing/x/cards/count-6000.png"
+      ],
+      "reply_to": null,
+      "quote": null,
+      "note": "The goal."
+    },
+    {
+      "id": "M6000Q",
+      "account": "oscar",
+      "at": "2026-11-10T10:00:00-05:00",
+      "when_keys": 6000,
+      "status": "draft",
+      "text": "We're buying the car.",
+      "media": [],
+      "reply_to": null,
+      "quote": "M6000",
+      "note": "Oscar quotes the goal post. Film a reaction and attach it if you can."
+    },
+    {
+      "id": "M6001",
+      "account": "ownacar",
+      "at": "2026-11-10T10:00:00-05:00",
+      "when_keys": 6001,
+      "status": "draft",
+      "text": "6,001. Welcome. There's room on the roof.",
+      "media": [],
+      "reply_to": null,
+      "quote": null,
+      "note": "Past the goal the count keeps going."
+    },
+    {
+      "id": "C3",
+      "account": "ownacar",
+      "at": "2026-12-07T10:00:00-05:00",
+      "until_keys": 6000,
+      "status": "draft",
+      "text": "3 days.\n{keys_left} keys to go.\n\nIf we don't get there, everyone gets their money back and the car stays a picture.",
+      "media": [],
+      "reply_to": null,
+      "quote": null,
+      "note": "Countdown: skipped automatically if the goal is already met."
+    },
+    {
+      "id": "C2",
+      "account": "ownacar",
+      "at": "2026-12-08T10:00:00-05:00",
+      "until_keys": 6000,
+      "status": "draft",
+      "text": "48 hours left to own a Lamborghini.\n{keys_left} keys to go.",
+      "media": [
+        "own-a-car/marketing/x/cards/deadline.png"
+      ],
+      "reply_to": null,
+      "quote": null,
+      "note": ""
+    },
+    {
+      "id": "C1",
+      "account": "ownacar",
+      "at": "2026-12-09T10:00:00-05:00",
+      "until_keys": 6000,
+      "status": "draft",
+      "text": "Tonight at midnight the car either belongs to {goal} people or to nobody.\n\n{keys_left} keys left.",
+      "media": [],
+      "reply_to": null,
+      "quote": null,
+      "note": ""
+    },
+    {
+      "id": "C0",
+      "account": "ownacar",
+      "at": "2026-12-09T23:00:00-05:00",
+      "until_keys": 6000,
+      "status": "draft",
+      "text": "11pm. {keys_left} keys. We are not sending another reminder.",
+      "media": [],
+      "reply_to": null,
+      "quote": null,
+      "note": ""
+    },
+    {
+      "id": "F1",
+      "account": "ownacar",
+      "at": "2026-12-10T00:05:00-05:00",
+      "when_keys": 6000,
+      "status": "draft",
+      "text": "The presale is closed. {keys} owners.\n\nWe're buying a Lamborghini.",
+      "media": [],
+      "reply_to": null,
+      "quote": null,
+      "note": "Only posts if the goal was met."
+    },
+    {
+      "id": "F0",
+      "account": "ownacar",
+      "at": "2026-12-10T00:05:00-05:00",
+      "until_keys": 6000,
+      "status": "draft",
+      "text": "We closed at {keys} of {goal}. Not enough to buy the car.\n\nEvery order is being refunded right now, in full, automatically. Thank you.",
+      "media": [],
+      "reply_to": null,
+      "quote": null,
+      "note": "Only posts if the goal was missed. Run ops.py refund --execute first."
+    }
+  ],
+  "replies": {
+    "about": "Ready answers for the first two hours (never auto-posted; paste by hand, rephrase so no two are identical).",
+    "Is this a scam?": "If we don't reach 6,000, you get all $50 back. If we do, you get a key, a certificate, and your name on a Lamborghini. That's the whole thing.",
+    "Is this a security?": "No. There's nothing to sell, nothing to earn and nothing to trade. It's a numbered key and your name on a car.",
+    "Can I drive it?": "No. Nobody can. That's what makes it fair.",
+    "Where does the money go?": "Every dollar is on the site: $20.45 car, $13 key and box, $8.80 tax, $6 shipping, $1.75 card fees.",
+    "What if you don't hit 6,000?": "Everyone is refunded in full, automatically. You don't have to ask.",
+    "MSCHF did this.": "They gave 1,000 people a PT Cruiser and made them race for it. This one is shared.",
+    "Why not give it to charity?": "You can. It's your $50.",
+    "Why a Lamborghini?": "It's the most owned-looking object there is.",
+    "Where's the car?": "Right now it's a render. At 6,000 keys it's a car, and its address, insurance and schedule go on the site.",
+    "Is this affiliated with Lamborghini?": "No."
+  },
+  "ideas": {
+    "about": "Unscheduled post ideas. Promote one into 'posts' (with an id, time and account) to schedule it.",
+    "math": [
+      "Every time someone buys a key, you own a little less of your Lamborghini. You're welcome.",
+      "If a million people buy a key, each owns 1.4 grams. That's a paperclip of Lamborghini. We'd frame it.",
+      "The Gallardo makes about 560 hp. Split {keys} ways, that's the horsepower of a small, determined pony."
+    ],
+    "deadpan": [
+      "The key doesn't start the car. Nothing does, for you.",
+      "\"Who holds the title?\" The project. A DMV title doesn't have room for 6,000 names. The car does.",
+      "The car will never be sold for profit. If it ever leaves, it's donated, and owners hear first.",
+      "Key Nº {keys} has been issued. The car has no comment."
+    ],
+    "identity": [
+      "Post your key number. We'll repost every one.",
+      "Some of you bought key Nº 0069 and Nº 0420 on purpose and we see you.",
+      "If you gift someone a key, the certificate has their name. For someone who has everything except a Lamborghini."
+    ],
+    "debate": [
+      "At what number of owners does a luxury object stop being a luxury?",
+      "Is it ownership if you can't drive it. (You can't drive yours either. It's in traffic.)"
+    ],
+    "polls": [
+      "Where should the car live first? LA · NYC · Miami · Princeton, NJ",
+      "Which color should the name wrap be? White on black · Black on white · Brass on black",
+      "Stretch goal at 14,000: upgrade to a Huracán, or keep the Gallardo and tour it?"
+    ],
+    "behind_the_scenes": [
+      "The key is being scanned from the real one, cast in solid brass and engraved with your number. [photo of the sample]",
+      "I had to find a box that opens slowly. That's a spec. It costs $0.40 more. Worth it. [photo]"
+    ]
+  }
 }

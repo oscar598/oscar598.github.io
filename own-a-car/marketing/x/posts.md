@@ -1,251 +1,339 @@
 # Posts
 
-Ready to copy. `[img: …]` names the attachment: `cards/…` are in this folder, `assets/…` are the Runway renders.
-**O** = Oscar's account, **@** = @ownacar. Replace `[link]` with the site URL. Numbers in {braces} come from the live counter.
-Label Runway images "concept render" until the real objects exist.
+_Generated from `queue.json` by `python3 own-a-car/tools/xpost.py md`. Edit the queue, not this file._
 
----
+Framework and evidence: `../research/x-launch-frameworks.md`. Video scripts: `../research/launch-video-frameworks.md`.
 
-## ★ The launch thread (O, Nov 9, 12:00 pm ET)
+## Pre-launch teasers
 
-**1/**
-I'm selling unlimited keys to one Lamborghini.
+**T1** · @ownacar · 2026-10-27 10:00 ET · _draft_
 
-$50 each. No limit.
+> One car.
+> Unlimited keys.
+> Nov 10.
+> `[brand/og.png]`
 
-Everyone who buys one owns it.
+_First post on the brand account. Pin until launch._
 
-[img: marketing/x/clips/rain.mp4 (keys pile up, one per owner), or assets/hero.mp4]
+**T2** · @oscar · 2026-10-28 10:00 ET · _draft_
 
-**2/**
-Here's the deal.
+> Working on something dumb and beautiful. It involves a Lamborghini and a few thousand strangers.
+>
+> Nov 10.
 
-You buy a key. I buy the car. Your key, a numbered brass one, gets mailed to your door, with a certificate that has your name on it.
+_No explanation, no link._
 
-If we don't sell 6,000 keys by Dec 9, everyone gets refunded. Automatically.
+**T3** · @ownacar · 2026-10-30 10:00 ET · _draft_
 
-[img: assets/key.jpg]
+> Would you rather own 100% of a Corolla or 1/6000th of a Lamborghini.
 
-**3/**
-"But if 6,000 people own it, how much do I own?"
+_Post as a native X poll by hand (Corolla / Lamborghini, 3 days). The API needs extra setup for polls._
 
-About 238 grams. Roughly a phone.
+**T4** · @ownacar · 2026-11-04 10:00 ET · _draft_
 
-At 100,000 owners it's 14 grams. A lug nut.
+> A key.
+> To a Lamborghini.
+> Nov 10.
+> `[marketing/x/clips/teaser-key-9x16.mp4]`
 
-That's the point.
+_Teaser B1. Day after the midterms: check the news cycle first._
 
-[img: clips/shatter.mp4 (the car breaks into one shard per owner, 1 → 100,000)]
+**T5** · @oscar · 2026-11-05 10:00 ET · _draft_
 
-**4/**
-When the presale closes, the car gets wrapped in every owner's name. Bumper to bumper.
+> How many people can own one car?
+> `[marketing/x/clips/teaser-shatter-9x16.mp4]`
 
-The more owners, the smaller the names. At 6,000 they're 18 mm tall.
+_Teaser B2. Answer replies for the first hour._
 
-[img: assets/names.jpg]
+**T6** · @ownacar · 2026-11-06 10:00 ET · _draft_
 
-**5/**
-Every dollar is public.
+> Every owner's name.
+> On the car.
+> Nov 10.
+> `[marketing/x/clips/teaser-names-9x16.mp4]`
 
-$20.45 → the car
-$13 → your key, box, certificate
-$8.80 → taxes
-$6 → shipping it to you
-$1.75 → card fees
+_Teaser B3._
 
-The receipts go up on the site as they happen.
+**T7** · @ownacar · 2026-11-09 10:00 ET · _draft_
 
-[img: cards/math.png]
+> Tomorrow, 10am ET.
+> Key Nº 0001 goes first.
+> `[marketing/x/cards/launch.png]`
 
-**6/**
-What it isn't: an investment. There are no returns and no resale payouts. The key doesn't start the car.
+_Send the private preview DMs today (marketing/x/PLAYBOOK.md § 7)._
 
-It's an art project about what "owning" something means when everyone does.
+## Launch day
 
-**7/**
-Key numbers go in order. Key Nº 0001 is still available.
+**L1** · @oscar · 2026-11-10 10:00 ET · _draft_
 
-[link]
+> I'm selling unlimited keys to one Lamborghini.
+>
+> $50 each. Everyone who holds one owns it.
+> `[marketing/x/clips/launch-9x16.mp4]`
 
----
+_ROOT. Native video, no link, under 120 chars. Then staff replies for 2 hours._
 
-## Pre-launch (Oct 26 – Nov 8)
+**L2** · @oscar · 2026-11-10 10:00 ET · replies to L1 · _draft_
 
-**P1 (@, first post ever)**
-One car.
-Unlimited keys.
-Nov 9.
-[img: brand/og.png]
+> $50 buys a numbered brass key. There is no limit on keys. Everyone who holds one owns the car.
+>
+> 6,000 keys by Dec 9, or everyone is refunded in full, automatically.
+>
+> {link}
 
-**P2 (O)**
-Working on something dumb and beautiful. It involves a Lamborghini and a few thousand strangers. Nov 9.
+_R1: the mechanic and the link._
 
-**P3 (@)**
-Poll. Would you rather own:
-- 100% of a Honda Civic
-- 0.017% of a Lamborghini
+**L3** · @oscar · 2026-11-10 10:01 ET · replies to L2 · _draft_
 
-**P4 (@)**
-The key. (concept render)
-[img: assets/key.jpg]
+> What you get: a solid brass key with your number on it, a signed certificate, and your name printed on the car.
+> `[assets/key.jpg]`
 
-**P5 (O)**
-How many strangers would you co-own a Lamborghini with?
+_R2. Swap in a photo of the real key sample when it exists._
 
-**P6 (@)**
-It will be wrapped in names.
-[img: assets/names.jpg]
+**L4** · @oscar · 2026-11-10 10:01 ET · replies to L3 · _draft_
 
-**P7 (O)**
-The first time I told someone about this project they said "that's either art or a crime." It's art. I checked. (I had a lawyer check.)  ← only post once the attorney review is actually done
+> What you don't get: to drive it, to sell your part of it, or any money from it.
+>
+> It isn't an investment. It's worse. It's art.
 
-**P8 (@)**
-Nº 0001 goes to whoever's fastest on Nov 9 at noon ET.
+_R3, the honest no-list. The 'isn't an investment' line is the one approved negation. Counsel may cut it._
 
-**P9 (@, T−1)**
-Tomorrow, noon ET, you can own a car.
-[img: cards/launch.png]
+**L5** · @oscar · 2026-11-10 10:02 ET · replies to L4 · _draft_
 
----
+> How much of it is yours depends on how many of you there are.
+>
+> At 6,000 owners: 238 grams. About a phone.
+> At 100,000: a lug nut.
+>
+> The count is public: @ownacar
+> `[marketing/x/clips/shatter.mp4]`
 
-## Launch day extras (Nov 9)
+_R4._
 
-**L1 (@ quote-posting the thread)**
-It's open.
-[img: cards/launch.png]
+**L6** · @oscar · 2026-11-10 10:02 ET · replies to L5 · _draft_
 
-**L2 (@)**
-How much Lamborghini is $50?
-Depends how many of you there are.
-[img: clips/shatter.mp4]
+> I wanted to know what ownership means when nobody can use the thing and everybody has the key.
 
-**L3 (@, first count)**
-{41} people own a Lamborghini now. It's been {4} hours.
+_R5, the artist line._
 
-**L4 (@, poll)**
-You have $50. Do you:
-- Buy a Lamborghini
-- Buy 3 burritos
+**L7** · @ownacar · 2026-11-10 10:03 ET · quotes L1 · _draft_
 
-**L5 (O)**
-Someone just bought 10 keys. Sir, it's the same car.
+> Key Nº 0001 has been issued.
+> `[marketing/x/cards/certificate.png]`
 
-**L6 (@, evening)**
-Key Nº 0001 went at 12:00:{07}. Whoever you are: you own a car.
+_The registrar quotes the launch._
 
----
+**L8** · @oscar · 2026-11-10 11:15 ET · replies to L6 · _draft_
 
-## Presale: the rotation (pick 3–5/day)
+> Keys issued so far: {keys}.
 
-**Counters (@, 8 pm ET daily)**
-- {1,212} people own this car now. {4,788} to go. {26} days.
-- Day {3}. {2,050} owners. Each key is now {697} g of Lamborghini, about a football.
-- Owners today: {312}. The car doesn't know yet.
-- {3,000} keys. Halfway. Somewhere in there is a lug nut with your name on it.
+_First-hour counter as a self-reply: gives the thread fresh activity._
 
-**The math jokes (@)**
+**L9** · @ownacar · 2026-11-10 14:00 ET · _draft_
+
+> {keys} owners. One car.
+> Find your shard.
+> `[marketing/x/cards/shard.png]`
+
+**L10** · @ownacar · 2026-11-10 17:00 ET · _draft_
+
+> You have $50. Do you:
+>
+> Buy a Lamborghini
+> or
+> Buy three burritos
+
+_Native poll by hand, 24 h._
+
+**L11** · @ownacar · 2026-11-10 20:00 ET · _draft_
+
+> Day 1. {keys} keys. {days_left} days left.
+>
+> The car doesn't know yet.
+
+_The daily 8 pm count starts here._
+
+## Presale rotation
+
+**D2** · @ownacar · 2026-11-11 12:00 ET · _draft_
+
+> A banana with a certificate sold for $6.2M.
+>
+> This is a Lamborghini with a certificate for $50.
+>
+> We are not going to explain the art market to you.
+> `[marketing/x/cards/certificate.png]`
+
+_Cattelan's Comedian resold for $6.2M (Sotheby's, Nov 2024)._
+
+**D3** · @oscar · 2026-11-12 11:00 ET · _draft_
+
+> Is it still a Lamborghini if 6,000 people own it? Or does it become a public park?
+
+_Debate about the idea, never about the audience._
+
+**D4** · @ownacar · 2026-11-13 12:00 ET · _draft_
+
+> Where the car will live, who insures it, and what happens to it in 1, 5 and 10 years: {link}#faq
+
+_NEEDS the custody plan written into the site FAQ first (OPEN_QUESTIONS.md). Pre-empts the Key4All impound story._
+
+**D5** · @ownacar · 2026-11-14 12:00 ET · _draft_
+
+> Each key is {grams} of Lamborghini right now. About {thing}.
+>
+> Every new owner makes yours smaller. That's the piece.
+> `[marketing/x/cards/shrink.png]`
+
+## Milestones (post when the count gets there)
+
+**M100** · @ownacar · 2026-11-10 10:00 ET · when 100 keys · _draft_
+
+> 100.
+> Most of them just met.
+> `[marketing/x/cards/count-100.png]`
+
+_Milestone._
+
+**M1000** · @ownacar · 2026-11-10 10:00 ET · when 1,000 keys · _draft_
+
+> 1,000.
+> The car now has more owners than most companies have employees.
+> `[marketing/x/cards/count-1000.png]`
+
+_Oscar quote-posts this one._
+
+**M2500** · @ownacar · 2026-11-10 10:00 ET · when 2,500 keys · _draft_
+
+> 2,500.
+> Each key is now {grams} of car. About {thing}.
+> `[marketing/x/cards/count-2500.png]`
+
+**M3000** · @ownacar · 2026-11-10 10:00 ET · when 3,000 keys · _draft_
+
+> 3,000 owners. Halfway.
+> The car is aware.
+
+_Oscar quote-posts this one._
+
+**M5000** · @ownacar · 2026-11-10 10:00 ET · when 5,000 keys · _draft_
+
+> 5,000.
+> 1,000 keys between this and a car.
+> `[marketing/x/cards/count-5000.png]`
+
+**M6000** · @ownacar · 2026-11-10 10:00 ET · when 6,000 keys · _draft_
+
+> 6,000.
+> It's yours. All of you.
+> `[marketing/x/cards/count-6000.png]`
+
+_The goal._
+
+**M6000Q** · @oscar · 2026-11-10 10:00 ET · when 6,000 keys · quotes M6000 · _draft_
+
+> We're buying the car.
+
+_Oscar quotes the goal post. Film a reaction and attach it if you can._
+
+**M6001** · @ownacar · 2026-11-10 10:00 ET · when 6,001 keys · _draft_
+
+> 6,001. Welcome. There's room on the roof.
+
+_Past the goal the count keeps going._
+
+## Countdown (skipped if the goal is met)
+
+**C3** · @ownacar · 2026-12-07 10:00 ET · skip at 6,000 keys · _draft_
+
+> 3 days.
+> {keys_left} keys to go.
+>
+> If we don't get there, everyone gets their money back and the car stays a picture.
+
+_Countdown: skipped automatically if the goal is already met._
+
+**C2** · @ownacar · 2026-12-08 10:00 ET · skip at 6,000 keys · _draft_
+
+> 48 hours left to own a Lamborghini.
+> {keys_left} keys to go.
+> `[marketing/x/cards/deadline.png]`
+
+**C1** · @ownacar · 2026-12-09 10:00 ET · skip at 6,000 keys · _draft_
+
+> Tonight at midnight the car either belongs to {goal} people or to nobody.
+>
+> {keys_left} keys left.
+
+**C0** · @ownacar · 2026-12-09 23:00 ET · skip at 6,000 keys · _draft_
+
+> 11pm. {keys_left} keys. We are not sending another reminder.
+
+## Close
+
+**F1** · @ownacar · 2026-12-10 00:05 ET · when 6,000 keys · _draft_
+
+> The presale is closed. {keys} owners.
+>
+> We're buying a Lamborghini.
+
+_Only posts if the goal was met._
+
+**F0** · @ownacar · 2026-12-10 00:05 ET · skip at 6,000 keys · _draft_
+
+> We closed at {keys} of {goal}. Not enough to buy the car.
+>
+> Every order is being refunded right now, in full, automatically. Thank you.
+
+_Only posts if the goal was missed. Run ops.py refund --execute first._
+
+## Ready replies (paste by hand in the first two hours)
+
+- **Is this a scam?** If we don't reach 6,000, you get all $50 back. If we do, you get a key, a certificate, and your name on a Lamborghini. That's the whole thing.
+- **Is this a security?** No. There's nothing to sell, nothing to earn and nothing to trade. It's a numbered key and your name on a car.
+- **Can I drive it?** No. Nobody can. That's what makes it fair.
+- **Where does the money go?** Every dollar is on the site: $20.45 car, $13 key and box, $8.80 tax, $6 shipping, $1.75 card fees.
+- **What if you don't hit 6,000?** Everyone is refunded in full, automatically. You don't have to ask.
+- **MSCHF did this.** They gave 1,000 people a PT Cruiser and made them race for it. This one is shared.
+- **Why not give it to charity?** You can. It's your $50.
+- **Why a Lamborghini?** It's the most owned-looking object there is.
+- **Where's the car?** Right now it's a render. At 6,000 keys it's a car, and its address, insurance and schedule go on the site.
+- **Is this affiliated with Lamborghini?** No.
+
+## Idea bank (unscheduled)
+
+**math**
+
 - Every time someone buys a key, you own a little less of your Lamborghini. You're welcome.
-- At the current count, your share of the car is roughly one headlight bulb. Tomorrow: a smaller bulb.
 - If a million people buy a key, each owns 1.4 grams. That's a paperclip of Lamborghini. We'd frame it.
-- The Gallardo makes about 560 hp. Split {2,000} ways, you have a quarter of a horsepower. A small, determined pony.
-- Your share of the car's top speed is not how physics works, but emotionally it's 0.1 mph.
+- The Gallardo makes about 560 hp. Split {keys} ways, that's the horsepower of a small, determined pony.
 
-**Find your shard (@, once the site is live)**
-- 6,000 owners. One car. Find your shard. [img: cards/shard.png] Reply: "It's interactive: sweep the car on the site."
+**deadpan**
 
-**Deadpan facts (@)**
 - The key doesn't start the car. Nothing does, for you.
-- You can't drive it. Nobody can. That's the art part.
-- "Can I sit in it?" There will be owners' days. Owners vote on where.
 - "Who holds the title?" The project. A DMV title doesn't have room for 6,000 names. The car does.
 - The car will never be sold for profit. If it ever leaves, it's donated, and owners hear first.
+- Key Nº {keys} has been issued. The car has no comment.
 
-**Identity (@)**
+**identity**
+
 - Post your key number. We'll repost every one.
 - Some of you bought key Nº 0069 and Nº 0420 on purpose and we see you.
-- Owners' wall update: there are {14} Mayas, {3} people named "Your Mom", and one "the IRS". We removed the IRS.
-- If you gift someone a key, the certificate has their name. Good present for someone who has everything except a Lamborghini.
+- If you gift someone a key, the certificate has their name. For someone who has everything except a Lamborghini.
 
-**Debate bait (O)**
-- Is it still a Lamborghini if 6,000 people own it? Or does it become a public park?
-- Genuinely curious: at what number of owners does a luxury object stop being a luxury?
-- People keep asking if this is a scam. It's the most transparent thing I've ever made: every dollar is on the site. The only trick is that the car isn't the product. You are.
+**debate**
 
-**Behind the scenes (O)**
-- The key is being scanned from the real one, cast in solid brass and engraved with your number. Here's the first sample. [img: photo of the sample]
-- I had to find a box that "opens slowly." Turns out that's a spec. It's called air resistance and it costs $0.40 more. Worth it. [img: assets/box.jpg]
-- The certificate is printed on cotton. It smells like money that's been refunded.
+- At what number of owners does a luxury object stop being a luxury?
+- Is it ownership if you can't drive it. (You can't drive yours either. It's in traffic.)
 
-**Polls (@)**
+**polls**
+
 - Where should the car live first? LA · NYC · Miami · Princeton, NJ
-- Which color should the name wrap be? White on black · Black on white · Gold on black
-- What should owners name the car?  (reply with names, top 4 go to a poll)
-- Stretch goal at 14,000: upgrade to a Huracán, or keep the Gallardo and tour it? Upgrade · Tour
+- Which color should the name wrap be? White on black · Black on white · Brass on black
+- Stretch goal at 14,000: upgrade to a Huracán, or keep the Gallardo and tour it?
 
-**Owner reposts (@, quote)**
-- An owner.
-- Another one.
-- Owner Nº {0512}, a person of taste.
+**behind the scenes**
 
----
+- The key is being scanned from the real one, cast in solid brass and engraved with your number. [photo of the sample]
+- I had to find a box that opens slowly. That's a spec. It costs $0.40 more. Worth it. [photo]
 
-## Milestones (@ + O)
-
-| Count | @ post | Image |
-|---|---|---|
-| 100 | "100 people own a Lamborghini. Most of them just met." | `cards/count-100.png` |
-| 500 | "500 owners. Each key is now 2.9 kg of car, about a brick." | — |
-| 1,000 | "1,000 owners. We're a sixth of the way to buying the car." | `cards/count-1000.png` |
-| 2,500 | "2,500. Each key is now 572 g, about a football." | `cards/count-2500.png` |
-| 3,000 | "Halfway." | `assets/crowd.jpg` |
-| 5,000 | "5,000 owners. 1,000 left. We might actually do this." | `cards/count-5000.png` |
-| 6,000 | "We're buying the car." (O posts the reaction video) | `cards/count-6000.png` |
-| 14,000 | "Stretch goal: it's a Huracán now." | `assets/tour.jpg` |
-
----
-
-## Deadline (last 72 hours)
-
-- (@) 72 hours. {4,650} owners. We need {1,350} more or everyone gets refunded.
-- (@) 48 hours left to own a Lamborghini. [img: cards/deadline.png]
-- (O) Real talk: we might not make it. If we don't, everyone gets their money back, and I'll have learned exactly how many strangers want to share a car. Either way, it's the piece.
-- (@) If every owner brings one person, we're done by lunch.
-- (@) 24 hours.
-- (@) 1 hour. The names get printed tomorrow.
-
----
-
-## After close
-
-**If funded**
-- (@) The presale is closed. {6,412} owners. We're buying a Lamborghini.
-- (O) Thread: how we're picking the car (inspection reports, three finalists, owners vote in Discord).
-- (@) The car hunt, day 1. [img: dealer lot photos]
-- (O) Pickup day. [video]
-- (@) Your name, 18 mm tall. [img: the real wrap, close-up]
-
-**If not funded**
-- (@) We closed at {4,210} of 6,000. Not enough to buy the car. Every order is being refunded right now, automatically. Thank you.
-- (O) Thread: what I learned trying to get 6,000 strangers to own a car together. (Be honest: this post can do better than the launch.)
-
----
-
-## Fulfilment
-
-- (@) Casting day. {6,412} keys. [img: foundry photos]
-- (@) The boxes arrived. [img: assets/warehouse.jpg]
-- (@) First keys ship tomorrow. Check your key page. [img: assets/door.jpg]
-- (@) Unboxing #OwnACar. Post yours. [img: assets/unbox.mp4]
-- (O) The last key just shipped. {6,412} people own a Lamborghini. Now we find out what that means.
-
----
-
-## Reply bank (for other people's posts)
-
-Use sparingly and only where it fits. Never paste a link in a first reply unless asked.
-
-- On any "I want a Lamborghini" post: "For $50 you can have 238 grams of one."
-- On supercar spotting posts: "Nice. We have one with 6,000 owners."
-- On "rich people buy X" posts: "What if everyone was the rich person, a tiny bit."
-- On "is it art?" discourse: "Asking the same thing about a Lamborghini with unlimited keys."
-- On finance-bro "own nothing" posts: "Counterpoint: own 0.017% of a Lamborghini."

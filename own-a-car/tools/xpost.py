@@ -13,11 +13,13 @@ permission; OAuth 1.0a user context). Env vars, where ACCOUNT is the queue's acc
 e.g. X_OWNACAR_API_KEY … and X_OSCAR_API_KEY … Standard library only.
 
 Queue entry (marketing/x/queue.json → "posts"):
-  { "id": "L1", "account": "oscar", "at": "2026-11-09T12:00:00-05:00", "text": "...",
+  { "id": "L1", "account": "oscar", "at": "2026-11-10T10:00:00-05:00", "text": "...",
     "media": ["own-a-car/marketing/x/clips/launch-16x9.mp4"], "reply_to": "L0" | null, "quote": "L0" | null,
     "status": "draft" | "approved" | "posted", "posted_id": null, "note": "..." }
 Only "approved" entries ever post. Replies/quotes of another entry wait until that entry has posted.
-Text may use {keys}, {owners}, {grams}, {thing}, {goal}, {days_left}, {link}: filled from the live registry.
+"when_keys": N (optional) holds a milestone post until N keys have sold; "at" is then its earliest time.
+"until_keys": N (optional) skips a post once N keys have sold (countdowns stop making sense after the goal).
+Text may use {keys}, {owners}, {grams}, {thing}, {goal}, {keys_left}, {days_left}, {link}: filled from the live registry.
 """
 import base64
 import hashlib
@@ -40,8 +42,11 @@ ROOT = REPO / "own-a-car"
 QUEUE = ROOT / "marketing" / "x" / "queue.json"
 API = "https://api.x.com"
 UPLOAD = "https://api.x.com/2/media/upload"
-BANNED = re.compile(r"\b(invest(ment|ing|or)?|returns?|profits?|stake|shares? in|dividend|appreciat\w*|to the moon|"
-                    r"win(ner|s)?|lucky|raffle|giveaway|sweepstakes?)\b", re.I)
+# Words that turn an artwork into a securities or lottery problem (marketing/research/x-launch-frameworks.md § 5–6).
+# "investment" is allowed only in the approved negation "It isn't an investment. It's worse. It's art."
+BANNED = re.compile(r"\b(invest(ing|or)?|returns?|profits?|stake|shares? in|dividend|appreciat\w*|to the moon|token|"
+                    r"flip|resale|floor price|win(ner|s)?|lucky|raffle|giveaway|sweepstakes?|prize|draw)\b", re.I)
+NEGATION_OK = re.compile(r"isn't an investment\. It's worse\. It's art\.", re.I)
 
 
 # ---------- queue ----------
@@ -63,7 +68,8 @@ def live_values():
     days = max(0, (closes - datetime.now(timezone.utc)).days)
     grams = f"{g / 1000:,.1f} kg" if g >= 1000 else f"{g:,.0f} g"
     return {"keys": f"{keys:,}", "owners": f"{reg.get('owners', 0):,}", "grams": grams, "thing": thing(g),
-            "goal": f"{cfg['goalKeys']:,}", "days_left": str(days), "link": cfg["siteUrl"]}
+            "goal": f"{cfg['goalKeys']:,}", "keys_left": f"{max(0, cfg['goalKeys'] - keys):,}",
+            "days_left": str(days), "link": cfg["siteUrl"], "_keys": keys}
 
 
 def thing(g):
@@ -87,11 +93,17 @@ def weighted_len(text):
 
 
 def due(q, now=None):
+    """Approved, time reached, key-count trigger reached (when_keys), and parent already posted."""
     now = now or datetime.now(timezone.utc)
+    sold = live_values()["_keys"]
     posted = {p["id"] for p in q["posts"] if p["status"] == "posted"}
     out = []
     for p in q["posts"]:
         if p["status"] != "approved" or datetime.fromisoformat(p["at"]) > now:
+            continue
+        if p.get("when_keys") and sold < p["when_keys"]:
+            continue
+        if p.get("until_keys") and sold >= p["until_keys"]:
             continue
         parent = p.get("reply_to") or p.get("quote")
         if parent and parent not in posted:
@@ -204,8 +216,9 @@ def check(q):
                 issues.append(f"missing media {m}")
         if len(p.get("media") or []) > 4:
             issues.append("more than 4 media")
-        if BANNED.search(text):
-            issues.append(f"banned word: {BANNED.search(text)[0]}")
+        bare = NEGATION_OK.sub("", text)
+        if BANNED.search(bare) or re.search(r"\binvestment\b", bare, re.I):
+            issues.append(f"banned word: {(BANNED.search(bare) or re.search(r'investment', bare, re.I))[0]}")
         for k in ("reply_to", "quote"):
             if p.get(k) and p[k] not in ids:
                 issues.append(f"{k} {p[k]} not in queue")
@@ -216,9 +229,47 @@ def check(q):
     return problems
 
 
+GROUPS = [("T", "Pre-launch teasers"), ("L", "Launch day"), ("D", "Presale rotation"),
+          ("M", "Milestones (post when the count gets there)"), ("C", "Countdown (skipped if the goal is met)"),
+          ("F", "Close")]
+
+
+def to_markdown(q):
+    """marketing/x/posts.md: a readable view of the queue. Generated; edit queue.json instead."""
+    out = ["# Posts", "", "_Generated from `queue.json` by `python3 own-a-car/tools/xpost.py md`. Edit the queue, not this file._",
+           "", "Framework and evidence: `../research/x-launch-frameworks.md`. Video scripts: `../research/launch-video-frameworks.md`.", ""]
+    for prefix, title in GROUPS:
+        rows = [p for p in q["posts"] if p["id"].startswith(prefix)]
+        if not rows:
+            continue
+        out += [f"## {title}", ""]
+        for p in rows:
+            when = p["at"][:16].replace("T", " ")
+            cond = f" · when {p['when_keys']:,} keys" if p.get("when_keys") else f" · skip at {p['until_keys']:,} keys" if p.get("until_keys") else ""
+            link = f" · replies to {p['reply_to']}" if p.get("reply_to") else f" · quotes {p['quote']}" if p.get("quote") else ""
+            out += [f"**{p['id']}** · @{p['account']} · {when} ET{cond}{link} · _{p['status']}_", ""]
+            out += ["> " + line if line else ">" for line in p["text"].split("\n")]
+            for m in p.get("media") or []:
+                out.append(f"> `[{m.replace('own-a-car/', '')}]`")
+            if p.get("note"):
+                out += ["", f"_{p['note']}_"]
+            out.append("")
+    out += ["## Ready replies (paste by hand in the first two hours)", ""]
+    out += [f"- **{k}** {v}" for k, v in q.get("replies", {}).items() if k != "about"]
+    out += ["", "## Idea bank (unscheduled)", ""]
+    for k, v in q.get("ideas", {}).items():
+        if k != "about":
+            out += [f"**{k.replace('_', ' ')}**", ""] + [f"- {x}" for x in v] + [""]
+    return "\n".join(out) + "\n"
+
+
 def main(argv):
     cmd = argv[0] if argv else "list"
     q = load()
+    if cmd == "md":
+        (QUEUE.parent / "posts.md").write_text(to_markdown(q))
+        print("wrote marketing/x/posts.md")
+        return
     if cmd == "list":
         for p in sorted(q["posts"], key=lambda p: p["at"]):
             print(f"{p['id']:>5}  {p['status']:<8}  {p['at'][:16]}  @{p['account']:<8}  {render(p['text'])[:70]!r}")
