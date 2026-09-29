@@ -117,5 +117,45 @@ export function initFarm() {
   // Double-click the pile to re-drop.
   pile.addEventListener("dblclick", reset);
 
+  // Click empty space: toss a graduation cap (class of 2026).
+  let downAt = null;
+  pile.addEventListener("pointerdown", (e) => (downAt = { x: e.clientX, y: e.clientY }));
+  pile.addEventListener("click", (e) => {
+    if (e.target.closest(".card, .ball, .cap")) return;
+    if (downAt && Math.hypot(e.clientX - downAt.x, e.clientY - downAt.y) > 6) return;
+    const r = pile.getBoundingClientRect();
+    tossCap(e.clientX - r.left, e.clientY - r.top);
+  });
+
+  function tossCap(x, y) {
+    const el = document.createElement("div");
+    el.className = "cap";
+    el.setAttribute("aria-hidden", "true");
+    el.innerHTML = "<i></i>";
+    pile.appendChild(el);
+    const w = 64;
+    const h = 16;
+    const body = Bodies.rectangle(x, Math.min(y, world.h - 40), w, h, {
+      restitution: 0.35,
+      friction: 0.4,
+      frictionAir: 0.02,
+      density: 0.0015,
+    });
+    body.plugin.w = w;
+    body.plugin.h = h;
+    world.add(body);
+    items.push({ el, body });
+    Body.setVelocity(body, { x: rand(-4, 4), y: rand(-22, -16) });
+    Body.setAngularVelocity(body, rand(-0.35, 0.35));
+    // Keep the pile tidy: at most 12 caps
+    const caps = items.filter((it) => it.el.classList.contains("cap"));
+    if (caps.length > 12) {
+      const old = caps[0];
+      old.el.remove();
+      world.remove(old.body);
+      items = items.filter((it) => it !== old);
+    }
+  }
+
   return { world, reset };
 }

@@ -118,7 +118,7 @@
         <div class="copy" data-chapter="4"></div>
       </div>
       <div class="pile" id="pile" data-cursor="throw">
-        <div class="pile-hint mono">grab a card · throw the ball</div>
+        <div class="pile-hint mono">grab a card · throw the ball · click to toss a cap</div>
       </div>
     </section>
 
@@ -154,7 +154,15 @@
         <h2 class="next-title" id="next-title"></h2>
         <p class="next-body" id="next-body"></p>
         <div class="cta" id="cta"></div>
-        <div class="blank"><span class="blank-cursor"></span></div>
+        <!-- The blank page: the visitor writes the cold email this time -->
+        <form class="compose" id="compose" autocomplete="off">
+          <label class="mono" for="compose-body">Your turn. Write the cold email.</label>
+          <textarea id="compose-body" rows="4" placeholder="Hi Oscar, I'm… and we're building…"></textarea>
+          <div class="compose-row">
+            <span class="mono" id="compose-count">a blank page</span>
+            <button class="btn btn--primary" type="submit" data-magnetic>Send it ✈</button>
+          </div>
+        </form>
       </div>
     </section>
     <!-- End credits: personalised with what this visitor actually did -->

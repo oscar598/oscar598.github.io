@@ -21,6 +21,7 @@ export function initCredits(site, scenes) {
       `${stats.objects} object${stats.objects === 1 ? "" : "s"} tossed in LA`,
       `${stats.cards} yearbook card${stats.cards === 1 ? "" : "s"} knocked over`,
       stats.emailSent ? "1 cold email sent" : "0 cold emails sent (there's still time)",
+      ...(stats.visitorEmail ? ["and 1 written by you, thank you"] : []),
       `${stats.freshmen} extra freshm${stats.freshmen === 1 ? "an" : "en"} down the slide`,
     ];
     roll.innerHTML = `

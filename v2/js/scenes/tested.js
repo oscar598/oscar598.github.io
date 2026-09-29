@@ -33,10 +33,15 @@ export function initTested() {
   ];
   let stars = "";
   for (let i = 0; i < 120; i++) {
-    stars += `<circle cx="${(rnd() * W).toFixed(0)}" cy="${(rnd() * H * 0.55).toFixed(0)}" r="${(rnd() * 1.4 + 0.3).toFixed(2)}" fill="#fff" opacity="${(rnd() * 0.7 + 0.2).toFixed(2)}"/>`;
+    // ~1 in 4 stars twinkle, each on its own rhythm
+    const tw = rnd() < 0.25 ? ` class="tw" style="animation-duration:${(2 + rnd() * 3).toFixed(1)}s;animation-delay:-${(rnd() * 3).toFixed(1)}s"` : "";
+    stars += `<circle${tw} cx="${(rnd() * W).toFixed(0)}" cy="${(rnd() * H * 0.55).toFixed(0)}" r="${(rnd() * 1.4 + 0.3).toFixed(2)}" fill="#fff" opacity="${(rnd() * 0.7 + 0.2).toFixed(2)}"/>`;
   }
+  // A shooting star that crosses every few seconds while it's still dark
+  stars += `<line class="shooting" x1="0" y1="0" x2="120" y2="30" stroke="url(#streak)" stroke-width="2" stroke-linecap="round"/>`;
   const sun = `<circle id="sun" cx="1060" cy="760" r="70" fill="#ffd28a"/><circle id="sun-glow" cx="1060" cy="760" r="240" fill="url(#glow)"/>`;
-  const defs = `<defs><radialGradient id="glow"><stop offset="0" stop-color="#ffcf8a" stop-opacity="0.55"/><stop offset="1" stop-color="#ffcf8a" stop-opacity="0"/></radialGradient></defs>`;
+  const defs = `<defs><radialGradient id="glow"><stop offset="0" stop-color="#ffcf8a" stop-opacity="0.55"/><stop offset="1" stop-color="#ffcf8a" stop-opacity="0"/></radialGradient>
+    <linearGradient id="streak"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="0.9"/></linearGradient></defs>`;
 
   let ridgeSvg = "";
   let trailPath = "";

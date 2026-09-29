@@ -653,11 +653,62 @@ body.has-cursor .cursor { display: grid; place-items: center; }
   touch-action: none;
 }
 
+/* Graduation cap: flat board + tassel */
+.cap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 64px;
+  height: 16px;
+  background: var(--ink);
+  border-radius: 2px;
+  will-change: transform;
+  pointer-events: none;
+}
+.cap::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 14px;
+  width: 28px;
+  height: 12px;
+  background: var(--ink);
+  border-radius: 0 0 4px 4px;
+}
+.cap i {
+  position: absolute;
+  right: 8px;
+  top: 6px;
+  width: 2px;
+  height: 22px;
+  background: var(--accent);
+}
+.cap i::after {
+  content: "";
+  position: absolute;
+  left: -3px;
+  bottom: -4px;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
 /* ---------- SC 06 · Tested ---------- */
 
 .scene--tested { background: #05070d; }
 .sky { position: absolute; inset: 0; z-index: 0; }
 .ridges { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; z-index: 1; }
+.ridges .tw { animation: twinkle 3s ease-in-out infinite; }
+@keyframes twinkle { 50% { opacity: 0.1; } }
+.ridges .shooting { opacity: 0; animation: shoot 7s linear infinite 2s; }
+@keyframes shoot {
+  0% { opacity: 0; transform: translate(200px, 60px); }
+  2% { opacity: 1; }
+  9% { opacity: 0; transform: translate(760px, 200px); }
+  100% { opacity: 0; transform: translate(760px, 200px); }
+}
+@media (prefers-reduced-motion: reduce) { .ridges .tw, .ridges .shooting { animation: none; } }
 .altimeter {
   position: absolute;
   right: var(--pad);
@@ -737,15 +788,34 @@ body.has-cursor .cursor { display: grid; place-items: center; }
   background: transparent;
 }
 .btn--primary { background: var(--accent); border-color: var(--accent); color: var(--ink); }
-.blank {
-  margin-top: 72px;
-  height: 160px;
-  border: 1.5px dashed var(--line);
-  border-radius: 4px;
-  padding: 18px;
-}
-.blank-cursor { display: inline-block; width: 3px; height: 28px; background: var(--accent); animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
+.compose {
+  margin-top: 72px;
+  max-width: 720px;
+  padding: 18px;
+  border: 1.5px dashed rgba(242, 237, 227, 0.25);
+  border-radius: 6px;
+  transition: border-color 0.3s;
+}
+.compose:focus-within { border-color: var(--accent); border-style: solid; }
+.compose label { display: block; font-size: 12px; color: var(--accent); margin-bottom: 10px; }
+.compose textarea {
+  display: block;
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: var(--paper);
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.4;
+  caret-color: var(--accent);
+}
+.compose textarea::placeholder { color: rgba(242, 237, 227, 0.28); font-style: italic; }
+.compose-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: 12px; }
+.compose-row .mono { font-size: 12px; color: var(--muted); }
 
 /* ---------- Credits ---------- */
 

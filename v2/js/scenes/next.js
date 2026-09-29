@@ -5,6 +5,7 @@
 import { createWorld } from "../core/world.js";
 import { esc, rand, pick, reduceMotion } from "../core/util.js";
 import { sound } from "../core/sound.js";
+import { stats } from "../core/stats.js";
 
 const { Bodies, Body } = window.Matter;
 const { ScrollTrigger } = window;
@@ -90,6 +91,54 @@ export function initNext(site) {
   document.getElementById("email-btn").addEventListener("click", (e) => {
     confetti({ x: e.clientX, y: e.clientY });
   });
+
+  // ---- Your turn: the visitor writes the cold email ----
+  const form = document.getElementById("compose");
+  const textarea = document.getElementById("compose-body");
+  const count = document.getElementById("compose-count");
+  textarea.addEventListener("input", () => {
+    const words = textarea.value.trim().split(/\s+/).filter(Boolean).length;
+    count.textContent = words ? `${words} word${words === 1 ? "" : "s"}${words > 60 ? " · keep it short, it works better" : ""}` : "a blank page";
+    if (Math.random() < 0.5) sound.key();
+  });
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const text = textarea.value.trim();
+    if (!text) {
+      textarea.focus();
+      form.animate([{ transform: "translateX(0)" }, { transform: "translateX(-8px)" }, { transform: "translateX(8px)" }, { transform: "translateX(0)" }], { duration: 300 });
+      return;
+    }
+    stats.visitorEmail = true;
+    const btn = form.querySelector("button");
+    const r = btn.getBoundingClientRect();
+    flyPlane(r.left + r.width / 2, r.top);
+    confetti({ x: r.left + r.width / 2, y: r.top });
+    sound.whoosh();
+    const subject = encodeURIComponent("Re: the next chapter");
+    const bodyText = encodeURIComponent(text);
+    setTimeout(() => {
+      window.location.href = `mailto:${p.email}?subject=${subject}&body=${bodyText}`;
+      count.textContent = "sent to your mail app ✓";
+    }, reduceMotion ? 0 : 900);
+  });
+
+  function flyPlane(x, y) {
+    if (reduceMotion) return;
+    const plane = document.getElementById("plane").cloneNode(true);
+    plane.removeAttribute("id");
+    plane.style.cssText = `position:fixed;left:${x - 22}px;top:${y - 22}px;width:44px;height:44px;opacity:1;z-index:90;color:#ff4b2b;pointer-events:none`;
+    document.body.appendChild(plane);
+    window.gsap.to(plane, {
+      keyframes: [
+        { x: 80, y: -60, rotate: -12, duration: 0.3 },
+        { x: 320, y: -320, rotate: -30, duration: 0.45 },
+        { x: 700, y: -760, rotate: -40, opacity: 0, duration: 0.5 },
+      ],
+      ease: "power1.in",
+      onComplete: () => plane.remove(),
+    });
+  }
 
   // Easter egg: confetti from anywhere → scroll here first so it's visible
   return {

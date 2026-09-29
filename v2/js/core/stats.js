@@ -5,4 +5,5 @@ export const stats = {
   cards: 0,
   freshmen: 0,
   emailSent: false,
+  visitorEmail: false, // they wrote their own cold email in the last scene
 };
