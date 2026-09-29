@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Oscar Lu · A Life in Seven Chapters</title>
+  <meta name="description" content="Oscar Lu: self-taught designer, founder, Princeton '30. A life in seven chapters.">
+  <meta property="og:title" content="Oscar Lu: a life in seven chapters">
+  <meta property="og:description" content="I cold-emailed Harvard Basketball at 13. They said yes.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0e0d0b">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/v2.css">
+</head>
+<body>
+  <!-- Film-leader countdown shown on first visit -->
+  <div class="leader" id="leader" aria-hidden="true">
+    <canvas id="leader-canvas"></canvas>
+    <button class="leader-skip" type="button">skip ↵</button>
+  </div>
+
+  <!-- Fixed chrome -->
+  <canvas class="rope" id="rope" aria-hidden="true"></canvas>
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor-label"></span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="chrome">
+    <a class="brand" href="#open" data-magnetic>OL<span>/v2</span></a>
+    <div class="chrome-right">
+      <button class="chip" id="sound-toggle" type="button" aria-pressed="false" data-magnetic>sound: off</button>
+      <a class="chip chip--solid" href="../resume.html" data-magnetic>Resume ↗</a>
+    </div>
+  </header>
+
+  <!-- Film-strip chapter nav -->
+  <nav class="filmstrip" id="filmstrip" aria-label="Chapters"></nav>
+
+  <main id="app">
+    <!-- SC 00: letters are physics bodies -->
+    <section class="scene scene--open" id="open" data-year="2008" data-label="Open">
+      <canvas class="world" id="open-world" data-cursor="drag"></canvas>
+      <div class="open-copy">
+        <p class="label">SC. 00 · Cold open</p>
+        <p class="open-tagline" id="open-tagline"></p>
+        <p class="hint">drag the letters · throw them · scroll</p>
+      </div>
+    </section>
+
+    <!-- SC 01: objects from the hustle fall into the frame -->
+    <section class="scene scene--origin pin" id="origin" data-label="Origin">
+      <div class="pin-inner">
+        <div class="copy" data-chapter="0"></div>
+        <div class="stage">
+          <canvas class="world" id="origin-world" data-cursor="drag"></canvas>
+          <div class="stage-caption mono" id="origin-caption"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SC 02: 2,000 particles morph between shapes -->
+    <section class="scene scene--spark pin" id="spark" data-label="Spark">
+      <canvas class="particles" id="spark-particles" data-cursor="stir"></canvas>
+      <div class="pin-inner pin-inner--overlay">
+        <div class="copy copy--glass" data-chapter="1"></div>
+      </div>
+      <div class="spark-count mono" id="spark-count">0</div>
+    </section>
+
+    <!-- SC 03: the cold email writes itself, then flies -->
+    <section class="scene scene--email pin" id="cold-email" data-label="Cold email">
+      <div class="pin-inner">
+        <div class="copy" data-chapter="2"></div>
+        <div class="stage stage--email">
+          <div class="mail" id="mail">
+            <div class="mail-bar"><span></span><span></span><span></span><em>New message</em></div>
+            <div class="mail-row"><b>To</b><span>Coach · Harvard Men's Basketball</span></div>
+            <div class="mail-row"><b>Subject</b><span id="mail-subject"></span></div>
+            <div class="mail-body" id="mail-body"></div>
+            <button class="mail-send" id="mail-send" type="button" data-magnetic>Send</button>
+          </div>
+          <svg class="plane" id="plane" viewBox="0 0 48 48" aria-hidden="true"><path d="M4 22 44 4 30 44 22 28Z M22 28 44 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+          <div class="reply" id="reply">
+            <div class="reply-dot"></div>
+            <div><b>Harvard Men's Basketball</b><p>"Let's get on a call."</p></div>
+          </div>
+          <figure class="harvard-card" id="harvard-card">
+            <div class="media" data-asset="harvard"></div>
+            <figcaption class="mono">4 years · recruiting · social · arena</figcaption>
+          </figure>
+          <div class="odometer" id="impressions"><span class="odo-num">0</span><span class="odo-label mono">impressions</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SC 04: the question, then the numbers -->
+    <section class="scene scene--ukraine" id="ukraine" data-label="Ukraine">
+      <div class="question pin" id="question">
+        <p class="question-line" id="question-line"></p>
+      </div>
+      <div class="ukraine-body">
+        <div class="copy" data-chapter="3"></div>
+        <div class="bedding" id="bedding" aria-label="400 bedding sets washed per day"></div>
+        <div class="stats" id="ukraine-stats"></div>
+        <svg class="network" id="network" viewBox="0 0 800 420" aria-hidden="true"></svg>
+      </div>
+    </section>
+
+    <!-- SC 05: yearbook cards are physical, you can throw them -->
+    <section class="scene scene--farm" id="farm" data-label="The Farm">
+      <div class="farm-head">
+        <div class="copy" data-chapter="4"></div>
+      </div>
+      <div class="pile" id="pile" data-cursor="throw">
+        <div class="pile-hint mono">grab a card · throw the ball</div>
+      </div>
+    </section>
+
+    <!-- SC 06: scroll brings the sunrise -->
+    <section class="scene scene--tested pin" id="tested" data-label="Tested">
+      <div class="sky" id="sky"></div>
+      <svg class="ridges" id="ridges" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+      <div class="altimeter mono" id="altimeter"><span id="alt-num">10,152</span> ft</div>
+      <div class="pin-inner pin-inner--overlay">
+        <div class="copy copy--light" data-chapter="5"></div>
+      </div>
+    </section>
+
+    <!-- SC 07: freshmen slide down a physics slip 'n slide -->
+    <section class="scene scene--now" id="now" data-label="Now">
+      <div class="now-grid">
+        <div class="copy" data-chapter="6"></div>
+        <div class="stage stage--slide">
+          <canvas class="world" id="slide-world" data-cursor="tap"></canvas>
+          <div class="slide-count"><span id="slide-num">0</span><small class="mono">freshmen showed up</small></div>
+        </div>
+      </div>
+      <div class="now-media">
+        <div class="media media--wide" data-asset="yosemite"></div>
+      </div>
+    </section>
+
+    <!-- SC 08: the blank page is the ask -->
+    <section class="scene scene--next" id="next" data-year="next" data-label="Next">
+      <canvas class="world world--confetti" id="confetti-world"></canvas>
+      <div class="next-inner">
+        <p class="label">SC. 08 · 20??</p>
+        <h2 class="next-title" id="next-title"></h2>
+        <p class="next-body" id="next-body"></p>
+        <div class="cta" id="cta"></div>
+        <div class="blank"><span class="blank-cursor"></span></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot mono">
+    <span>v2 · built by hand + a little physics</span>
+    <a href="../index.html">see v1 →</a>
+  </footer>
+
+  <!-- Libraries (CDN) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.20.0/matter.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+
+  <!-- Content (shared with v1) + v2 assets manifest -->
+  <script src="../js/data.js"></script>
+  <script src="js/assets.js"></script>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
