@@ -67,8 +67,8 @@ main { overflow: hidden; }
 .media--tall { aspect-ratio: 3 / 4; }
 
 /* Hero: the car backdrop, Key Rain canvas over it, copy on top. */
-/* The bottom ~260px is left for the pile of keys. */
-.hero { position: relative; min-height: max(calc(100svh - 58px), 820px); display: grid; align-content: start; padding: clamp(48px, 8vh, 110px) var(--pad) 280px; overflow: hidden; }
+/* The bottom of the hero is left for the pile of keys; it scales with the screen so the pile stays above the fold. */
+.hero { position: relative; min-height: calc(100svh - 58px); display: grid; align-content: start; padding: clamp(40px, 8vh, 110px) var(--pad) clamp(170px, 30vh, 280px); overflow: hidden; }
 .hero-media { position: absolute; inset: 0; aspect-ratio: auto; background: radial-gradient(60% 55% at 50% 30%, #3a311f 0%, #121110 55%, #0a0a0a 100%); }
 .hero-media::before { display: none; }
 .hero-media img, .hero-media video { opacity: .55; object-position: 50% 70%; }
@@ -87,7 +87,7 @@ main { overflow: hidden; }
 .ticker div { background: var(--bg); padding: 14px 16px; }
 .ticker dt { color: var(--dim); font-size: 11px; }
 .ticker dd { text-transform: none; margin: 4px 0 0; font: 500 clamp(18px, 3vw, 28px)/1 var(--mono); color: var(--ink); letter-spacing: 0; }
-@media (max-width: 560px) { .ticker { grid-template-columns: repeat(2, 1fr); } .hero { min-height: calc(100svh - 58px); padding-bottom: 200px; } .hero-media img, .hero-media video { object-position: 62% 70%; opacity: .4; } }
+@media (max-width: 560px) { .ticker { grid-template-columns: repeat(2, 1fr); } .hero { padding-bottom: 200px; } .hero-media img, .hero-media video { object-position: 62% 70%; opacity: .4; } }
 
 /* Share calculator */
 .share { text-align: center; }

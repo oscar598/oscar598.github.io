@@ -15,7 +15,7 @@ $50 each. No limit.
 
 Everyone who buys one owns it.
 
-[img: assets/hero.mp4]
+[img: marketing/x/clips/rain.mp4 (keys pile up, one per owner), or assets/hero.mp4]
 
 **2/**
 Here's the deal.
@@ -35,7 +35,7 @@ At 100,000 owners it's 14 grams. A lug nut.
 
 That's the point.
 
-[img: cards/shrink.png]
+[img: clips/shatter.mp4 (the car breaks into one shard per owner, 1 → 100,000)]
 
 **4/**
 When the presale closes, the car gets wrapped in every owner's name. Bumper to bumper.
@@ -117,7 +117,7 @@ It's open.
 **L2 (@)**
 How much Lamborghini is $50?
 Depends how many of you there are.
-[img: cards/shrink.png]
+[img: clips/shatter.mp4]
 
 **L3 (@, first count)**
 {41} people own a Lamborghini now. It's been {4} hours.
