@@ -196,7 +196,18 @@ class Shatter {
     this._raf = requestAnimationFrame(this._frame);
     var cv = this.canvas;
     if (!cv) return;
-    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    // Adaptive quality: after ~1.2 s spent in slow frames (> 28 ms each), drop to 1× pixel density, then cut
+    // the shard count by 40% at a time (quietly, no crack burst) down to 200, then go lite (no sweep, no
+    // reflection). Fast frames pay the debt back.
+    var dt = Math.min(250, now - (this._last || now));
+    this._slowMs = Math.max(0, (this._slowMs || 0) + (dt > 28 ? dt : -dt));
+    if (this._slowMs > 1200) {
+      this._slowMs = 0;
+      if ((this._dprCap || 2) > 1) this._dprCap = 1;
+      else if (this._cap() > 200) { this.props.maxShards = Math.max(200, Math.floor(this._cap() * 0.6)); this._quiet = true; }
+      else this._lite = true;  // last step: drop the light sweep and the floor reflection
+    }
+    var dpr = Math.min(this._dprCap || 2, window.devicePixelRatio || 1);
     if (dpr !== this._dpr || !this._ctx) {
       this._dpr = dpr;
       cv.width = Math.round(SH_W * dpr);
@@ -474,7 +485,7 @@ class Shatter {
           S.oy[u] = S.dy[u] * mag * 0.7 + (pr() - 0.5) * 160;
           S.a[u] = (pr() - 0.5) * 2.6;
         }
-      } else if (prev > 0) {
+      } else if (prev > 0 && !this._quiet) {
         var shock = Math.min(9, 2 + 5 * Math.abs(Math.log10(M / prev)));
         var ix = SH_CX + (pr() - 0.5) * 520, iy = SH_CY + (pr() - 0.5) * 80;
         for (var u2 = 0; u2 < M; u2++) {
@@ -488,6 +499,7 @@ class Shatter {
       }
     }
     this._introDone = true;
+    this._quiet = false;
     this._S = S;
     this._built = target;
     this._hover = -1;
@@ -612,7 +624,7 @@ class Shatter {
       ctx.lineWidth = 1.1;
       for (i = 0; i < M; i++) { this._xf(ctx, i, 1); ctx.stroke(S.list[i].path); }
     }
-    if (!this._reduced) {
+    if (!this._reduced && !this._lite) {
       var t = (now - this._t0) / 1000;
       var ph = ((t * 0.075) % 1.9) - 0.45;
       var sx = SH_TX + ph * SH_TW;
@@ -648,6 +660,7 @@ class Shatter {
 
     var RH = 110;
     ctx.globalCompositeOperation = 'source-over';
+    if (this._lite) { this._drawUI(ctx, N); return; }  // lite mode: no floor reflection
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.globalAlpha = 0.16;
     ctx.save();

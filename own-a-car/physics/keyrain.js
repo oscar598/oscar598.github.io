@@ -71,8 +71,18 @@ class KeyRain {
     this._alive = true;
     this.reduced = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     this._t0 = 0; this._acc = 0;
+    // Only run while the hero is on screen.
+    this._visible = true;
+    if ('IntersectionObserver' in window) {
+      this._io = new IntersectionObserver((es) => {
+        this._visible = es[0].isIntersecting;
+        if (this._visible && this._alive && this.ready && !this.raf && !this.reduced) { this._t0 = 0; this.raf = requestAnimationFrame(this.loop); }
+      });
+      this._io.observe(this.canvas);
+    }
     this.loop = (t) => {
       if (!this._alive) return;
+      if (!this._visible) { this.raf = 0; return; }
       this.raf = requestAnimationFrame(this.loop);
       if (!this._t0) this._t0 = t;
       var dt = Math.min(50, t - this._t0); this._t0 = t;
@@ -80,7 +90,11 @@ class KeyRain {
       var n = 0;
       while (this._acc >= 16.667 && n < 3) { this.frame(); this._acc -= 16.667; n++; }
       if (n === 3) this._acc = 0;
-      this.render();
+      // Skip drawing while the whole pile is asleep and nothing is moving, fading or pulsing.
+      if (this.awake || this.grab || this.queue.length || this.fading || this.fc < this._pulseUntil || this._dirty) {
+        this.render();
+        this._dirty = false;
+      }
     };
     var boot = () => {
       if (!this._alive) return;
@@ -95,6 +109,7 @@ class KeyRain {
   destroy() {
     this._alive = false;
     cancelAnimationFrame(this.raf);
+    if (this._io) this._io.disconnect();
     window.removeEventListener('resize', this._resize);
     var c = this.canvas, h = this._h;
     c.removeEventListener('pointerdown', h.down); c.removeEventListener('pointermove', h.move);
@@ -125,7 +140,7 @@ class KeyRain {
     this.keys = []; this.free = [];
     for (var s = 0; s < K.MAXK; s++) { this.keys.push({ alive: false, cv: null }); }
     for (var s2 = K.MAXK - 1; s2 >= 0; s2--) this.free.push(s2);
-    this.order = []; this.queue = []; this.grab = null; this.fc = 0; this.awake = 0;
+    this.order = []; this.queue = []; this.grab = null; this.fc = 0; this.awake = 0; this._pulseUntil = 0; this._dirty = true;
     var fog = this.ctx.createLinearGradient(0, K.H * 0.62, 0, K.H);
     fog.addColorStop(0, 'rgba(10,10,10,0)');
     fog.addColorStop(1, 'rgba(10,10,10,0.62)');
@@ -276,10 +291,10 @@ class KeyRain {
     var g = 0.3 * gv;
     this.sub(g); this.sub(g);
     var X = this.X, Y = this.Y, PX = this.PX, PY = this.PY, ord = this.order, keys = this.keys;
-    var awake = 0;
+    var awake = 0, fading = false;
     for (var o = ord.length - 1; o >= 0; o--) {
       var s = ord[o], k = keys[s], b = s * K.PPK;
-      if (k.die > 0) { k.die--; if (k.die === 0) { this.removeKey(s); continue; } }
+      if (k.die > 0) { fading = true; k.die--; if (k.die === 0) { this.removeKey(s); continue; } }
       if (k.sleep) continue;
       awake++;
       if (this.grab && this.grab.k === s) { k.still = 0; continue; }
@@ -299,6 +314,7 @@ class KeyRain {
       } else k.still = 0;
     }
     this.awake = awake;
+    this.fading = fading;
   }
 
   sub(g) {
@@ -556,6 +572,7 @@ class KeyRain {
   drop() {
     if (!this.ready) return;
     this._mine++;
+    this._pulseUntil = this.fc + 260;  // the YOU ring animates for ~4 s
     this.spawn(this._sold + this._mine, true);
     if (this.reduced) { this.settle(240); this.render(); }
     return this._sold + this._mine;

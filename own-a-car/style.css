@@ -193,9 +193,11 @@ details p { color: var(--dim); margin: 12px 0 0; max-width: 64ch; }
 .cert-this { font: 400 13px var(--sans); color: #6d665b; margin: 8% 0 0; }
 .cert-name { font: 700 clamp(22px, 3.2vw, 30px)/1.15 var(--sans); margin: 6px 0 0; overflow-wrap: anywhere; }
 .cert-body { font: 400 14px/1.5 var(--sans); max-width: 30ch; margin: 12px 0 0; }
-.cert-key { margin: auto 0 0; font-size: clamp(30px, 5vw, 46px); letter-spacing: .02em; color: #151310; }
+.cert-art { width: 58%; margin: auto 0 0; transform: rotate(-8deg); filter: drop-shadow(0 8px 14px rgba(122,90,28,.35)); }
+.cert-key { margin: 6% 0 0; font-size: clamp(30px, 5vw, 46px); letter-spacing: .02em; color: #151310; }
 .cert-key small { display: block; font-size: 10px; color: #6d665b; letter-spacing: .24em; margin-bottom: 4px; }
 .cert-foot { display: flex; justify-content: space-between; width: 100%; margin: 6% 0 0; font-size: 10px; color: #6d665b; }
+.cert-sig { font: 400 12px var(--sans); text-transform: none; letter-spacing: 0; color: #151310; border-top: 1px solid #151310; padding-top: 3px; }
 .keyside .dim { max-width: 44ch; }
 .timeline { list-style: none; padding: 0; margin: 28px 0 0; border-left: 1px solid var(--line); }
 .timeline li { position: relative; padding: 8px 0 8px 22px; color: var(--dim); }
