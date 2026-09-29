@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Recall Table</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bungee&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: one card-table column. HUD rail on top (score, combo, pips), the question
+   is an ivory card on felt, confidence bets are poker chips, results slide up under the card.
+   Deliberately single-theme: it is a lit table in a dark room. */
+:root {
+  --felt: #123f31;
+  --felt-deep: #0a271e;
+  --rail: #24160f;
+  --brass: #e0ab4a;
+  --brass-dim: #9c7a3c;
+  --ivory: #f4eedd;
+  --ink: #1f1b14;
+  --ink-soft: #5b5446;
+  --sage: #9dbfae;
+  --good: #7fd49b;
+  --miss: #b8a7a0;
+  --chip-sure: #b8392f;
+  --chip-maybe: #2e5f9e;
+  --chip-guess: #4b4f4a;
+  --fire: #ff8a3d;
+  --font-display: "Bungee", "Arial Black", Impact, sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-num: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.25rem;
+  --step-2: 1.6rem;
+  --step-3: 2.4rem;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+body {
+  background: radial-gradient(120% 80% at 50% 30%, var(--felt) 0%, var(--felt-deep) 75%) fixed, var(--felt-deep);
+  color: var(--ivory);
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.5;
+}
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px solid var(--brass); outline-offset: 3px; }
+
+.wrap { max-width: 760px; margin: 0 auto; padding-inline: 16px; padding-block: 16px 48px; display: flex; flex-direction: column; gap: 18px; }
+
+/* HUD */
+.hud { display: grid; grid-template-columns: 1fr auto; gap: 10px 16px; align-items: center; background: var(--rail); border: 1px solid var(--brass-dim); border-radius: 14px; padding: 12px 16px; }
+.brand { display: flex; flex-direction: column; min-width: 0; }
+.brand b { font-family: var(--font-display); font-weight: 400; font-size: var(--step-1); letter-spacing: 0.02em; color: var(--brass); line-height: 1.1; }
+.brand span { font-size: var(--step--1); color: var(--sage); }
+.hud-right { display: flex; gap: 8px; align-items: center; }
+.icon-btn { background: transparent; border: 1px solid var(--brass-dim); border-radius: 999px; padding: 6px 12px; font-size: var(--step--1); color: var(--ivory); }
+.icon-btn[aria-pressed="false"] { color: var(--sage); border-style: dashed; }
+.meters { grid-column: 1 / -1; display: grid; grid-template-columns: auto 1fr; gap: 12px 20px; align-items: center; }
+.score { font-family: var(--font-num); font-weight: 600; font-size: var(--step-2); font-variant-numeric: tabular-nums; color: var(--ivory); line-height: 1; min-width: 6ch; }
+.score small { display: block; font-family: var(--font-body); font-size: var(--step--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--sage); font-weight: 400; margin-bottom: 4px; }
+.combo { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.combo-label { display: flex; justify-content: space-between; font-size: var(--step--1); letter-spacing: 0.08em; text-transform: uppercase; color: var(--sage); }
+.combo-label strong { font-family: var(--font-display); font-weight: 400; letter-spacing: 0.04em; color: var(--brass); font-size: var(--step-0); text-transform: none; }
+.combo-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+.combo-seg { height: 10px; border-radius: 3px; background: rgba(244, 238, 221, 0.12); transition: background 0.2s; }
+.combo-seg.on { background: var(--brass); }
+.onfire .combo-seg.on { background: linear-gradient(90deg, var(--brass), var(--fire)); box-shadow: 0 0 12px var(--fire); animation: flicker 0.9s infinite alternate; }
+.onfire .combo-label strong { color: var(--fire); }
+@keyframes flicker { from { filter: brightness(1); } to { filter: brightness(1.35); } }
+.combo.off { opacity: 0.35; }
+
+.pips { display: flex; gap: 6px; align-items: center; }
+.pip { flex: 1; height: 6px; border-radius: 3px; background: rgba(244, 238, 221, 0.14); }
+.pip.now { background: var(--ivory); }
+.pip.right { background: var(--good); }
+.pip.wrong { background: var(--miss); opacity: 0.5; }
+.pip.boss { flex: 1.8; }
+.pip-label { font-family: var(--font-display); font-size: 0.7rem; color: var(--fire); letter-spacing: 0.06em; }
+
+/* Question card */
+.card { background: var(--ivory); color: var(--ink); border-radius: 16px; padding: 22px 20px 18px; box-shadow: 0 18px 40px rgba(0,0,0,0.35), 0 2px 0 rgba(255,255,255,0.4) inset; position: relative; transition: transform 0.25s, filter 0.3s; }
+.card.boss { box-shadow: 0 0 0 3px var(--fire), 0 18px 40px rgba(0,0,0,0.4); }
+.card.dim { filter: saturate(0.6) brightness(0.93); }
+.card.shake { animation: shake 0.45s; }
+@keyframes shake { 20% { transform: translate(-6px, 2px) rotate(-0.6deg); } 40% { transform: translate(6px, -2px) rotate(0.6deg); } 60% { transform: translate(-4px, 1px); } 80% { transform: translate(3px, 0); } }
+.card-top { display: flex; justify-content: space-between; gap: 12px; font-size: var(--step--1); color: var(--ink-soft); letter-spacing: 0.06em; text-transform: uppercase; }
+.boss-tag { font-family: var(--font-display); color: #b8452a; letter-spacing: 0.06em; }
+.q { font-size: var(--step-1); font-weight: 700; line-height: 1.35; margin: 10px 0 16px; text-wrap: balance; }
+.opts { display: grid; gap: 8px; }
+.opt { display: grid; grid-template-columns: 2rem 1fr; gap: 10px; align-items: center; text-align: left; background: #fffaf0; border: 2px solid #ddd3bb; border-radius: 10px; padding: 10px 12px; color: var(--ink); transition: border-color 0.15s, background 0.15s, transform 0.1s; }
+.opt:hover:not(:disabled) { border-color: var(--ink-soft); }
+.opt:active:not(:disabled) { transform: scale(0.99); }
+.opt .key { font-family: var(--font-num); font-weight: 600; font-size: var(--step--1); width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; background: #ece3cc; color: var(--ink-soft); }
+.opt.picked { border-color: var(--ink); background: #fff; }
+.opt.picked .key { background: var(--ink); color: var(--ivory); }
+.opt.correct { border-color: #2f8a52; background: #e5f5e8; }
+.opt.correct .key { background: #2f8a52; color: #fff; }
+.opt.wrongpick { border-color: #9a8f86; background: #efebe4; text-decoration: line-through; text-decoration-color: #9a8f86; }
+.opt:disabled { cursor: default; }
+.source { margin-top: 12px; font-size: var(--step--1); color: var(--ink-soft); }
+.source q { font-style: italic; }
+
+/* Bets */
+.bet { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.bet h2 { margin: 0; font-size: var(--step-0); font-weight: 700; letter-spacing: 0.04em; color: var(--ivory); text-align: center; }
+.bet p { margin: 0; font-size: var(--step--1); color: var(--sage); text-align: center; max-width: 46ch; }
+.chips { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+.chip { width: 104px; height: 104px; border-radius: 50%; border: 0; display: grid; place-items: center; position: relative; color: #fff; box-shadow: 0 6px 0 rgba(0,0,0,0.35), 0 10px 18px rgba(0,0,0,0.3); transition: transform 0.12s; }
+.chip::before { content: ""; position: absolute; inset: 6px; border-radius: 50%; border: 5px dashed rgba(255,255,255,0.85); }
+.chip::after { content: ""; position: absolute; inset: 20px; border-radius: 50%; background: rgba(0,0,0,0.12); border: 1px solid rgba(255,255,255,0.35); }
+.chip span { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; line-height: 1.15; }
+.chip b { font-family: var(--font-display); font-weight: 400; font-size: 0.85rem; letter-spacing: 0.04em; }
+.chip i { font-style: normal; font-family: var(--font-num); font-size: 0.7rem; }
+.chip:hover { transform: translateY(-3px); }
+.chip:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,0.35); }
+.chip.sure { background: var(--chip-sure); }
+.chip.maybe { background: var(--chip-maybe); }
+.chip.guess { background: var(--chip-guess); }
+
+/* Result */
+.result { border-radius: 14px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; border: 1px solid rgba(244,238,221,0.18); background: rgba(10,39,30,0.7); }
+.result.win { border-color: var(--good); }
+.result-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.result-head h2 { margin: 0; font-size: var(--step-1); }
+.result.win h2 { color: var(--good); }
+.result.lose h2 { color: var(--miss); font-weight: 400; }
+.gain { font-family: var(--font-num); font-weight: 600; font-size: var(--step-2); font-variant-numeric: tabular-nums; }
+.result.win .gain { color: var(--brass); }
+.result.lose .gain { color: var(--miss); font-size: var(--step-1); }
+.math { display: flex; flex-wrap: wrap; gap: 6px; font-family: var(--font-num); font-size: var(--step--1); }
+.math span { padding: 2px 8px; border-radius: 999px; background: rgba(244,238,221,0.1); color: var(--ivory); }
+.math span.crit { background: var(--brass); color: var(--ink); }
+.math span.fire { background: var(--fire); color: var(--ink); }
+.result p { margin: 0; max-width: 62ch; }
+.note { font-size: var(--step--1); color: var(--sage); }
+.hyper { border-left: 3px solid var(--brass); padding-left: 10px; color: var(--ivory); }
+.next { align-self: flex-end; background: var(--brass); color: var(--ink); border: 0; border-radius: 999px; padding: 10px 22px; font-weight: 700; margin-top: 4px; }
+.next kbd { font-family: var(--font-num); font-size: 0.7rem; opacity: 0.7; margin-left: 6px; }
+
+/* Crit overlay */
+#crit { position: fixed; inset: 0; display: grid; place-items: center; pointer-events: none; z-index: 20; }
+#crit div { font-family: var(--font-display); font-size: clamp(2.6rem, 11vw, 5.5rem); color: var(--brass); text-shadow: 0 4px 0 #6b4a12, 0 0 40px rgba(224,171,74,0.8); transform: scale(0.3) rotate(-8deg); opacity: 0; text-align: center; line-height: 1; }
+#crit div small { display: block; font-size: 0.4em; color: var(--ivory); text-shadow: 0 2px 0 #000; }
+#crit.go div { animation: critpop 1.1s cubic-bezier(.2,1.6,.4,1) forwards; }
+@keyframes critpop { 0% { transform: scale(0.3) rotate(-8deg); opacity: 0; } 25% { transform: scale(1.15) rotate(3deg); opacity: 1; } 70% { transform: scale(1) rotate(0); opacity: 1; } 100% { transform: scale(1.05); opacity: 0; } }
+#fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 15; }
+.flash { position: fixed; inset: 0; background: var(--brass); opacity: 0; pointer-events: none; z-index: 14; }
+.flash.go { animation: flash 0.5s; }
+@keyframes flash { 0% { opacity: 0.35; } 100% { opacity: 0; } }
+
+/* Rank screen */
+.rank { display: grid; grid-template-columns: auto 1fr; gap: 20px 24px; align-items: center; background: var(--rail); border: 1px solid var(--brass-dim); border-radius: 16px; padding: 22px; }
+.letter { font-family: var(--font-display); font-size: clamp(5rem, 22vw, 8.5rem); line-height: 0.9; color: var(--brass); text-shadow: 0 6px 0 #5e3f0f; }
+.letter.S { color: var(--fire); text-shadow: 0 6px 0 #6b2a08, 0 0 40px rgba(255,138,61,0.55); }
+.rank-copy h1 { margin: 0 0 6px; font-size: var(--step-2); line-height: 1.15; text-wrap: balance; }
+.rank-copy p { margin: 0; color: var(--sage); }
+.stats { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.stat { background: rgba(244,238,221,0.06); border-radius: 10px; padding: 10px 12px; }
+.stat b { display: block; font-family: var(--font-num); font-size: var(--step-1); font-variant-numeric: tabular-nums; }
+.stat span { font-size: var(--step--1); color: var(--sage); }
+.pb { grid-column: 1 / -1; font-family: var(--font-display); color: var(--fire); letter-spacing: 0.04em; }
+.panel { background: rgba(10,39,30,0.7); border: 1px solid rgba(244,238,221,0.14); border-radius: 14px; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+.panel h2 { margin: 0; font-size: var(--step-0); letter-spacing: 0.06em; text-transform: uppercase; color: var(--brass); }
+.panel > p { margin: 0; color: var(--sage); font-size: var(--step--1); max-width: 62ch; }
+.cal-row { display: grid; grid-template-columns: 5.5rem 1fr 4.5rem; gap: 10px; align-items: center; font-size: var(--step--1); }
+.cal-row .bar { height: 12px; border-radius: 6px; background: rgba(244,238,221,0.1); overflow: hidden; }
+.cal-row .bar i { display: block; height: 100%; }
+.cal-row .n { font-family: var(--font-num); text-align: right; font-variant-numeric: tabular-nums; }
+.review { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.review li { border-left: 3px solid var(--miss); padding-left: 12px; }
+.review li.sure { border-left-color: var(--brass); }
+.review li b { display: block; }
+.review li span { font-size: var(--step--1); color: var(--sage); }
+.actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.ghost { background: transparent; border: 1px solid var(--brass-dim); color: var(--ivory); border-radius: 999px; padding: 10px 20px; }
+.late { background: var(--rail); border: 1px solid var(--sage); border-radius: 14px; padding: 16px 18px; }
+.late b { font-family: var(--font-display); font-weight: 400; color: var(--sage); letter-spacing: 0.03em; }
+
+/* Playtest switches */
+.switches { background: var(--rail); border: 1px dashed var(--brass-dim); border-radius: 14px; padding: 4px 16px; font-size: var(--step--1); }
+.switches summary { padding: 10px 0; color: var(--sage); letter-spacing: 0.06em; text-transform: uppercase; }
+.switches .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 16px; padding-bottom: 14px; }
+.switches label { display: flex; gap: 8px; align-items: center; }
+.switches input[type=range] { width: 100%; accent-color: var(--brass); }
+.switches input[type=checkbox] { accent-color: var(--brass); width: 18px; height: 18px; }
+.switches .span2 { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 4px; }
+.switches p { grid-column: 1 / -1; margin: 0; color: var(--sage); }
+
+.enter { animation: enter 0.3s ease-out; }
+@keyframes enter { from { transform: translateY(10px); opacity: 0.2; } to { transform: none; opacity: 1; } }
+
+@media (max-width: 520px) {
+  .meters { grid-template-columns: 1fr; }
+  .chip { width: 88px; height: 88px; }
+  .chips { gap: 12px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .rank { grid-template-columns: 1fr; text-align: left; }
+  .switches .grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001s !important; animation-iteration-count: 1 !important; transition-duration: 0.001s !important; }
+}
+</style>
+
+<div class="wrap">
+  <header class="hud">
+    <div class="brand"><b>Recall Table</b><span>Sample deck: BIO 110, Unit 3 notes (fake questions for playtesting)</span></div>
+    <div class="hud-right">
+      <button class="icon-btn" id="soundBtn" aria-pressed="true">Sound on</button>
+    </div>
+    <div class="meters">
+      <div class="score"><small>Points</small><span id="score">0</span></div>
+      <div class="combo" id="combo">
+        <div class="combo-label"><span>Combo</span><strong id="comboText">1×</strong></div>
+        <div class="combo-bar" aria-hidden="true"><div class="combo-seg"></div><div class="combo-seg"></div><div class="combo-seg"></div><div class="combo-seg"></div></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="pips" id="pips" aria-label="Round progress"></div>
+
+  <main id="stage" aria-live="polite"></main>
+
+  <details class="switches" id="switches">
+    <summary>Playtest switches</summary>
+    <div class="grid">
+      <p>Turn mechanics off and replay to see which ones make the round more fun. Points never affect the rank; rank comes from accuracy only.</p>
+      <label><input type="checkbox" id="swBets" checked> Confidence bets</label>
+      <label><input type="checkbox" id="swCombo" checked> Combo multiplier</label>
+      <label><input type="checkbox" id="swCrits" checked> Random crits</label>
+      <label><input type="checkbox" id="swJuice" checked> Juice (sound, particles, count-up)</label>
+      <label class="span2">Crit chance on a correct answer: <b id="critVal">15%</b><input type="range" id="swCritRate" min="0" max="50" step="5" value="15"></label>
+    </div>
+  </details>
+</div>
+
+<canvas id="fx"></canvas>
+<div class="flash" id="flash"></div>
+<div id="crit" aria-hidden="true"><div>CRIT ×3<small>correct answer, lucky payout</small></div></div>
+
+<script>
+(() => {
+"use strict";
+
+/* ---------- Sample deck (hand-written; wrong options are real misconceptions) ---------- */
+const DECK = [
+  { q: "Where is most of the ATP from aerobic respiration made?", a: "Across the inner mitochondrial membrane, by ATP synthase",
+    wrong: [["In the cytoplasm during glycolysis", "Glycolysis nets only 2 ATP per glucose. Most ATP comes later, from the proton gradient."],
+            ["In the matrix during the Krebs cycle", "The Krebs cycle mostly makes NADH and FADH₂; those feed the electron transport chain."],
+            ["On the outer mitochondrial membrane", "The outer membrane is leaky. The gradient that drives ATP synthase is built across the inner one."]],
+    why: "Oxidative phosphorylation makes roughly 26–28 of the ~30 ATP per glucose.", page: 4, quote: "most ATP is produced by ATP synthase in the inner membrane" },
+  { q: "Most of the dry mass of a tree comes from…", a: "Carbon dioxide taken from the air",
+    wrong: [["Minerals absorbed from the soil", "The classic misconception. Soil minerals are a tiny fraction; the soil barely loses mass as a tree grows."],
+            ["Water absorbed by the roots", "Water supplies hydrogen and the O₂ that is released, but most dry mass is carbon."],
+            ["Energy from sunlight", "Light provides energy, not mass. The carbon atoms come from CO₂."]],
+    why: "Carbon fixed from CO₂ in the Calvin cycle builds sugars, then cellulose and wood.", page: 7, quote: "carbon from atmospheric CO₂ is fixed into sugar" },
+  { q: "What is the final electron acceptor in the electron transport chain?", a: "Oxygen (O₂)",
+    wrong: [["NADH", "NADH is an electron donor. It delivers electrons to the start of the chain."],
+            ["Carbon dioxide", "CO₂ is released in the Krebs cycle; it does not take electrons at the end of the chain."],
+            ["ATP", "ATP is the product of the process, not an electron carrier."]],
+    why: "O₂ accepts electrons and H⁺ to form water. Without it, the chain backs up.", page: 5, quote: "oxygen is the final electron acceptor, forming water" },
+  { q: "Do plant cells carry out cellular respiration?", a: "Yes, in their mitochondria, day and night",
+    wrong: [["No, photosynthesis replaces respiration in plants", "Plants make sugar by photosynthesis, then still need respiration to turn it into ATP."],
+            ["Only at night, when photosynthesis stops", "Respiration runs all the time. It is just hidden by photosynthesis during the day."],
+            ["Only in roots, which lack chloroplasts", "Leaf cells have mitochondria too, and they respire."]],
+    why: "Photosynthesis stores energy in sugar; respiration releases it as ATP in every living plant cell.", page: 8, quote: "plant cells contain both chloroplasts and mitochondria" },
+  { q: "What does the Calvin cycle directly need from the light reactions?", a: "ATP and NADPH",
+    wrong: [["Sunlight", "The Calvin cycle does not use light directly. That is why it used to be called the dark reactions."],
+            ["Oxygen", "O₂ is a by-product of the light reactions; the Calvin cycle does not use it."],
+            ["Glucose", "Glucose is made from the Calvin cycle's output. It is not an input."]],
+    why: "The light reactions charge up ATP and NADPH; the Calvin cycle spends them to fix CO₂.", page: 9, quote: "the Calvin cycle uses ATP and NADPH from the light reactions" },
+  { q: "The O₂ released during photosynthesis comes from…", a: "Water molecules split in the light reactions",
+    wrong: [["Carbon dioxide", "Tempting, since CO₂ contains oxygen. Isotope-labeling experiments showed the O₂ comes from water."],
+            ["Glucose breaking down", "That is respiration, and it consumes O₂ instead of releasing it."],
+            ["Chlorophyll", "Chlorophyll absorbs light and loses electrons, but it is not used up to release O₂."]],
+    why: "Photosystem II splits water to replace its lost electrons, releasing O₂.", page: 7, quote: "water is split, releasing O₂ as a by-product" },
+  { q: "What is the main job of fermentation?", a: "To regenerate NAD⁺ so glycolysis can keep going",
+    wrong: [["To make more ATP than aerobic respiration", "Fermentation adds no ATP beyond glycolysis's 2."],
+            ["To store energy as lactic acid", "Lactate is a waste product here, not a storage form."],
+            ["To produce oxygen when it runs low", "Fermentation does not make O₂; it works around its absence."]],
+    why: "Without O₂, NADH piles up. Fermentation turns it back into NAD⁺ so glycolysis keeps making its 2 ATP.", page: 6, quote: "fermentation regenerates NAD⁺" },
+  { q: "What is the net ATP yield of glycolysis per glucose?", a: "2 ATP",
+    wrong: [["4 ATP", "4 is the gross yield. Glycolysis spends 2 ATP in its first steps, so the net is 2."],
+            ["About 30 ATP", "That is the total for full aerobic respiration, not glycolysis alone."],
+            ["0 ATP, it only makes NADH", "Glycolysis makes both: 2 ATP net and 2 NADH."]],
+    why: "Invest 2, make 4, net 2.", page: 3, quote: "net yield of 2 ATP and 2 NADH" },
+  { q: "What directly powers ATP synthase?", a: "H⁺ ions flowing back down their gradient",
+    wrong: [["Electrons passing through it", "Electrons move through the transport chain proteins, not through ATP synthase."],
+            ["Energy released directly from glucose", "Glucose's energy is passed along in steps; ATP synthase only sees the proton gradient."],
+            ["Heat produced by the mitochondrion", "Heat is energy lost from the process. It does not drive the enzyme."]],
+    why: "The chain pumps H⁺ out; their flow back through ATP synthase spins it like a turbine.", page: 5, quote: "the proton gradient drives ATP synthase" },
+];
+const BOSS = { boss: true, q: "A drug makes the inner mitochondrial membrane leaky to H⁺. What happens?", a: "ATP output falls while O₂ use stays high, and the energy is lost as heat",
+  wrong: [["ATP output rises because H⁺ moves faster", "H⁺ leaking back through the membrane bypasses ATP synthase, so less ATP is made."],
+          ["O₂ use stops because the chain shuts down", "The chain keeps running and even speeds up; it is uncoupled from ATP synthesis."],
+          ["Glycolysis stops immediately", "Glycolysis happens in the cytoplasm and does not depend on the gradient."]],
+  why: "This is uncoupling, the same trick brown fat uses to make heat. The gradient leaks away instead of driving ATP synthase.", page: 5, quote: "if the gradient dissipates, ATP synthesis stops" };
+
+/* ---------- Tunables ---------- */
+const BETS = {
+  sure:  { label: "Sure",     win: 200, lose: 150 },
+  maybe: { label: "Maybe",    win: 120, lose: 40 },
+  guess: { label: "Guessing", win: 60,  lose: 0 },
+};
+const FLAT = { label: "No bet", win: 100, lose: 0 };
+const cfg = { bets: true, combo: true, crits: true, juice: true, critRate: 0.15, sound: true };
+
+const multFor = (streak) => streak >= 6 ? 4 : streak >= 4 ? 3 : streak >= 2 ? 2 : 1;
+const rankFor = (acc) => acc >= 0.9 ? "S" : acc >= 0.8 ? "A" : acc >= 0.6 ? "B" : "C";
+
+/* ---------- State ---------- */
+let S;
+const $ = (id) => document.getElementById(id);
+const stage = $("stage");
+const shuffle = (arr) => { const a = arr.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+function newRound() {
+  const items = shuffle(DECK).concat([BOSS]).map((it) => ({
+    ...it,
+    opts: shuffle([{ text: it.a, ok: true }].concat(it.wrong.map(([text, note]) => ({ text, note, ok: false })))),
+  }));
+  S = { items, i: 0, score: 0, shown: 0, streak: 0, best: 0, crits: 0, results: [], phase: "answer", pick: null };
+  renderPips(); renderCombo(); setScore(0, true);
+  renderQuestion();
+}
+
+/* ---------- HUD ---------- */
+function renderPips() {
+  $("pips").innerHTML = S.items.map((it, k) => {
+    const r = S.results[k];
+    const cls = r ? (r.correct ? "right" : "wrong") : k === S.i ? "now" : "";
+    return `<div class="pip ${cls} ${it.boss ? "boss" : ""}"></div>`;
+  }).join("") + `<span class="pip-label">BOSS</span>`;
+}
+function renderCombo() {
+  const m = multFor(S.streak);
+  $("combo").classList.toggle("off", !cfg.combo);
+  document.body.classList.toggle("onfire", cfg.combo && m === 4);
+  $("comboText").textContent = !cfg.combo ? "off" : m === 4 ? "ON FIRE 4×" : `${m}×`;
+  [...document.querySelectorAll(".combo-seg")].forEach((el, k) => el.classList.toggle("on", cfg.combo && k < m));
+}
+let raf = 0;
+function setScore(v, snap) {
+  S.score = Math.max(0, v);
+  cancelAnimationFrame(raf);
+  if (snap || !cfg.juice) { S.shown = S.score; $("score").textContent = S.shown.toLocaleString(); return; }
+  const from = S.shown, to = S.score, t0 = performance.now(), dur = Math.min(1200, 300 + Math.abs(to - from));
+  const step = (t) => {
+    const p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3);
+    S.shown = Math.round(from + (to - from) * e);
+    $("score").textContent = S.shown.toLocaleString();
+    if (to > from && p < 1 && Math.floor(p * 12) !== Math.floor(((t - 16 - t0) / dur) * 12)) tick();
+    if (p < 1) raf = requestAnimationFrame(step);
+  };
+  raf = requestAnimationFrame(step);
+}
+
+/* ---------- Question ---------- */
+function renderQuestion() {
+  const it = S.items[S.i];
+  S.phase = "answer"; S.pick = null;
+  stage.innerHTML = `
+    <article class="card enter ${it.boss ? "boss" : ""}" id="card">
+      <div class="card-top"><span>Question ${S.i + 1} of ${S.items.length}</span>${it.boss ? '<span class="boss-tag">BOSS · points ×2</span>' : "<span>Bronze · multiple choice</span>"}</div>
+      <div class="q">${esc(it.q)}</div>
+      <div class="opts">${it.opts.map((o, k) => `<button class="opt" data-k="${k}"><span class="key">${"ABCD"[k]}</span><span>${esc(o.text)}</span></button>`).join("")}</div>
+      <div class="source">Source: Unit 3 notes, p. ${it.page}</div>
+    </article>
+    <section id="below"></section>`;
+  stage.querySelectorAll(".opt").forEach((b) => b.addEventListener("click", () => choose(+b.dataset.k)));
+  renderPips();
+}
+
+function choose(k) {
+  if (S.phase !== "answer" && S.phase !== "bet") return;
+  S.pick = k;
+  stage.querySelectorAll(".opt").forEach((b, j) => b.classList.toggle("picked", j === k));
+  blip(520, 0.05, "triangle", 0.08);
+  if (!cfg.bets) return resolve(null);
+  if (S.phase === "bet") return;
+  S.phase = "bet";
+  $("below").innerHTML = `
+    <div class="bet enter">
+      <h2>How sure are you?</h2>
+      <div class="chips">
+        ${Object.entries(BETS).map(([key, b]) => `<button class="chip ${key}" data-bet="${key}" aria-label="${b.label}: win ${b.win}, lose ${b.lose}"><span><b>${key.toUpperCase()}</b><i>+${b.win} / −${b.lose}</i></span></button>`).join("")}
+      </div>
+      <p>Bet before you see the answer. You can still change your pick. Guessing never costs points, so be honest.</p>
+    </div>`;
+  $("below").querySelectorAll(".chip").forEach((c) => c.addEventListener("click", () => resolve(c.dataset.bet)));
+}
+
+function resolve(betKey) {
+  if (S.pick == null || S.phase === "reveal") return;
+  S.phase = "reveal";
+  const it = S.items[S.i], opt = it.opts[S.pick], correct = opt.ok;
+  const bet = betKey ? BETS[betKey] : FLAT;
+  const card = $("card");
+  stage.querySelectorAll(".opt").forEach((b, j) => {
+    b.disabled = true;
+    if (it.opts[j].ok) b.classList.add("correct");
+    else if (j === S.pick) b.classList.add("wrongpick");
+  });
+  let gain = 0, crit = false, mult = 1;
+  const parts = [];
+  if (correct) {
+    S.streak++; S.best = Math.max(S.best, S.streak);
+    mult = cfg.combo ? multFor(S.streak) : 1;
+    crit = cfg.crits && Math.random() < cfg.critRate;
+    gain = bet.win * mult * (crit ? 3 : 1) * (it.boss ? 2 : 1);
+    parts.push(`<span>${bet.win} ${esc(bet.label.toLowerCase())}</span>`);
+    if (mult > 1) parts.push(`<span class="${mult === 4 ? "fire" : ""}">×${mult} combo</span>`);
+    if (crit) { parts.push(`<span class="crit">×3 crit</span>`); S.crits++; }
+    if (it.boss) parts.push(`<span>×2 boss</span>`);
+  } else {
+    S.streak = 0;
+    gain = -bet.lose;
+  }
+  S.results[S.i] = { item: it, pick: opt, correct, bet: betKey, gain, crit };
+  setScore(S.score + gain);
+  renderCombo(); renderPips();
+
+  const quote = `<div class="note">Source: Unit 3 notes, p. ${it.page}: <q>${esc(it.quote)}</q></div>`;
+  let body;
+  if (correct) {
+    const guessNote = betKey === "guess" ? `<p class="note">Right, but you said you were guessing. In the full app a guessed answer earns points but does not move the concept up a tier.</p>` : "";
+    body = `<div class="result win enter">
+      <div class="result-head"><h2>${it.boss ? "Boss down" : "Correct"}</h2><span class="gain">+${gain.toLocaleString()}</span></div>
+      <div class="math">${parts.join("")}</div>
+      <p>${esc(it.why)}</p>${guessNote}${quote}
+      <button class="next" id="next">${S.i + 1 < S.items.length ? "Next" : "See rank"}<kbd>Enter</kbd></button></div>`;
+  } else {
+    const hyper = betKey === "sure" ? `<p class="hyper"><b>High-confidence miss.</b> Read this one twice. Corrections to answers you were sure about are the ones people remember best.</p>` : "";
+    body = `<div class="result lose enter">
+      <div class="result-head"><h2>Not this time</h2><span class="gain">${gain ? "−" + Math.abs(gain) : "±0"}</span></div>
+      ${hyper}
+      <p><b>Answer:</b> ${esc(it.a)}</p>
+      <p><b>Why yours is tempting but wrong:</b> ${esc(opt.note)}</p>${quote}
+      <button class="next" id="next">${S.i + 1 < S.items.length ? "Next" : "See rank"}<kbd>Enter</kbd></button></div>`;
+  }
+  $("below").innerHTML = body;
+  $("next").addEventListener("click", next);
+  $("next").focus({ preventScroll: true });
+  $("below").scrollIntoView({ behavior: cfg.juice ? "smooth" : "auto", block: "nearest" });
+
+  if (correct) celebrate(card, mult, crit, it.boss);
+  else { card.classList.add("dim"); thud(); }
+}
+
+function next() {
+  if (S.phase !== "reveal") return;
+  S.i++;
+  if (S.i >= S.items.length) return renderRank();
+  renderQuestion();
+  window.scrollTo({ top: 0, behavior: cfg.juice ? "smooth" : "auto" });
+}
+
+/* ---------- Rank ---------- */
+function renderRank() {
+  S.phase = "done";
+  document.body.classList.remove("onfire");
+  const n = S.results.length, right = S.results.filter((r) => r.correct).length, acc = right / n;
+  const L = rankFor(acc);
+  let pb = false, prev = 0;
+  try { prev = +localStorage.getItem("recall-table-pb") || 0; if (S.score > prev) { localStorage.setItem("recall-table-pb", String(S.score)); pb = prev > 0; } } catch (e) {}
+  const lines = { S: "Clean sweep of the table.", A: "Strong round. A couple to review.", B: "Solid. The review list below is your next round.", C: "Rough table. The misses below are where the points are next time." };
+
+  const cal = cfg.bets ? Object.entries(BETS).map(([key, b]) => {
+    const rs = S.results.filter((r) => r.bet === key), ok = rs.filter((r) => r.correct).length;
+    const pct = rs.length ? ok / rs.length : 0;
+    return `<div class="cal-row"><span>${b.label}</span><div class="bar"><i style="width:${pct * 100}%;background:var(--chip-${key})"></i></div><span class="n">${ok}/${rs.length}</span></div>`;
+  }).join("") : "";
+  const sureRs = S.results.filter((r) => r.bet === "sure"), sureOk = sureRs.filter((r) => r.correct).length;
+  const calLine = !sureRs.length ? "You never bet Sure. If you knew some of these cold, say so; Sure pays the most when you are right."
+    : sureOk === sureRs.length ? "Every Sure bet was right. Your sense of what you know is well calibrated."
+    : `${sureRs.length - sureOk} of your Sure bets missed. Those are the most valuable things to review.`;
+
+  const misses = S.results.filter((r) => !r.correct).sort((a, b) => (b.bet === "sure") - (a.bet === "sure"));
+  const late = (() => { const h = new Date().getHours(); return h >= 22 || h < 5; })();
+
+  stage.innerHTML = `
+    <section class="rank enter">
+      <div class="letter ${L}" aria-label="Rank ${L}">${L}</div>
+      <div class="rank-copy"><h1>${lines[L]}</h1><p>Rank comes from accuracy only: ${right} of ${n} correct. Points are for fun and do not change it.</p></div>
+      <div class="stats">
+        <div class="stat"><b>${Math.round(acc * 100)}%</b><span>Accuracy</span></div>
+        <div class="stat"><b>${S.score.toLocaleString()}</b><span>Points</span></div>
+        <div class="stat"><b>${S.best}</b><span>Best streak</span></div>
+        <div class="stat"><b>${S.crits}</b><span>Crits</span></div>
+      </div>
+      ${pb ? `<div class="pb">New personal best, beating ${prev.toLocaleString()}</div>` : ""}
+    </section>
+    ${cfg.bets ? `<section class="panel"><h2>Confidence check</h2><p>How often each bet was right. Ideally Sure is near 100% and Guessing is lower.</p>${cal}<p>${calLine}</p></section>` : ""}
+    ${misses.length ? `<section class="panel"><h2>Review first</h2><p>Your misses, high-confidence ones on top.</p><ul class="review">${misses.map((r) => `<li class="${r.bet === "sure" ? "sure" : ""}"><b>${esc(r.item.q)}</b>${esc(r.item.a)}<br><span>You picked “${esc(r.pick.text)}”${r.bet ? `, bet ${BETS[r.bet].label}` : ""} · Unit 3 notes, p. ${r.item.page}</span></li>`).join("")}</ul></section>` : ""}
+    ${late ? `<section class="late"><b>It's late. Go sleep.</b><p>Sleep is when this round gets stored. Come back tomorrow and the misses above will be first in line.</p></section>` : ""}
+    <div class="actions">
+      <button class="${late ? "ghost" : "next"}" id="again">Play again (reshuffled)</button>
+    </div>`;
+  $("again").addEventListener("click", () => { newRound(); window.scrollTo({ top: 0 }); });
+  renderPips();
+  if (L === "S" && cfg.juice) { burst(innerWidth / 2, innerHeight * 0.3, 140, true); chord([523, 659, 784, 1047], 0.5); }
+  else if (cfg.juice) blip(440, 0.12, "sine", 0.08);
+}
+
+/* ---------- Juice: particles ---------- */
+const cv = $("fx"), cx = cv.getContext("2d");
+let parts = [], fxRaf = 0;
+const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+function fit() { const d = devicePixelRatio || 1; cv.width = innerWidth * d; cv.height = innerHeight * d; cx.setTransform(d, 0, 0, d, 0, 0); }
+addEventListener("resize", fit); fit();
+function burst(x, y, n, big) {
+  if (!cfg.juice || reduced.matches) return;
+  const cols = ["#e0ab4a", "#f4eedd", "#ffd27a", big ? "#ff8a3d" : "#7fd49b"];
+  for (let k = 0; k < n; k++) {
+    const a = Math.random() * Math.PI * 2, sp = (big ? 5 : 3) + Math.random() * (big ? 9 : 5);
+    parts.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp - (big ? 5 : 3), r: 2 + Math.random() * (big ? 5 : 3), c: cols[k % cols.length], life: 1, rot: Math.random() * 6, coin: Math.random() < 0.4 });
+  }
+  if (!fxRaf) fxRaf = requestAnimationFrame(fxLoop);
+}
+function fxLoop() {
+  cx.clearRect(0, 0, innerWidth, innerHeight);
+  parts = parts.filter((p) => p.life > 0);
+  for (const p of parts) {
+    p.vy += 0.28; p.vx *= 0.985; p.x += p.vx; p.y += p.vy; p.life -= 0.013; p.rot += 0.2;
+    cx.globalAlpha = Math.max(0, p.life);
+    cx.fillStyle = p.c;
+    if (p.coin) { cx.beginPath(); cx.ellipse(p.x, p.y, p.r * 1.3, p.r * 1.3 * Math.abs(Math.cos(p.rot)), 0, 0, Math.PI * 2); cx.fill(); }
+    else { cx.save(); cx.translate(p.x, p.y); cx.rotate(p.rot); cx.fillRect(-p.r, -p.r / 2, p.r * 2, p.r); cx.restore(); }
+  }
+  cx.globalAlpha = 1;
+  fxRaf = parts.length ? requestAnimationFrame(fxLoop) : 0;
+}
+function celebrate(card, mult, crit, boss) {
+  const r = card.getBoundingClientRect();
+  const x = r.left + r.width / 2, y = r.top + r.height * 0.45;
+  burst(x, y, 18 + mult * 10 + (boss ? 40 : 0), boss);
+  chime(mult);
+  if (crit && cfg.juice) {
+    const el = $("crit"); el.classList.remove("go"); void el.offsetWidth; el.classList.add("go");
+    const fl = $("flash"); fl.classList.remove("go"); void fl.offsetWidth; fl.classList.add("go");
+    if (!reduced.matches) { card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake"); }
+    setTimeout(() => burst(innerWidth / 2, innerHeight * 0.45, 120, true), 180);
+    setTimeout(() => chord([784, 988, 1175, 1568], 0.6), 120);
+  }
+}
+
+/* ---------- Juice: synthesized sound (no files) ---------- */
+let ac = null;
+function audio() { if (!cfg.sound || !cfg.juice) return null; try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); if (ac.state === "suspended") ac.resume(); } catch (e) { return null; } return ac; }
+function blip(f, dur, type = "sine", vol = 0.12, when = 0) {
+  const a = audio(); if (!a) return;
+  const t = a.currentTime + when, o = a.createOscillator(), g = a.createGain();
+  o.type = type; o.frequency.setValueAtTime(f, t);
+  g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.01); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  o.connect(g).connect(a.destination); o.start(t); o.stop(t + dur + 0.02);
+}
+function chime(mult) { const base = 523 * Math.pow(1.12246, (mult - 1) * 2); blip(base, 0.14, "triangle", 0.12); blip(base * 1.5, 0.22, "triangle", 0.1, 0.07); if (mult >= 3) blip(base * 2, 0.25, "sine", 0.08, 0.14); }
+function chord(fs, dur) { fs.forEach((f, k) => blip(f, dur, "triangle", 0.07, k * 0.05)); }
+function tick() { blip(1800, 0.02, "square", 0.015); }
+function thud() { blip(150, 0.16, "sine", 0.1); }
+
+/* ---------- Controls ---------- */
+$("soundBtn").addEventListener("click", (e) => { cfg.sound = !cfg.sound; e.currentTarget.setAttribute("aria-pressed", cfg.sound); e.currentTarget.textContent = cfg.sound ? "Sound on" : "Sound off"; });
+$("swBets").addEventListener("change", (e) => { cfg.bets = e.target.checked; if (S.phase === "bet") resolve(null); });
+$("swCombo").addEventListener("change", (e) => { cfg.combo = e.target.checked; renderCombo(); });
+$("swCrits").addEventListener("change", (e) => { cfg.crits = e.target.checked; });
+$("swJuice").addEventListener("change", (e) => { cfg.juice = e.target.checked; });
+$("swCritRate").addEventListener("input", (e) => { cfg.critRate = e.target.value / 100; $("critVal").textContent = e.target.value + "%"; });
+
+document.addEventListener("keydown", (e) => {
+  if (e.target.closest && e.target.closest("input, summary")) return;
+  const k = e.key.toLowerCase();
+  if (S.phase === "answer" || S.phase === "bet") {
+    const idx = "abcd".indexOf(k) >= 0 ? "abcd".indexOf(k) : "1234".indexOf(k);
+    if (idx >= 0) { e.preventDefault(); return choose(idx); }
+  }
+  if (S.phase === "bet") { const m = { s: "sure", m: "maybe", g: "guess" }[k]; if (m) { e.preventDefault(); return resolve(m); } }
+  if (S.phase === "reveal" && (k === "enter" || k === " ")) { e.preventDefault(); next(); }
+});
+
+newRound();
+})();
+</script>
