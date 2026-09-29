@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Outlines the OWN A CAR wordmark (Fraunces Black, +280 tracking) into brand/*.svg, so the logo
+"""Outlines the OWN A CAR wordmark (Michroma, +220 tracking) into brand/*.svg, so the logo
 never depends on a font being installed. Needs: pip install fonttools brotli
 
   python3 own-a-car/tools/wordmark.py
@@ -11,16 +11,15 @@ from fontTools.pens.transformPen import TransformPen
 from fontTools.ttLib import TTFont
 
 ROOT = Path(__file__).resolve().parent.parent
-FONT = ROOT / "fonts" / "fraunces-latin-900-normal.woff2"
+FONT = ROOT / "fonts" / "michroma-latin-400-normal.woff2"
 BRAND = ROOT / "brand"
 KEY = (BRAND / "key-mono.svg").read_text().split(">", 1)[1].rsplit("</svg>", 1)[0]
 
 
-def outline(text, tracking=0.28):
+def outline(text, tracking=0.22):
     font = TTFont(FONT)
     upm = font["head"].unitsPerEm
     cmap, glyphs, hmtx = font.getBestCmap(), font.getGlyphSet(), font["hmtx"]
-    ascent = font["hhea"].ascent
     cap = font["OS/2"].sCapHeight or 0.7 * upm
     pen = SVGPathPen(glyphs)
     x = 0

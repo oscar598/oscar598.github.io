@@ -1,11 +1,11 @@
-/* Self-hosted brand fonts (SIL Open Font License 1.1, via Fontsource). */
-@font-face { font-family: "Fraunces"; font-weight: 300; font-style: normal; font-display: swap; src: url(fraunces-latin-300-normal.woff2) format("woff2"); }
-@font-face { font-family: "Fraunces"; font-weight: 400; font-style: normal; font-display: swap; src: url(fraunces-latin-400-normal.woff2) format("woff2"); }
-@font-face { font-family: "Fraunces"; font-weight: 400; font-style: italic; font-display: swap; src: url(fraunces-latin-400-italic.woff2) format("woff2"); }
-@font-face { font-family: "Fraunces"; font-weight: 900; font-style: normal; font-display: swap; src: url(fraunces-latin-900-normal.woff2) format("woff2"); }
-@font-face { font-family: "Fraunces"; font-weight: 900; font-style: italic; font-display: swap; src: url(fraunces-latin-900-italic.woff2) format("woff2"); }
-@font-face { font-family: "Inter"; font-weight: 400; font-display: swap; src: url(inter-latin-400-normal.woff2) format("woff2"); }
-@font-face { font-family: "Inter"; font-weight: 500; font-display: swap; src: url(inter-latin-500-normal.woff2) format("woff2"); }
-@font-face { font-family: "Inter"; font-weight: 600; font-display: swap; src: url(inter-latin-600-normal.woff2) format("woff2"); }
+/* Self-hosted brand fonts (SIL Open Font License 1.1, via Fontsource).
+   Michroma = display (wide, squared: the hypercar voice). Saira = text. JetBrains Mono = numbers. */
+@font-face { font-family: "Michroma"; font-weight: 400; font-display: swap; src: url(michroma-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Saira"; font-weight: 300; font-display: swap; src: url(saira-latin-300-normal.woff2) format("woff2"); }
+@font-face { font-family: "Saira"; font-weight: 400; font-display: swap; src: url(saira-latin-400-normal.woff2) format("woff2"); }
+@font-face { font-family: "Saira"; font-weight: 500; font-display: swap; src: url(saira-latin-500-normal.woff2) format("woff2"); }
+@font-face { font-family: "Saira"; font-weight: 600; font-display: swap; src: url(saira-latin-600-normal.woff2) format("woff2"); }
+@font-face { font-family: "Saira"; font-weight: 700; font-display: swap; src: url(saira-latin-700-normal.woff2) format("woff2"); }
+@font-face { font-family: "Saira"; font-weight: 800; font-display: swap; src: url(saira-latin-800-normal.woff2) format("woff2"); }
 @font-face { font-family: "JetBrains Mono"; font-weight: 400; font-display: swap; src: url(jetbrains-mono-latin-400-normal.woff2) format("woff2"); }
 @font-face { font-family: "JetBrains Mono"; font-weight: 500; font-display: swap; src: url(jetbrains-mono-latin-500-normal.woff2) format("woff2"); }

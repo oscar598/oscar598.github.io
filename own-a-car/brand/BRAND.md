@@ -17,7 +17,7 @@ Lamborghini's trademarks while every post still says what the car is.
   Until then: oscarludesign.com/own-a-car
 
 ## Taglines
-- Primary: **You now own a car.**
+- Primary: **YOU NOW OWN A CAR.**
 - Supporting: *Unlimited keys. One car.* · *Edition of ∞.* · *How much Lamborghini is $50?* · *The more of us own it, the less any of us does.*
 
 ## Voice
@@ -43,16 +43,23 @@ Deadpan, exact, a little dry. It states things like a title deed. Numbers do the
 | Line | `#262420` | Rules and borders |
 | Brass | `#c9a24a` | The accent: buttons, numbers, the key |
 | Brass high / low | `#f3dc9a` / `#7a5a1c` | The key's gradient; gold type on hero numbers |
+| Arancio | `#f25c05` | Warnings only: the deadpan labels ("DOES NOT START THE CAR") and stickers |
 
 Brass appears once or twice per surface, never as a background fill (except the primary button).
 In print, brass = **gold foil** (e.g. Kurz Luxor 220 or the printer's closest match).
 
 ## Type
-- **Fraunces Black (900)** for headlines and the wordmark, tracked tight (−3%) in headlines and +280 in the wordmark.
-- **Fraunces Italic** for ledes and asides.
+The letters should feel like the car: wide, squared, engineered. Lamborghini's own typeface and wordmark are proprietary
+and are never used. These open-source faces carry the same DNA:
+- **Michroma** for headlines and the wordmark. Always UPPERCASE, tracked +1% in headlines, +220 in the wordmark, +14% on buttons.
+  Single weight: never fake-bold it, and never set it in italic.
+- **Saira** (300–800) for body copy, ledes and UI. Squared counters that read as engineered.
 - **JetBrains Mono** for every number, label and key number (`KEY Nº 0042`), uppercase, +8–14% tracking.
-- **Inter** for body copy and buttons.
-All four are SIL Open Font License and self-hosted in `/own-a-car/fonts/`.
+All three are SIL Open Font License and self-hosted in `/own-a-car/fonts/`.
+
+## Shape
+Chamfered corners (45° cuts, 8–12 px) on filled buttons and plates; hexagons for gauges and badges; Y-shaped cuts as accents.
+It's the hypercar's geometry, never its marks.
 
 ## The key mark
 `key.svg` (brass gradient) and `key-mono.svg` (single color, uses `currentColor`). It's a ring bow, a collar and a blade with three teeth.

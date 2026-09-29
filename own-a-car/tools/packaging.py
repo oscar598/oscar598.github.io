@@ -43,8 +43,8 @@ def key(x, y, width, fill, rotate=0, stroke=None):
     return (f'<g transform="translate({x:.2f} {y:.2f}) rotate({rotate}) scale({s:.5f})" {paint}>{KEY}</g>')
 
 
-FONTS = {("JetBrains Mono", 500): "jetbrains-mono-latin-500-normal", ("Fraunces", 900): "fraunces-latin-900-normal",
-         ("Inter", 400): "inter-latin-400-normal"}
+FONTS = {("JetBrains Mono", 500): "jetbrains-mono-latin-500-normal", ("Michroma", 400): "michroma-latin-400-normal",
+         ("Saira", 400): "saira-latin-400-normal"}
 _fonts = {}
 
 
@@ -123,9 +123,9 @@ def main():
     svg("insert-card.svg", 89, 51,
         f'<rect width="89" height="51" fill="{BLACK}"/>'
         + wordmark(6, 8, 36, GOLD)
-        + text(6, 20, 3.4, "Welcome, owner.", BONE, anchor="start", family="Fraunces", weight=900, spacing=0)
-        + text(6, 27, 2.2, "Track your key, find your", "#cfc8bb", anchor="start", family="Inter", weight=400, spacing=0)
-        + text(6, 30.4, 2.2, "certificate, join the owners.", "#cfc8bb", anchor="start", family="Inter", weight=400, spacing=0)
+        + text(6, 20, 3.4, "Welcome, owner.", BONE, anchor="start", family="Michroma", weight=400, spacing=0)
+        + text(6, 27, 2.2, "Track your key, find your", "#cfc8bb", anchor="start", family="Saira", weight=400, spacing=0)
+        + text(6, 30.4, 2.2, "certificate, join the owners.", "#cfc8bb", anchor="start", family="Saira", weight=400, spacing=0)
         + text(6, 42, 2, "POST IT: #OWNACAR @OWNACAR", GOLD, anchor="start", spacing=0.3)
         + f'<rect x="{qx - 2}" y="{qy - 2}" width="{size + 4}" height="{size + 4}" fill="{BONE}"/>'
         + f'<g fill="{BLACK}">{rects}</g>',
