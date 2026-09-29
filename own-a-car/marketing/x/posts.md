@@ -150,6 +150,9 @@ Key Nº 0001 went at 12:00:{07}. Whoever you are: you own a car.
 - The Gallardo makes about 560 hp. Split {2,000} ways, you have a quarter of a horsepower. A small, determined pony.
 - Your share of the car's top speed is not how physics works, but emotionally it's 0.1 mph.
 
+**Find your shard (@, once the site is live)**
+- 6,000 owners. One car. Find your shard. [img: cards/shard.png] Reply: "It's interactive: sweep the car on the site."
+
 **Deadpan facts (@)**
 - The key doesn't start the car. Nothing does, for you.
 - You can't drive it. Nobody can. That's the art part.
