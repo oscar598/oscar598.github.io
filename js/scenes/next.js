@@ -24,7 +24,7 @@ export function initNext(site) {
     .join("");
   cta.innerHTML = `
     <a class="btn btn--primary" id="email-btn" href="mailto:${esc(p.email)}" data-magnetic>Email me</a>
-    <a class="btn" href="../resume.html" data-magnetic>Resume</a>
+    <a class="btn" href="resume.html" data-magnetic>Resume</a>
     ${links}`;
   cta.querySelectorAll("[data-magnetic]").forEach((n) => window.dispatchEvent(new CustomEvent("ol:magnetic", { detail: n })));
 

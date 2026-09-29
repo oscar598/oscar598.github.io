@@ -32,7 +32,7 @@ export function initTldr(site) {
           .join("")}
       </ol>
       <div class="tldr-cta">
-        <a class="btn btn--primary" href="../resume.html">Resume</a>
+        <a class="btn btn--primary" href="resume.html">Resume</a>
         <a class="btn" href="mailto:${esc(site.person.email)}">Email</a>
         <button class="btn" type="button" data-watch>Watch the full story</button>
       </div>
@@ -62,7 +62,7 @@ export function initTldr(site) {
   // Skip link (first focusable element on the page)
   const skip = document.createElement("a");
   skip.className = "skip-link";
-  skip.href = "../resume.html";
+  skip.href = "resume.html";
   skip.textContent = "Skip the show: go to the resume";
   document.body.prepend(skip);
 

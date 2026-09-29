@@ -3,7 +3,7 @@
 Everything in this folder is a **placeholder** until Oscar swaps in real photos.
 All pieces share one look so they sit together: *matte clay / plaster sculpture, soft studio light, warm off-white paper background (#f2ede3) or deep ink (#0e0d0b), one red-orange accent (#ff4b2b), shallow depth of field, no text, no logos, no real people's faces.*
 
-Wire each file up in `v2/js/assets.js`.
+Wire each file up in `js/assets.js`.
 
 ## Hero images and loops (scene slots)
 

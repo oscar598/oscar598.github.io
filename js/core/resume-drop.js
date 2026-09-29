@@ -34,8 +34,8 @@ export function initResumeDrop(site) {
       <section><h3>Leadership &amp; Initiative</h3>${r.leadership.map(entry).join("")}</section>
       <section><h3>Skills</h3><p>${r.skills.map(esc).join("; ")}</p></section>
       <footer>
-        <a class="btn btn--primary" href="../resume.html">Open full page</a>
-        <a class="btn" href="../resume.html" data-print>Download PDF</a>
+        <a class="btn btn--primary" href="resume.html">Open full page</a>
+        <a class="btn" href="resume.html" data-print>Download PDF</a>
         <button class="btn" type="button" data-close>Put it back</button>
       </footer>
     </article>`;
@@ -88,8 +88,8 @@ export function initResumeDrop(site) {
   overlay.querySelector("[data-print]").addEventListener("click", (e) => {
     e.preventDefault();
     // Open the print-ready page and trigger the print dialog there.
-    const w = window.open("../resume.html#print", "_blank");
-    if (!w) location.href = "../resume.html";
+    const w = window.open("resume.html#print", "_blank");
+    if (!w) location.href = "resume.html";
   });
   window.addEventListener("keydown", (e) => e.key === "Escape" && overlay.classList.contains("is-on") && close());
 

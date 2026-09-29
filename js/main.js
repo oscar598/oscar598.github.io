@@ -84,7 +84,7 @@ function nextScene() {
         <p class="next-body reveal">${esc(site.next.body)}</p>
         <div class="cta reveal">
           <a class="btn btn--primary" href="mailto:${esc(p.email)}">Email me</a>
-          <a class="btn" href="resume.html">Resume</a>
+          <a class="btn" href="../resume.html">Resume</a>
           ${links}
         </div>
         <p class="blank-page reveal" aria-hidden="true"><span class="cursor"></span></p>

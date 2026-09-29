@@ -384,7 +384,7 @@ export function openLevel(site) {
     saveBest();
     sound.chime();
     showCard(`<p class="label">Level complete · ★ ${state.score}</p><h3>That's the story so far.</h3><p>Your team is the next level.</p>
-      <div class="lv-cta"><a class="btn btn--primary" href="mailto:${site.person.email}">Email Oscar</a><a class="btn" href="../resume.html">Resume</a><button class="btn" data-retry>Play again</button></div>`);
+      <div class="lv-cta"><a class="btn btn--primary" href="mailto:${site.person.email}">Email Oscar</a><a class="btn" href="resume.html">Resume</a><button class="btn" data-retry>Play again</button></div>`);
   }
 
   function showCard(html) {

@@ -40,9 +40,9 @@ if (location.hash === "#print") {
   window.addEventListener("load", () => setTimeout(() => window.print(), 400));
 }
 
-// Came here from v2? Send "← Watch the story" back there instead of v1.
-if (document.referrer.includes("/v2/")) {
-  document.getElementById("back-link")?.setAttribute("href", "v2/");
+// Came here from the calm version (v1)? Send "← Watch the story" back there instead of the homepage.
+if (document.referrer.includes("/v1/")) {
+  document.getElementById("back-link")?.setAttribute("href", "v1/");
 }
 
 document.getElementById("resume").innerHTML = `

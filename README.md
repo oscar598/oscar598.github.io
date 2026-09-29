@@ -1,6 +1,6 @@
-# v2: "A Life in Seven Chapters", physics + motion edition
+# Oscar Lu: "A Life in Seven Chapters"
 
-v1 (`/index.html`) is the calm, readable version. v2 (`/v2/`) is the memorable one: every chapter is a scene you can play with.
+The homepage (`/`) is the physics + motion version: every chapter is a scene you can play with. The calm, readable v1 lives at `/v1/`. Live at https://oscar598.github.io/
 Both read the **same words** from `/js/data.js`, and both link to the same `/resume.html`.
 
 Run it locally:
@@ -9,7 +9,7 @@ Run it locally:
 python3 -m http.server 8080
 ```
 
-Then open http://localhost:8080/v2/ (add `?debug` to skip the intro countdown).
+Then open http://localhost:8080/ (add `?debug` to skip the intro countdown).
 
 ## The scenes
 
@@ -43,11 +43,11 @@ Then open http://localhost:8080/v2/ (add `?debug` to skip the intro countdown).
 
 - **Words** → `/js/data.js` (shared with v1 and the resume).
 - **Scene-specific lines** (email text, credits, acrostic facts, director's notes) live at the top of each scene file.
-- **Media** → `v2/js/assets.js`. Every slot currently shows a designed placeholder drawn in code
-  (the Harvard poster, Half Dome at alpenglow). Put a file in `v2/assets/` and set its path, e.g.
+- **Media** → `js/assets.js`. Every slot currently shows a designed placeholder drawn in code
+  (the Harvard poster, Half Dome at alpenglow). Put a file in `assets/` and set its path, e.g.
   `harvard: { img: "assets/harvard.jpg" }`. Video works too (`video: "assets/yosemite.mp4"`).
 - **Physics sprites** for the Origin scene → `ASSETS.sprites` (transparent PNGs). Prompts ready in `assets/PROMPTS.md`.
-- **Share card** → `v2/assets/og.jpg`, rendered by `v2/tools/og.html` (regenerate after changing the tagline).
+- **Share card** → `assets/og.jpg`, rendered by `tools/og.html` (regenerate after changing the tagline).
 
 ## Getting AI placeholders from Runway
 

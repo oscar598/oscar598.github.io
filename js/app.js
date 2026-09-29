@@ -141,7 +141,7 @@ async function boot() {
   await runLeader();
   scenes.open?.begin();
 
-  // Deep links like v2/#farm (scenes are built by JS, so jump after layout settles).
+  // Deep links like /#farm (scenes are built by JS, so jump after layout settles).
   if (location.hash) {
     const el = document.querySelector(location.hash);
     if (el) setTimeout(() => cutTo(el), 60);

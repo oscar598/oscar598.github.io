@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <title>OG card generator</title>
   <!-- Renders the 1200x630 link-preview image. Open this page, then right-click → save the canvas,
-       or read window.ogDataURL from the console. Output lives at v2/assets/og.jpg. -->
+       or read window.ogDataURL from the console. Output lives at assets/og.jpg. -->
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
   <style>body{margin:0;background:#222}canvas{display:block;width:1200px;height:630px}</style>
 </head>
 <body>
   <canvas id="c" width="1200" height="630"></canvas>
-  <script src="../../js/data.js"></script>
+  <script src="../js/data.js"></script>
   <script>
     (async () => {
       await Promise.all([
