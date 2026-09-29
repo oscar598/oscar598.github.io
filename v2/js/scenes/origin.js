@@ -3,7 +3,7 @@
 // Oranges and juice cups (age 8), eBay boxes and phone cases (age 10), a bike wheel (the hour-long ride),
 // coins for every sale. You can grab and throw everything.
 
-import { createWorld } from "../core/world.js";
+import { createWorld, drawBodies } from "../core/world.js";
 import { rand, reduceMotion } from "../core/util.js";
 import { stats } from "../core/stats.js";
 
@@ -34,6 +34,16 @@ export function initOrigin() {
   const world = createWorld(canvas, {
     walls: { floor: true, left: true, right: true, ceiling: false },
     onGrab: () => stats.objects++,
+    // Soft drop shadow; canvas shadows ignore rotation, so they always fall down-right.
+    draw(ctx, w, h, api) {
+      ctx.save();
+      ctx.shadowColor = "rgba(0,0,0,0.45)";
+      ctx.shadowBlur = 10;
+      ctx.shadowOffsetX = 3;
+      ctx.shadowOffsetY = 6;
+      drawBodies(ctx, api.bodies());
+      ctx.restore();
+    },
     beforeDraw(ctx, w, h) {
       // Faint ruled paper
       ctx.strokeStyle = "rgba(242,237,227,0.05)";
@@ -74,6 +84,9 @@ export function initOrigin() {
           c.beginPath();
           c.ellipse(u * 0.15, -u * 0.95, u * 0.28, u * 0.12, -0.5, 0, Math.PI * 2);
           c.fill();
+        }, (c) => {
+          c.beginPath();
+          c.arc(0, 0, u * 0.9, 0, Math.PI * 2);
         });
         break;
       case "juice": {
@@ -97,6 +110,13 @@ export function initOrigin() {
           c.moveTo(w * 0.1, -h / 2);
           c.lineTo(w * 0.3, -h * 0.85);
           c.stroke();
+        }, (c) => {
+          c.beginPath();
+          c.moveTo(-w * 0.4, -h / 2);
+          c.lineTo(w * 0.4, -h / 2);
+          c.lineTo(w * 0.5, h / 2);
+          c.lineTo(-w * 0.5, h / 2);
+          c.closePath();
         });
         // Physics trapezoid points down; flip so cups land upright more often.
         Body.setAngle(body, Math.PI + rand(-0.4, 0.4));
@@ -118,6 +138,9 @@ export function initOrigin() {
           c.textAlign = "center";
           c.textBaseline = "middle";
           c.fillText("eBay", w * 0.25, -h * 0.2);
+        }, (c) => {
+          c.beginPath();
+          c.rect(-w / 2, -h / 2, w, h);
         });
         break;
       }
@@ -132,7 +155,7 @@ export function initOrigin() {
           c.fillStyle = "#0e0d0b";
           roundRect(c, -w * 0.32, -h * 0.4, w * 0.3, w * 0.3, 3);
           c.fill();
-        });
+        }, (c) => roundRect(c, -w / 2, -h / 2, w, h, w * 0.2));
         break;
       }
       case "bike": {
@@ -163,11 +186,15 @@ export function initOrigin() {
       default: {
         const r = u * 0.45;
         body = Bodies.circle(x, y, r, { ...common, restitution: 0.6, density: 0.003 });
-        body.plugin.draw = (c) => {
+        body.plugin.draw = (c, b) => {
           c.fillStyle = "#e8c547";
           c.beginPath();
           c.arc(0, 0, r, 0, Math.PI * 2);
           c.fill();
+          clayLight(c, b, (cc) => {
+            cc.beginPath();
+            cc.arc(0, 0, r, 0, Math.PI * 2);
+          }, r * 2);
           c.strokeStyle = "#b8942a";
           c.lineWidth = 1.5;
           c.beginPath();
@@ -186,13 +213,33 @@ export function initOrigin() {
     world.add(body);
   }
 
-  // Use an AI sprite if one exists in assets.js, otherwise the procedural drawing.
-  function spriteOr(key, w, h, fallback) {
-    return (c) => {
+  // Use an AI sprite if one exists in assets.js, otherwise the procedural drawing
+  // plus "clay" lighting: a soft light from the top-left that stays fixed while the object spins.
+  function spriteOr(key, w, h, fallback, outline) {
+    return (c, body) => {
       const img = images[key];
-      if (img && img.complete && img.naturalWidth) c.drawImage(img, -w / 2, -h / 2, w, h);
-      else fallback(c);
+      if (img && img.complete && img.naturalWidth) {
+        c.drawImage(img, -w / 2, -h / 2, w, h);
+        return;
+      }
+      fallback(c);
+      if (outline) clayLight(c, body, outline, Math.max(w, h));
     };
+  }
+
+  function clayLight(c, body, outline, size) {
+    c.save();
+    c.shadowColor = "transparent"; // the light overlay shouldn't cast its own shadow
+    outline(c);
+    c.clip();
+    c.rotate(-body.angle); // back to world space: light always comes from the top-left
+    const g = c.createLinearGradient(-size * 0.6, -size * 0.6, size * 0.6, size * 0.6);
+    g.addColorStop(0, "rgba(255,255,255,0.32)");
+    g.addColorStop(0.45, "rgba(255,255,255,0)");
+    g.addColorStop(1, "rgba(0,0,0,0.35)");
+    c.fillStyle = g;
+    c.fillRect(-size, -size, size * 2, size * 2);
+    c.restore();
   }
 
   function setWave(i) {
