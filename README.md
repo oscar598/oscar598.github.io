@@ -26,6 +26,10 @@ Then open http://localhost:8080/ (add `?debug` to skip the intro countdown).
 | 08 | Next chapter | The visitor writes the cold email to Oscar; paper plane; opens their mail app | `js/scenes/next.js` |
 | 09 | Credits | Personalized: counts what *this* visitor did (letters thrown, cards knocked over…) | `js/scenes/credits.js` |
 
+## Also here
+
+- **Cram** (`/cram/`): a focused exam-cram tool. Drop in notes and get a timed, SAT-style run built only from your material. See `cram/README.md`.
+
 ## Everything around the scenes
 
 - **Rope timeline** (`core/rope.js`): a verlet-simulated string with a year tag; swings with scroll and your cursor.

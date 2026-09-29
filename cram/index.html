@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Cram</title>
+  <meta name="description" content="Drop in your notes. Get a timed, SAT-style cram run built only from your material.">
+  <meta name="theme-color" content="#f7f5f0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121210" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111'/%3E%3Cpath d='M20 44V20h8l8 14V20h8v24h-8l-8-14v14z' fill='%23ffd23f'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="cram.css">
+</head>
+<body>
+  <header class="top" id="top">
+    <a class="brand" href="./" aria-label="Cram home">Cram</a>
+    <div class="top-mid" id="top-mid"></div>
+    <div class="top-right">
+      <button class="icon-btn" id="sound-btn" type="button" aria-pressed="true" title="Sound (M)">
+        <span class="snd-on" aria-hidden="true">♪</span><span class="snd-off" aria-hidden="true">♪̸</span>
+        <span class="sr">Sound</span>
+      </button>
+    </div>
+  </header>
+  <main id="app" tabindex="-1"></main>
+  <div class="drop-veil" id="drop-veil" aria-hidden="true"><div>Drop to add</div></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <noscript><p style="padding:24px">Cram needs JavaScript.</p></noscript>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
