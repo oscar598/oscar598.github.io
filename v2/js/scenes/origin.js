@@ -93,7 +93,7 @@ export function initOrigin() {
         const w = u * 1.2;
         const h = u * 1.7;
         body = Bodies.trapezoid(x, y, w, h, 0.2, { ...common, density: 0.0012 });
-        body.plugin.draw = spriteOr("juice", w * 1.1, h * 1.2, (c) => {
+        body.plugin.draw = spriteOr("juice", h * 0.72, h * 1.28, (c) => {
           c.fillStyle = "#f2ede3";
           c.beginPath();
           c.moveTo(-w * 0.4, -h / 2);
@@ -117,7 +117,7 @@ export function initOrigin() {
           c.lineTo(w * 0.5, h / 2);
           c.lineTo(-w * 0.5, h / 2);
           c.closePath();
-        });
+        }, Math.PI); // the body is flipped so cups land upright; flip the photo to match
         // Physics trapezoid points down; flip so cups land upright more often.
         Body.setAngle(body, Math.PI + rand(-0.4, 0.4));
         break;
@@ -215,10 +215,11 @@ export function initOrigin() {
 
   // Use an AI sprite if one exists in assets.js, otherwise the procedural drawing
   // plus "clay" lighting: a soft light from the top-left that stays fixed while the object spins.
-  function spriteOr(key, w, h, fallback, outline) {
+  function spriteOr(key, w, h, fallback, outline, spriteRotation = 0) {
     return (c, body) => {
       const img = images[key];
       if (img && img.complete && img.naturalWidth) {
+        if (spriteRotation) c.rotate(spriteRotation);
         c.drawImage(img, -w / 2, -h / 2, w, h);
         return;
       }

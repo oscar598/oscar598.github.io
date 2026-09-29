@@ -1,7 +1,7 @@
 // Fills every [data-asset] slot from window.ASSETS (js/assets.js).
 // If there's no file yet, it draws a procedural placeholder so the layout never looks broken.
 
-import { esc } from "./util.js";
+import { esc, reduceMotion } from "./util.js";
 import { paintPlaceholder } from "./placeholders.js";
 
 export function initMedia() {
@@ -9,7 +9,7 @@ export function initMedia() {
   document.querySelectorAll("[data-asset]").forEach((slot) => {
     const key = slot.dataset.asset;
     const a = assets[key] || {};
-    if (a.video) {
+    if (a.video && !reduceMotion) {
       slot.innerHTML = `
         <video src="${esc(a.video)}" ${a.img ? `poster="${esc(a.img)}"` : ""} muted loop playsinline autoplay preload="metadata" aria-label="${esc(a.alt || "")}"></video>
         <span class="tag">placeholder · AI</span>`;
