@@ -1,0 +1,29 @@
+# OWN A CAR: pulls paid orders from Stripe into own-a-car/data/registry.json every 15 minutes,
+# which drives the live counter, the owners' wall and every buyer's key page. It also closes the
+# Payment Links automatically once presaleCloses passes.
+# Inert until the STRIPE_SECRET_KEY secret exists (Settings → Secrets and variables → Actions).
+# Scheduled runs only fire from the default branch.
+name: own-a-car sync
+on:
+  schedule: [{ cron: "*/15 * * * *" }]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: own-a-car-sync
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sync from Stripe
+        env:
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+        run: |
+          if [ -z "$STRIPE_SECRET_KEY" ]; then echo "No STRIPE_SECRET_KEY secret yet; skipping."; exit 0; fi
+          python3 own-a-car/tools/ops.py sync
+      - name: Commit registry
+        run: |
+          git config user.name "own-a-car bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add own-a-car/data/registry.json
+          git diff --cached --quiet || (git commit -m "own-a-car: sync registry" && git push)

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 100" role="img" aria-label="OWN A CAR key">
+  <defs>
+    <linearGradient id="brass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f3dc9a"/><stop offset=".48" stop-color="#c9a24a"/><stop offset="1" stop-color="#7a5a1c"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#brass)" fill-rule="evenodd" d="M50 12a38 38 0 1 1 0 76a38 38 0 1 1 0-76zm0 18a20 20 0 1 0 0 40a20 20 0 1 0 0-40z"/>
+  <path fill="url(#brass)" d="M86 41h10v-5h8v5h180l10 9l-10 9h-14v12h-11v-12h-12v17h-11v-17h-12v9h-11v-9h-110v5h-8v-5h-10z"/>
+</svg>

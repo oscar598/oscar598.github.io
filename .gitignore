@@ -2,3 +2,7 @@
 .claude/
 # private research notes, keep out of any public repo
 story/oscar-story-dossier.md
+
+# OWN A CAR: buyer names, emails and addresses. Never commit.
+own-a-car/ops/private/
+__pycache__/

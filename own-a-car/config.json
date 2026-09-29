@@ -1,0 +1,42 @@
+{
+  "brand": "OWN A CAR",
+  "siteUrl": "https://oscarludesign.com/own-a-car/",
+  "xHandle": "ownacar",
+  "contactEmail": "",
+  "discordUrl": "",
+
+  "car": {
+    "name": "Lamborghini Gallardo",
+    "spec": "2006–2008 Gallardo coupe, V10, ~40k miles",
+    "budgetUsd": 95000,
+    "weightKg": 1430,
+    "wrapAreaM2": 18
+  },
+
+  "priceUsd": 50,
+  "intlShippingUsd": 15,
+  "maxKeysPerOrder": 10,
+  "goalKeys": 6000,
+  "stretchGoals": [
+    { "keys": 6000, "car": "Gallardo", "note": "The goal. The project buys a Gallardo." },
+    { "keys": 14000, "car": "Huracán", "note": "The car is upgraded to a Huracán." },
+    { "keys": 24000, "car": "Aventador", "note": "The car is upgraded to an Aventador." }
+  ],
+
+  "presaleOpens": "2026-11-09T12:00:00-05:00",
+  "presaleCloses": "2026-12-09T23:59:59-05:00",
+  "shipWindow": "March–April 2027",
+
+  "perKeyBreakdownUsd": {
+    "Payment processing": 1.75,
+    "Key, box and certificate": 13.0,
+    "Shipping to your door": 6.0,
+    "Tax reserve": 8.8,
+    "The car fund": 20.45
+  },
+
+  "stripe": {
+    "us": { "paymentLinkId": "", "url": "" },
+    "intl": { "paymentLinkId": "", "url": "" }
+  }
+}

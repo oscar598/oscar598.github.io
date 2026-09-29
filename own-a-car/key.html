@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Your Key · OWN A CAR</title>
+  <meta name="description" content="A key to the car at the center of OWN A CAR.">
+  <meta property="og:title" content="I own a Lamborghini.">
+  <meta property="og:description" content="$50 buys a key. No limit on keys. Everyone who holds one owns it.">
+  <meta property="og:image" content="https://oscarludesign.com/own-a-car/brand/og.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="icon" href="brand/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="fonts/fonts.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="bar">
+    <a class="mark" href="./">OWN A CAR</a>
+    <nav class="nav mono"><a href="./#owners">Owners</a><a href="key.html">Track my key</a></nav>
+    <a class="chip" data-buy="us" href="#">Buy a key</a>
+  </header>
+
+  <main class="keypage">
+    <!-- Lookup: shown when the page has no ?o= or ?n= -->
+    <section id="lookup" class="band narrow" hidden>
+      <p class="kicker mono">Track my key</p>
+      <h1 class="h1-sm">Find your key.</h1>
+      <p class="dim">Your private tracking link is in your welcome email and was the page you landed on after checkout. You can also look up any key by its number.</p>
+      <form id="lookup-form" class="lookup">
+        <input id="lookup-n" type="number" min="1" inputmode="numeric" placeholder="Key number, e.g. 42" aria-label="Key number" required>
+        <button class="btn" type="submit">Look up</button>
+      </form>
+    </section>
+
+    <!-- Pending: they just paid; the registry syncs every 15 minutes. -->
+    <section id="pending" class="band narrow" hidden>
+      <p class="kicker mono">Payment received</p>
+      <h1 class="h1-sm">Welcome, owner.</h1>
+      <p>Your key number is being assigned. It appears here within 15 minutes, so <b>bookmark this page</b>: it's your private tracking link.</p>
+      <p class="dim">A receipt is already in your inbox. If the goal isn't reached, you're refunded in full, automatically.</p>
+      <div class="cta"><a class="btn discord" href="#" hidden>Join the owners' Discord</a></div>
+    </section>
+
+    <!-- The key: certificate + status + share. -->
+    <section id="owned" class="band" hidden>
+      <div class="keygrid">
+        <article class="cert-web" id="cert">
+          <div class="mark">OWN A CAR</div>
+          <p class="kicker mono">Certificate of ownership</p>
+          <p class="cert-h">You now own a car.</p>
+          <p class="cert-this">This certifies that</p>
+          <p class="cert-name" id="c-name">—</p>
+          <p class="cert-body">is a registered owner of the car at the center of <i>Own a Car</i>, alongside every other holder of a key.</p>
+          <p class="cert-key mono"><small>KEY Nº</small><span id="c-key">—</span></p>
+          <p class="cert-foot mono"><span id="c-date">—</span><span>Edition of ∞</span></p>
+        </article>
+
+        <div class="keyside">
+          <p class="kicker mono" id="k-private">Your key</p>
+          <h1 class="h1-sm" id="k-title">Key Nº —</h1>
+          <p class="dim" id="k-share">—</p>
+
+          <ol class="timeline" id="k-timeline"></ol>
+
+          <div class="cta cta--stack">
+            <a class="btn" id="k-post" href="#" target="_blank" rel="noopener">Post it on X</a>
+            <button class="btn btn--ghost" id="k-copy" type="button">Copy the public link</button>
+            <a class="btn btn--ghost discord" href="#" hidden>Owners' Discord</a>
+          </div>
+          <p class="fine" id="k-note"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="missing" class="band narrow" hidden>
+      <h1 class="h1-sm">No key with that number yet.</h1>
+      <p class="dim">Which means it could be yours.</p>
+      <div class="cta"><a class="btn" data-buy="us" href="#">Buy a key · $50</a></div>
+    </section>
+  </main>
+
+  <footer class="foot mono">
+    <span>OWN A CAR · An art project by <a href="/">Oscar Lu</a></span>
+    <span><a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a></span>
+    <span class="dim">Symbolic ownership of an artwork. No legal title, share or profit in any vehicle.</span>
+  </footer>
+
+  <script src="own.js"></script>
+  <script src="key.js"></script>
+</body>
+</html>

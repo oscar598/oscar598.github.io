@@ -3,77 +3,183 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Own a Car · Oscar Lu</title>
-  <meta name="description" content="An art project. $50 buys a key. Unlimited keys. Every key holder owns the car.">
-  <meta property="og:title" content="Own a Car">
-  <meta property="og:description" content="$50 buys a key. Unlimited keys. Every key holder owns the car.">
+  <title>OWN A CAR</title>
+  <meta name="description" content="$50 buys a key to a Lamborghini. No limit on keys. Everyone who holds one owns it. An art project by Oscar Lu.">
+  <meta property="og:title" content="You now own a car.">
+  <meta property="og:description" content="$50 buys a key to a Lamborghini. No limit on keys. Everyone who holds one owns it.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://oscarludesign.com/own-a-car/brand/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ownacar">
   <meta name="theme-color" content="#0a0a0a">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="brand/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="fonts/fonts.css">
   <link rel="stylesheet" href="style.css">
-  <script src="config.js"></script>
 </head>
 <body>
   <header class="bar">
     <a class="mark" href="./">OWN A CAR</a>
-    <span class="edition mono">Edition of ∞</span>
+    <nav class="nav mono">
+      <a href="#share">Your share</a>
+      <a href="#owners">Owners</a>
+      <a href="key.html">Track my key</a>
+    </nav>
+    <a class="chip" data-buy="us" href="#buy">Buy a key</a>
   </header>
 
   <main>
+    <!-- 01 · Hero. Video and poster are Runway renders; the gradient + key SVG stand in if they're missing. -->
     <section class="hero">
-      <svg class="key" viewBox="0 0 400 140" aria-hidden="true">
-        <defs>
-          <linearGradient id="brass" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#f3dc9a"/><stop offset=".5" stop-color="#c9a24a"/><stop offset="1" stop-color="#7a5a1c"/>
-          </linearGradient>
-        </defs>
-        <circle cx="70" cy="70" r="52" fill="none" stroke="url(#brass)" stroke-width="18"/>
-        <path d="M122 60 H372 V80 H352 V96 H336 V80 H318 V104 H302 V80 H284 V92 H270 V80 H122 Z" fill="url(#brass)"/>
-      </svg>
-      <h1>You now own a car.</h1>
-      <p class="lede">$50 buys a key. There is no limit on keys. Every key holder owns the same car.</p>
-      <div class="cta">
-        <a id="buy" class="btn" href="#" aria-disabled="true">Presale opens soon</a>
-        <p class="fine mono" id="cta-fine">All or nothing. If the goal isn't reached by the deadline, every key is refunded in full.</p>
+      <div class="hero-media media">
+        <video autoplay muted loop playsinline poster="assets/car.jpg" onerror="this.remove()">
+          <source src="assets/hero.mp4" type="video/mp4" onerror="this.parentElement.remove()">
+        </video>
+      </div>
+      <div class="hero-copy">
+        <p class="kicker mono">An art project by Oscar Lu · Edition of ∞</p>
+        <h1>You now own a car.</h1>
+        <p class="lede">$50 buys a key to a Lamborghini. There's no limit on keys. Everyone who holds one owns it.</p>
+        <div class="cta" id="buy">
+          <a class="btn" data-buy="us" href="#">Buy a key · $50</a>
+          <a class="btn btn--ghost" data-buy="intl" href="#">Outside the US · +$15 shipping</a>
+        </div>
+        <p class="fine">All or nothing: if the goal isn't reached by the deadline, every key is refunded in full, automatically.</p>
+      </div>
+      <dl class="ticker mono">
+        <div><dt>Keys sold</dt><dd id="t-keys">0</dd></div>
+        <div><dt>Goal</dt><dd id="t-goal">—</dd></div>
+        <div><dt>Each key owns</dt><dd id="t-grams">—</dd></div>
+        <div><dt id="t-days-label">Days left</dt><dd id="t-days">—</dd></div>
+      </dl>
+    </section>
+
+    <!-- 02 · The share calculator: the core joke and the core idea. -->
+    <section class="share band" id="share">
+      <p class="kicker mono">02 · Your share</p>
+      <h2>How much Lamborghini is $50?</h2>
+      <p class="big"><span id="s-grams">—</span></p>
+      <p class="sub" id="s-line">—</p>
+      <label class="slider">
+        <span class="mono">Drag to see it at <b id="s-owners">—</b> keys</span>
+        <input type="range" id="s-range" min="0" max="1000" value="0" aria-label="Number of owners">
+      </label>
+      <p class="note">The more people own it, the less of it each of them owns. That's the piece.</p>
+    </section>
+
+    <!-- 03 · Names on the car. -->
+    <section class="split band">
+      <figure class="media media--wide"><img src="assets/names.jpg" alt="The car wrapped in thousands of owners' names" loading="lazy" onerror="this.parentElement.classList.add('empty')"></figure>
+      <div>
+        <p class="kicker mono">03 · Proof of ownership</p>
+        <h2>Every owner's name goes on the car.</h2>
+        <p>When the presale closes, the car is wrapped, bumper to bumper, in the name of every owner. One name per key. The more keys, the smaller the names.</p>
+        <p class="stat">At <b id="n-owners">—</b> keys, each name is <b id="n-mm">—</b> tall.</p>
+        <p class="dim">Leave the name field blank at checkout and you're listed as your key number instead.</p>
       </div>
     </section>
 
-    <section class="meter" aria-label="Presale progress">
-      <div class="meter-row mono">
-        <span><b id="sold">0</b> keys</span>
-        <span>goal <b id="goal">—</b></span>
-        <span id="left">—</span>
+    <!-- 04 · How it works. -->
+    <section class="how band">
+      <p class="kicker mono">04 · How it works</p>
+      <div class="steps">
+        <article>
+          <figure class="media"><img src="assets/key.jpg" alt="The numbered brass key" loading="lazy" onerror="this.parentElement.classList.add('empty')"></figure>
+          <span class="n mono">01</span><h3>Buy a key</h3>
+          <p>$50. Name, email, shipping address. You get a numbered key and a private page to track it.</p>
+        </article>
+        <article>
+          <figure class="media"><img src="assets/crowd.jpg" alt="Owners holding their keys around the car" loading="lazy" onerror="this.parentElement.classList.add('empty')"></figure>
+          <span class="n mono">02</span><h3>We buy the car</h3>
+          <p>Hit the goal and the project buys a Lamborghini. Miss it and everyone is refunded, automatically.</p>
+        </article>
+        <article>
+          <figure class="media"><img src="assets/door.jpg" alt="The key's box on a doorstep" loading="lazy" onerror="this.parentElement.classList.add('empty')"></figure>
+          <span class="n mono">03</span><h3>It's at your door</h3>
+          <p>Your brass key, cast from the real one, boxed with a signed certificate of ownership.</p>
+        </article>
       </div>
-      <div class="track"><div class="fill" id="fill"></div></div>
     </section>
 
-    <section class="how">
-      <div><span class="n mono">01</span><h2>Buy a key</h2><p>$50. Name, email, shipping address. That's the whole form.</p></div>
-      <div><span class="n mono">02</span><h2>We buy the car</h2><p>If the presale hits its goal, the car is bought and titled to the project. If it doesn't, you get your money back.</p></div>
-      <div><span class="n mono">03</span><h2>Your key arrives</h2><p>Numbered, boxed, and shipped to you. You join the owners' Discord the day you buy.</p></div>
+    <!-- 05 · Goal and stretch goals. -->
+    <section class="goal band">
+      <p class="kicker mono">05 · The goal</p>
+      <h2 id="g-title">6,000 keys buys the car.</h2>
+      <div class="goalbar" id="g-bar"><div class="goalfill" id="g-fill"></div></div>
+      <ol class="stretch" id="g-stretch"></ol>
     </section>
 
-    <section class="statement">
-      <p>Ownership usually means one person, one title, one set of keys. This piece asks what happens when it means everyone. The more keys exist, the more people own the car, and the less any of them owns it.</p>
+    <!-- 06 · Open books. -->
+    <section class="books band">
+      <p class="kicker mono">06 · Open books</p>
+      <h2>Where your $50 goes.</h2>
+      <div class="stack" id="b-stack"></div>
+      <ul class="legend mono" id="b-legend"></ul>
+      <p class="dim">The car's receipt, title (redacted), insurance and every invoice get posted here when they exist. Any money left over after the car, keys and taxes is published and spent on the owners: the name wrap, owners' days and the car's upkeep.</p>
+    </section>
+
+    <!-- 07 · The object. -->
+    <section class="split split--rev band">
+      <figure class="media media--tall">
+        <video muted loop playsinline autoplay poster="assets/box.jpg" onerror="this.remove()"><source src="assets/unbox.mp4" type="video/mp4" onerror="this.parentElement.remove()"></video>
+        <img src="assets/box.jpg" alt="The open box with the brass key and certificate" loading="lazy" onerror="this.parentElement.classList.add('empty')">
+      </figure>
+      <div>
+        <p class="kicker mono">07 · What arrives</p>
+        <h2>The key.</h2>
+        <ul class="spec">
+          <li><span>Key</span>Solid cast brass, from a 3D scan of the car's real key. 70 g. Your number engraved on the bow.</li>
+          <li><span>Box</span>Rigid, soft-touch black, blind-debossed key, gold foil. It opens slowly.</li>
+          <li><span>Certificate</span>5 × 7 in cotton card, your name and key number, signed.</li>
+          <li><span>Page</span>Your key's private page: status, certificate and your name on the wall.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 08 · The owners' wall. -->
+    <section class="wall band" id="owners">
+      <p class="kicker mono">08 · The owners</p>
+      <h2><span id="w-count">0</span> keys. <span id="w-people">0</span> people. One car.</h2>
+      <ol class="names" id="w-names"><li class="dim">The first name on this wall could be yours.</li></ol>
+    </section>
+
+    <!-- 09 · Statement. -->
+    <section class="statement band">
+      <p>Ownership usually means one name on a title and one set of keys. This asks what it means when the keys are unlimited. Every key makes the car more owned and every owner less of an owner. At some number, a Lamborghini belongs to everybody, and to nobody.</p>
       <p class="sig">— Oscar Lu</p>
     </section>
 
-    <section class="faq">
+    <!-- 10 · FAQ. -->
+    <section class="faq band" id="faq">
       <h2>Straight answers</h2>
-      <details><summary>Do I legally own part of the car?</summary><p>No. You're buying an artwork: a numbered key and your place in the piece. The car's title stays with the project. Keys carry no share of the car, no resale proceeds and no right to drive it.</p></details>
-      <details><summary>Is this an investment?</summary><p>No. There's no return, no dividend and no promise that the key will be worth anything later. Buy it because you want the key.</p></details>
-      <details><summary>Does the key start the car?</summary><p>No. It's cast from the real key but it's a sculpture, not a working key.</p></details>
-      <details><summary>What if the goal isn't reached?</summary><p>Every buyer is refunded in full to their original payment method within 10 days of the deadline.</p></details>
-      <details><summary>When does it ship?</summary><p id="ship">After the presale closes and the car is bought.</p></details>
+      <details><summary>Do I actually own the car?</summary><p>You own a numbered key, your certificate, your name on the car and your place in the piece: ownership as an artwork. The legal title stays with the project, because a DMV title can't hold thousands of names and because a legal share would make this an investment, which it isn't.</p></details>
+      <details><summary>Is this an investment?</summary><p>No. There is no return, no dividend, no resale payout and no promise that a key will be worth anything later. Buy one because you want to be in it.</p></details>
+      <details><summary>Is it a raffle? Does one key start the car?</summary><p>No. Every buyer gets exactly the same thing. Nothing is random. The keys are sculptures and don't start anything.</p></details>
+      <details><summary>What if the goal isn't reached?</summary><p>Every order, including shipping and tax, is refunded in full to the card you paid with, within 10 days of the deadline. You don't need to do anything.</p></details>
+      <details><summary>Can I drive it?</summary><p>No. Owners' days, where owners can see the car and sit in it, are planned once it's bought. Owners vote in Discord on where they happen.</p></details>
+      <details><summary>What happens to the car after?</summary><p>It's never sold for profit. It's kept, shown and toured as the artwork. If it ever has to leave the project, it will be donated, and owners will be told first.</p></details>
+      <details><summary>When does my key arrive?</summary><p id="f-ship">After the presale closes and the car is bought.</p></details>
+      <details><summary>Can I buy more than one?</summary><p>Up to 10 per order. Each is its own numbered key.</p></details>
+      <details><summary>Is this affiliated with Lamborghini?</summary><p>No. The car is the subject of the artwork. The project isn't affiliated with, sponsored by or endorsed by Automobili Lamborghini.</p></details>
+    </section>
+
+    <section class="closer band">
+      <h2>You now own a car.</h2>
+      <div class="cta">
+        <a class="btn" data-buy="us" href="#">Buy a key · $50</a>
+        <a class="btn btn--ghost" href="https://x.com/ownacar" id="follow">Follow @ownacar for the drop</a>
+      </div>
     </section>
   </main>
 
   <footer class="foot mono">
-    <a href="terms.html">Terms of sale</a>
-    <span>An art project by <a href="/">Oscar Lu</a>. Not affiliated with or endorsed by any car manufacturer.</span>
+    <span>OWN A CAR · An art project by <a href="/">Oscar Lu</a></span>
+    <span><a href="terms.html">Terms</a> · <a href="privacy.html">Privacy</a> · <a href="key.html">Track my key</a> · <a href="https://x.com/ownacar">X</a></span>
+    <span class="dim">Not affiliated with, sponsored by or endorsed by Automobili Lamborghini S.p.A.</span>
   </footer>
 
+  <script src="own.js"></script>
   <script src="main.js"></script>
 </body>
 </html>

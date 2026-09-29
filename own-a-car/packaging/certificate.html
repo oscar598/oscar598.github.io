@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Certificate of Ownership</title>
+<link rel="stylesheet" href="../fonts/fonts.css">
+<style>
+  /* Print spec: 5 × 7 in on 350 gsm cotton, gold foil on the seal and the rule lines. Print at 100%, no margins. */
+  @page { size: 5in 7in; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #d9d4ca; font-family: "Fraunces", Georgia, serif; }
+  .cert { width: 5in; height: 7in; margin: 24px auto; background: #f4efe6; color: #151310; padding: .5in .45in;
+          display: flex; flex-direction: column; align-items: center; text-align: center; position: relative;
+          page-break-after: always; box-shadow: 0 10px 40px rgba(0,0,0,.2); }
+  .cert::before { content: ""; position: absolute; inset: .18in; border: 1px solid #b38b3a; }
+  .cert::after { content: ""; position: absolute; inset: .23in; border: .5px solid #b38b3a; }
+  .mark { font: 900 13px/1 "Fraunces", serif; letter-spacing: .32em; margin-top: 6px; }
+  .kicker { font: 500 8.5px/1 "JetBrains Mono", monospace; letter-spacing: .24em; text-transform: uppercase; color: #6d665b; margin-top: 30px; }
+  h1 { font: 300 30px/1.1 "Fraunces", serif; margin: 12px 0 0; }
+  .this { font: italic 400 12px/1.5 "Fraunces", serif; color: #6d665b; margin-top: 26px; }
+  .name { font: 900 26px/1.15 "Fraunces", serif; margin-top: 8px; max-width: 3.8in; overflow-wrap: anywhere; }
+  .body { font: 400 11.5px/1.55 "Fraunces", serif; max-width: 3.5in; margin-top: 16px; }
+  .key { font: 500 40px/1 "JetBrains Mono", monospace; letter-spacing: .04em; margin-top: auto; }
+  .key small { display: block; font-size: 8.5px; letter-spacing: .24em; color: #6d665b; margin-bottom: 6px; }
+  .foot { display: flex; justify-content: space-between; align-items: flex-end; width: 100%; margin-top: 22px; }
+  .sig { font: italic 400 11px "Fraunces", serif; text-align: left; border-top: .5px solid #151310; padding-top: 4px; width: 1.5in; }
+  .date { font: 500 8.5px "JetBrains Mono", monospace; letter-spacing: .14em; text-transform: uppercase; text-align: right; }
+  .seal { width: .8in; height: .8in; }
+  .fine { font: 400 6.5px/1.4 "JetBrains Mono", monospace; color: #8d877c; margin-top: 12px; max-width: 3.8in; }
+  @media print { body { background: none; } .cert { margin: 0; box-shadow: none; } }
+</style>
+</head>
+<body>
+<!--CERT-->
+<section class="cert">
+  <div class="mark">OWN A CAR</div>
+  <div class="kicker">Certificate of Ownership</div>
+  <h1>You now own a car.</h1>
+  <p class="this">This certifies that</p>
+  <div class="name">{{NAME}}</div>
+  <p class="body">is a registered owner of the car at the center of <i>Own a Car</i>, alongside every other holder of a key. Their name is written on it.</p>
+  <div class="key"><small>KEY Nº</small>{{KEY}}</div>
+  <div class="foot">
+    <div class="sig">Oscar Lu, artist</div>
+    <svg class="seal" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="46" fill="#c9a24a"/><circle cx="50" cy="50" r="38" fill="none" stroke="#f4efe6" stroke-width="1"/>
+      <circle cx="42" cy="50" r="10" fill="none" stroke="#f4efe6" stroke-width="3.5"/>
+      <path d="M52 48.5h24v3h-3v4h-3v-4h-3v5h-3v-5h-12z" fill="#f4efe6"/>
+    </svg>
+    <div class="date">{{DATE}}<br>Edition of ∞</div>
+  </div>
+  <p class="fine">A certificate of symbolic ownership of an artwork. It confers no legal title, share, profit or right of use in any vehicle. Not affiliated with any manufacturer.</p>
+</section>
+<!--/CERT-->
+</body>
+</html>
