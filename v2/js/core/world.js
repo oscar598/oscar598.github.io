@@ -178,6 +178,7 @@ export function createWorld(canvas, opts = {}) {
     opts.onGrab?.(body, api);
   }
   function onMove(e) {
+    if (!running && !drag) return; // off-screen worlds don't need the pointer (saves layout reads)
     const p = localPoint(e);
     pointer.vx = p.x - pointer.x;
     pointer.vy = p.y - pointer.y;

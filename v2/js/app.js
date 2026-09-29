@@ -21,6 +21,10 @@ import { initResumeDrop } from "./core/resume-drop.js";
 const { ScrollTrigger } = window;
 const site = window.SITE;
 
+// Pinned scenes change the page height as they're built; a browser-restored scroll position
+// would land in the wrong scene. Always start at the top (or at a #deep-link).
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
 async function boot() {
   initSmooth();
   initCursor();
@@ -131,6 +135,8 @@ async function boot() {
     })
   );
   ScrollTrigger.refresh();
+  // Web fonts change text height; recompute every trigger once they've loaded.
+  document.fonts?.ready.then(() => ScrollTrigger.refresh());
 
   await runLeader();
   scenes.open?.begin();
@@ -138,7 +144,7 @@ async function boot() {
   // Deep links like v2/#farm (scenes are built by JS, so jump after layout settles).
   if (location.hash) {
     const el = document.querySelector(location.hash);
-    if (el) setTimeout(() => el.scrollIntoView(), 50);
+    if (el) setTimeout(() => cutTo(el), 60);
   }
 }
 
