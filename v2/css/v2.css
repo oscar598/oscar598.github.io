@@ -91,6 +91,23 @@ button { font: inherit; color: inherit; }
   100% { transform: translate(0, 0); }
 }
 
+.scratches {
+  position: fixed;
+  inset: 0;
+  z-index: 61;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.scratches i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(242, 237, 227, 0.5);
+}
+body.low-power .grain { animation: none; }
+
 .chrome {
   position: fixed;
   top: 0;

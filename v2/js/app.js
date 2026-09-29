@@ -15,6 +15,7 @@ import { initCommentary } from "./core/commentary.js";
 import { initKeys } from "./core/keys.js";
 import { initTldr } from "./core/tldr.js";
 import { initTab } from "./core/tab.js";
+import { initFilm } from "./core/film.js";
 
 const { ScrollTrigger } = window;
 const site = window.SITE;
@@ -106,6 +107,17 @@ async function boot() {
   const tldr = initTldr(site);
   initKeys({ commentary, tldr });
   initTab();
+  initFilm();
+
+  // Yosemite strip drifts slower than the page (parallax).
+  const strip = document.querySelector(".now-media .media");
+  if (strip && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.gsap.fromTo(
+      strip.firstElementChild,
+      { yPercent: -8, scale: 1.15 },
+      { yPercent: 8, scale: 1.15, ease: "none", scrollTrigger: { trigger: strip, start: "top bottom", end: "bottom top", scrub: true } }
+    );
+  }
 
   // In-page links (#open etc.) use the film cut instead of a long scroll.
   document.querySelectorAll('a[href^="#"]').forEach((a) =>

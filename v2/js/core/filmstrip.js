@@ -2,6 +2,7 @@
 // its bottom bar fills as you scroll through that scene. Click a frame to jump.
 
 import { cutTo } from "./smooth.js";
+import { sound } from "./sound.js";
 
 const { ScrollTrigger, gsap } = window;
 
@@ -16,7 +17,10 @@ export function initFilmstrip() {
     btn.setAttribute("aria-label", `Go to ${scene.dataset.label}`);
     btn.innerHTML = `<span>${String(i).padStart(2, "0")}</span><i class="frame-fill"></i><em class="frame-tip mono">${scene.dataset.label}</em>`;
     btn.addEventListener("click", () => cutTo(scene));
-    btn.addEventListener("pointerenter", () => gsap.to(btn.querySelector(".frame-tip"), { opacity: 1, y: 0, duration: 0.2 }));
+    btn.addEventListener("pointerenter", () => {
+      sound.tick();
+      gsap.to(btn.querySelector(".frame-tip"), { opacity: 1, y: 0, duration: 0.2 });
+    });
     btn.addEventListener("pointerleave", () => gsap.to(btn.querySelector(".frame-tip"), { opacity: 0, y: 4, duration: 0.2 }));
     strip.appendChild(btn);
 

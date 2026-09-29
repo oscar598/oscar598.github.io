@@ -157,9 +157,11 @@ export async function initSpark() {
     const r2 = 110 * 110;
     ctx.clearRect(0, 0, w, h);
     ctx.fillStyle = "#f2ede3";
+    // Low-power mode (slow machine detected): simulate every other particle.
+    const stride = document.body.classList.contains("low-power") ? 2 : 1;
     for (let pass = 0; pass < 2; pass++) {
       ctx.fillStyle = pass ? "#ff4b2b" : "rgba(242,237,227,0.9)";
-      for (let i = 0; i < count; i++) {
+      for (let i = 0; i < count; i += stride) {
         if (hot[i] !== pass) continue;
         const dx = xs[i] - mouse.x;
         const dy = ys[i] - mouse.y;
