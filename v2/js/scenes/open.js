@@ -198,6 +198,15 @@ export async function initOpen(site) {
   // Double-click / double-tap: re-drop everything.
   canvas.addEventListener("dblclick", drop);
 
+  // "throw them" button: flings every letter (works for keyboard and touch users too).
+  document.getElementById("fling")?.addEventListener("click", () => {
+    letterBodies.forEach((b) => {
+      Body.setVelocity(b, { x: rand(-14, 14), y: rand(-26, -16) });
+      Body.setAngularVelocity(b, rand(-0.4, 0.4));
+    });
+    stats.letters += letterBodies.length;
+  });
+
   // Acrostic: every letter hides a chapter. Hover (or tap) a letter to read it.
   const FACTS = {
     O: "Orange juice stand, age 8",

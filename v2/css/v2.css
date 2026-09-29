@@ -388,6 +388,18 @@ body.has-cursor .cursor { display: grid; place-items: center; }
 }
 .open-tagline em { font-style: italic; color: var(--accent); }
 .hint { font-family: var(--mono); font-size: 12px; color: var(--muted); margin: 0; }
+.open-copy .hint { pointer-events: auto; }
+.hint-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--paper);
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
 .letter-tip {
   position: absolute;
   left: 0;

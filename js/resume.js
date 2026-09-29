@@ -35,6 +35,11 @@ const links = p.links
   .map((link) => ` · <a href="${esc(link.url)}">${esc(link.label)}</a>`)
   .join("");
 
+// Came here from v2? Send "← Watch the story" back there instead of v1.
+if (document.referrer.includes("/v2/")) {
+  document.getElementById("back-link")?.setAttribute("href", "v2/");
+}
+
 document.getElementById("resume").innerHTML = `
   <header>
     <h1>${esc(p.name)}</h1>

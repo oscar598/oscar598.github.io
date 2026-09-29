@@ -51,6 +51,9 @@ export function createWorld(canvas, opts = {}) {
     sizeFrom = null, // element whose size defines the world (defaults to canvas)
   } = opts;
 
+  // Physics canvases are decorative; the story text sits next to them in real HTML.
+  if (!canvas.hasAttribute("role")) canvas.setAttribute("aria-hidden", "true");
+
   const engine = Engine.create({ enableSleeping: false });
   engine.positionIterations = 8;
   engine.velocityIterations = 6;

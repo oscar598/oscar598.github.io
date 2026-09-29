@@ -1,7 +1,7 @@
 // v2 entry point. Wires global chrome (smooth scroll, cursor, rope, film strip, sound, easter eggs)
 // and boots each scene. Scenes are loaded independently, so one failing never blanks the page.
 
-import { initSmooth } from "./core/smooth.js";
+import { initSmooth, cutTo } from "./core/smooth.js";
 import { initCursor } from "./core/cursor.js";
 import { initRope } from "./core/rope.js";
 import { runLeader } from "./core/leader.js";
@@ -106,6 +106,16 @@ async function boot() {
   const tldr = initTldr(site);
   initKeys({ commentary, tldr });
   initTab();
+
+  // In-page links (#open etc.) use the film cut instead of a long scroll.
+  document.querySelectorAll('a[href^="#"]').forEach((a) =>
+    a.addEventListener("click", (e) => {
+      const target = document.querySelector(a.getAttribute("href"));
+      if (!target) return;
+      e.preventDefault();
+      cutTo(target);
+    })
+  );
   ScrollTrigger.refresh();
 
   await runLeader();
