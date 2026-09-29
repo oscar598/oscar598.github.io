@@ -21,6 +21,11 @@ export async function initOpen(site) {
 
   const letters = "OSCARLU".split("");
   let letterBodies = [];
+  let schedule = []; // [{ at: simulation ms, fn }]
+  const later = (ms, fn) => {
+    schedule.push({ at: world.engine.timing.timestamp + ms, fn });
+    schedule.sort((a, b) => a.at - b.at);
+  };
   let fontSize = 100;
 
   const world = createWorld(canvas, {
@@ -37,6 +42,9 @@ export async function initOpen(site) {
       ctx.stroke();
     },
     onStep(api) {
+      // Drops are scheduled on simulation time, so they stay in order even if the tab was in the background.
+      const now = api.engine.timing.timestamp;
+      while (schedule.length && schedule[0].at <= now) schedule.shift().fn();
       // Scroll velocity kicks the letters (feels like the page is shaking them).
       const v = scrollState.velocity;
       if (Math.abs(v) > 18) {
@@ -120,42 +128,54 @@ export async function initOpen(site) {
 
   let generation = 0;
   function drop() {
-    const gen = ++generation; // cancels pending timers from an earlier drop
+    ++generation;
+    schedule = []; // cancel drops still pending from an earlier run
     letterBodies.forEach((b) => world.remove(b));
     letterBodies = [];
     const w = world.w;
     droppedAtWidth = w;
-    fontSize = Math.max(56, Math.min(w / 6, world.h / 3, 230));
+    // Narrow screens stack the name in two rows (OSCAR, then LU lands on top) so it can be bigger.
+    const twoRows = w < 600;
+    fontSize = twoRows ? Math.max(56, Math.min(w / 4.7, world.h / 4)) : Math.max(56, Math.min(w / 6, world.h / 3, 230));
     // Lay the letters out so they land reading "OSCAR LU" (then they're yours to wreck).
     const ctx = world.ctx;
     ctx.font = `900 ${fontSize}px Fraunces, Georgia, serif`;
     const widths = letters.map((ch) => ctx.measureText(ch).width * 0.94);
     const gap = fontSize * 0.04;
     const wordGap = fontSize * 0.45; // space between OSCAR and LU
-    const total = widths.reduce((a, b) => a + b, 0) + gap * (letters.length - 1) + wordGap;
-    let cursorX = Math.max(10, (w - total) / 2);
-    const xs = widths.map((bw, i) => {
-      const x = cursorX + bw / 2;
-      cursorX += bw + gap + (i === 4 ? wordGap : 0);
-      return x;
-    });
+    const rowWidth = (from, to) => widths.slice(from, to).reduce((a, b) => a + b, 0) + gap * (to - from - 1);
+    const xs = [];
+    if (twoRows) {
+      [[0, 5], [5, 7]].forEach(([from, to]) => {
+        let cx = Math.max(6, (w - rowWidth(from, to)) / 2);
+        for (let i = from; i < to; i++) {
+          xs[i] = cx + widths[i] / 2;
+          cx += widths[i] + gap;
+        }
+      });
+    } else {
+      let cx = Math.max(10, (w - rowWidth(0, 7) - wordGap) / 2);
+      widths.forEach((bw, i) => {
+        xs[i] = cx + bw / 2;
+        cx += bw + gap + (i === 4 ? wordGap : 0);
+      });
+    }
     letters.forEach((ch, i) => {
       const x = xs[i];
-      const delay = reduceMotion ? 0 : 250 + i * 110;
-      setTimeout(() => {
-        if (gen !== generation) return;
+      // In two-row mode LU waits for OSCAR to land, then drops onto it.
+      const delay = reduceMotion ? 0 : 250 + i * 110 + (twoRows && i >= 5 ? 900 : 0);
+      later(delay, () => {
         const b = makeLetter(ch, x, reduceMotion ? world.h - 78 - fontSize : -fontSize);
         letterBodies.push(b);
         world.add(b);
-      }, delay);
+      });
     });
-    setTimeout(() => {
-      if (gen !== generation) return;
+    later(reduceMotion ? 0 : twoRows ? 2600 : 1600, () => {
       const ball = makeBall(w * 0.85, -200);
       Body.setVelocity(ball, { x: -6, y: 0 });
       letterBodies.push(ball);
       world.add(ball);
-    }, reduceMotion ? 0 : 1600);
+    });
   }
 
   // Start the drop once the leader is gone / the scene is visible.

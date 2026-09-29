@@ -13,6 +13,7 @@ import { initEggs } from "./core/eggs.js";
 import { initTilt } from "./core/tilt.js";
 import { initCommentary } from "./core/commentary.js";
 import { initKeys } from "./core/keys.js";
+import { initTldr } from "./core/tldr.js";
 
 const { ScrollTrigger } = window;
 const site = window.SITE;
@@ -95,7 +96,8 @@ async function boot() {
   initEggs(scenes);
   initTilt();
   const commentary = initCommentary();
-  initKeys({ commentary });
+  const tldr = initTldr(site);
+  initKeys({ commentary, tldr });
   ScrollTrigger.refresh();
 
   await runLeader();

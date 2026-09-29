@@ -27,6 +27,12 @@ export function setTilt(x, y) {
 export function allWorlds() {
   return worlds;
 }
+// Calm mode: every world stays frozen (visibility won't restart it).
+let calm = false;
+export function setCalm(on) {
+  calm = on;
+  worlds.forEach((w) => (on ? w.stop() : w.start()));
+}
 
 export function createWorld(canvas, opts = {}) {
   const {
@@ -241,7 +247,7 @@ export function createWorld(canvas, opts = {}) {
   }
 
   function start() {
-    if (running) return;
+    if (running || calm) return;
     running = true;
     last = 0;
     acc = 0;

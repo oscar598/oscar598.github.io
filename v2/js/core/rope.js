@@ -21,8 +21,9 @@ export function initRope() {
 
   function build() {
     ({ ctx, w, h } = fitCanvas(canvas));
-    anchorX = w < 100 ? 30 : 46;
-    const length = Math.min(h * 0.42, 360);
+    anchorX = w < 100 ? 64 : 46;
+    // Phones: a short rope so the tag hangs just under the logo instead of across the content.
+    const length = window.innerWidth < 860 ? 44 : Math.min(h * 0.42, 360);
     segLen = length / SEGMENTS;
     points = [];
     for (let i = 0; i <= SEGMENTS; i++) {

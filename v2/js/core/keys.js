@@ -6,7 +6,7 @@
 import { scrollTo } from "./smooth.js";
 import { toast } from "./util.js";
 
-export function initKeys({ commentary }) {
+export function initKeys({ commentary, tldr }) {
   const scenes = () => [...document.querySelectorAll(".scene")];
 
   function currentIndex() {
@@ -27,6 +27,7 @@ export function initKeys({ commentary }) {
       <dl>
         <dt>J / K</dt><dd>next / previous chapter</dd>
         <dt>C</dt><dd>director's commentary</dd>
+        <dt>T</dt><dd>the 20-second version</dd>
         <dt>G</dt><dd>zero gravity</dd>
         <dt>↑↑↓↓←→←→BA</dt><dd>you know what this does</dd>
         <dt>type "harvard"</dt><dd>go crimson</dd>
@@ -44,6 +45,7 @@ export function initKeys({ commentary }) {
     j: () => scrollTo(scenes()[Math.min(currentIndex() + 1, scenes().length - 1)]),
     k: () => scrollTo(scenes()[Math.max(currentIndex() - 1, 0)]),
     c: () => commentary?.toggle(),
+    t: () => tldr?.open(),
   };
 
   window.addEventListener("keydown", (e) => {
@@ -59,6 +61,6 @@ export function initKeys({ commentary }) {
     else if (k === "escape") overlay.classList.remove("is-on");
   });
 
-  // First-time hint
-  setTimeout(() => toast("press ? for shortcuts", 2600), 6000);
+  // First-time hint (keyboards only)
+  if (!window.matchMedia("(pointer: coarse)").matches) setTimeout(() => toast("press ? for shortcuts", 2600), 6000);
 }
