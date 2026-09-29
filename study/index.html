@@ -89,7 +89,7 @@ button:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px 
 .boss-tag { font-family: var(--font-display); color: #b8452a; letter-spacing: 0.06em; }
 .q { font-size: var(--step-1); font-weight: 700; line-height: 1.35; margin: 10px 0 16px; text-wrap: balance; }
 .opts { display: grid; gap: 8px; }
-.opt { display: grid; grid-template-columns: 2rem 1fr; gap: 10px; align-items: center; text-align: left; background: #fffaf0; border: 2px solid #ddd3bb; border-radius: 10px; padding: 10px 12px; color: var(--ink); transition: border-color 0.15s, background 0.15s, transform 0.1s; }
+.opt { display: grid; grid-template-columns: 2rem 1fr auto; gap: 10px; align-items: center; text-align: left; background: #fffaf0; border: 2px solid #ddd3bb; border-radius: 10px; padding: 10px 12px; color: var(--ink); transition: border-color 0.15s, background 0.15s, transform 0.1s; }
 .opt:hover:not(:disabled) { border-color: var(--ink-soft); }
 .opt:active:not(:disabled) { transform: scale(0.99); }
 .opt .key { font-family: var(--font-num); font-weight: 600; font-size: var(--step--1); width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; background: #ece3cc; color: var(--ink-soft); }
@@ -101,6 +101,26 @@ button:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px 
 .opt:disabled { cursor: default; }
 .source { margin-top: 12px; font-size: var(--step--1); color: var(--ink-soft); }
 .source q { font-style: italic; }
+
+/* Misses: a correction slip tears out from the wrong pick; a marker (IOU chip) goes to the tray */
+.opt.correct .ans-tag { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: #2f8a52; font-weight: 700; }
+.slip { position: relative; margin: -6px 8px 4px 34px; background: #fbe6de; color: var(--ink); border: 1px dashed #c98a7a; border-top: 0; border-radius: 0 0 8px 8px; padding: 10px 14px 12px; transform-origin: top; animation: slipout 0.4s cubic-bezier(.2,1.2,.4,1); box-shadow: 0 6px 12px rgba(0,0,0,0.12); }
+.slip::before { content: ""; position: absolute; left: -1px; right: -1px; top: -5px; height: 6px; background: radial-gradient(circle at 5px -1px, transparent 5px, #fbe6de 5.5px) 0 0 / 10px 6px repeat-x; }
+.slip small { display: block; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: #9b3b2a; font-weight: 700; margin-bottom: 2px; }
+.slip p { margin: 0; font-size: 0.95rem; line-height: 1.4; }
+.stamp { position: absolute; right: 10px; top: -14px; font-family: var(--font-display); font-size: 0.72rem; letter-spacing: 0.06em; color: #b8392f; border: 2px solid #b8392f; border-radius: 4px; padding: 1px 6px; background: #fbe6de; transform: rotate(6deg); animation: stamp 0.35s 0.25s both cubic-bezier(.3,1.8,.5,1); }
+@keyframes slipout { from { transform: scaleY(0); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes stamp { from { transform: rotate(6deg) scale(2.2); opacity: 0; } to { transform: rotate(6deg) scale(1); opacity: 1; } }
+.markers { display: flex; gap: 4px; align-items: center; font-size: var(--step--1); color: var(--sage); }
+.markers[data-n="0"] { visibility: hidden; }
+.mk, .marker-fly { width: 18px; height: 18px; border-radius: 50%; background: var(--brass); border: 3px dashed var(--rail); box-shadow: 0 0 0 1px var(--brass); }
+.marker-fly { position: fixed; z-index: 16; width: 34px; height: 34px; border-width: 5px; transition: transform 0.7s cubic-bezier(.5,-0.3,.4,1), opacity 0.2s 0.6s; pointer-events: none; }
+.card.redeem { box-shadow: 0 0 0 3px var(--brass), 0 18px 40px rgba(0,0,0,0.4); }
+.redeem-tag { font-family: var(--font-display); color: #8a6414; letter-spacing: 0.06em; }
+.pip.redeem { background: transparent; border: 1px dashed var(--brass); height: 4px; }
+.pip.redeem.right { background: var(--brass); }
+.pip.redeem.wrong { opacity: 0.5; }
+.pip.redeem.now { background: var(--brass-dim); }
 
 /* Bets */
 .bet { display: flex; flex-direction: column; gap: 10px; align-items: center; }
@@ -208,6 +228,7 @@ button:focus-visible, input:focus-visible, summary:focus-visible { outline: 3px 
   <header class="hud">
     <div class="brand"><b>Recall Table</b><span>Sample deck: BIO 110, Unit 3 notes (fake questions for playtesting)</span></div>
     <div class="hud-right">
+      <span class="markers" id="markers" data-n="0" title="Markers: questions you owe. Each comes back once so you can win your bet back."></span>
       <button class="icon-btn" id="soundBtn" aria-pressed="true">Sound on</button>
     </div>
     <div class="meters">
@@ -322,8 +343,8 @@ function newRound() {
     ...it,
     opts: shuffle([{ text: it.a, ok: true }].concat(it.wrong.map(([text, note]) => ({ text, note, ok: false })))),
   }));
-  S = { items, i: 0, score: 0, shown: 0, streak: 0, best: 0, crits: 0, results: [], phase: "answer", pick: null };
-  renderPips(); renderCombo(); setScore(0, true);
+  S = { items, i: 0, score: 0, shown: 0, streak: 0, best: 0, crits: 0, results: [], phase: "answer", pick: null, shownAt: 0 };
+  renderPips(); renderCombo(); renderMarkers(); setScore(0, true);
   renderQuestion();
 }
 
@@ -332,8 +353,14 @@ function renderPips() {
   $("pips").innerHTML = S.items.map((it, k) => {
     const r = S.results[k];
     const cls = r ? (r.correct ? "right" : "wrong") : k === S.i ? "now" : "";
-    return `<div class="pip ${cls} ${it.boss ? "boss" : ""}"></div>`;
+    return `<div class="pip ${cls} ${it.boss ? "boss" : ""} ${it.redeem ? "redeem" : ""}"></div>`;
   }).join("") + `<span class="pip-label">BOSS</span>`;
+}
+function renderMarkers() {
+  const n = S.items.filter((it, k) => it.redeem && !S.results[k]).length;
+  const el = $("markers");
+  el.dataset.n = n;
+  el.innerHTML = n ? `${'<i class="mk"></i>'.repeat(n)}<span>owed</span>` : "";
 }
 function renderCombo() {
   const m = multFor(S.streak);
@@ -363,8 +390,8 @@ function renderQuestion() {
   const it = S.items[S.i];
   S.phase = "answer"; S.pick = null;
   stage.innerHTML = `
-    <article class="card enter ${it.boss ? "boss" : ""}" id="card">
-      <div class="card-top"><span>Question ${S.i + 1} of ${S.items.length}</span>${it.boss ? '<span class="boss-tag">BOSS · points ×2</span>' : "<span>Bronze · multiple choice</span>"}</div>
+    <article class="card enter ${it.boss ? "boss" : ""} ${it.redeem ? "redeem" : ""}" id="card">
+      <div class="card-top"><span>${it.redeem ? "Marker comes due" : `Question ${S.items.slice(0, S.i + 1).filter((x) => !x.redeem).length} of ${S.items.filter((x) => !x.redeem).length}`}</span>${it.boss ? '<span class="boss-tag">BOSS · points ×2</span>' : it.redeem ? `<span class="redeem-tag">REDEMPTION${it.lost ? ` · win back ${it.lost}` : ""}</span>` : "<span>Bronze · multiple choice</span>"}</div>
       <div class="q">${esc(it.q)}</div>
       <div class="opts">${it.opts.map((o, k) => `<button class="opt" data-k="${k}"><span class="key">${"ABCD"[k]}</span><span>${esc(o.text)}</span></button>`).join("")}</div>
       <div class="source">Source: Unit 3 notes, p. ${it.page}</div>
@@ -415,43 +442,75 @@ function resolve(betKey) {
     if (mult > 1) parts.push(`<span class="${mult === 4 ? "fire" : ""}">×${mult} combo</span>`);
     if (crit) { parts.push(`<span class="crit">×3 crit</span>`); S.crits++; }
     if (it.boss) parts.push(`<span>×2 boss</span>`);
+    if (it.redeem && it.lost) { gain += it.lost; parts.push(`<span class="crit">+${it.lost} marker paid back</span>`); }
   } else {
     S.streak = 0;
     gain = -bet.lose;
+  }
+  // A first-attempt miss (not the boss) comes back 3 questions later, always before the boss.
+  const owe = !correct && !it.redeem && !it.boss;
+  if (owe) {
+    const bossAt = S.items.length - 1;
+    S.items.splice(Math.min(S.i + 3, bossAt), 0, { ...it, redeem: true, lost: bet.lose, opts: shuffle(it.opts) });
   }
   S.results[S.i] = { item: it, pick: opt, correct, bet: betKey, gain, crit };
   setScore(S.score + gain);
   renderCombo(); renderPips();
 
   const quote = `<div class="note">Source: Unit 3 notes, p. ${it.page}: <q>${esc(it.quote)}</q></div>`;
+  const nextBtn = `<button class="next" id="next">${S.i + 1 < S.items.length ? "Next" : "See rank"}<kbd>Enter</kbd></button>`;
   let body;
   if (correct) {
     const guessNote = betKey === "guess" ? `<p class="note">Right, but you said you were guessing. In the full app a guessed answer earns points but does not move the concept up a tier.</p>` : "";
     body = `<div class="result win enter">
-      <div class="result-head"><h2>${it.boss ? "Boss down" : "Correct"}</h2><span class="gain">+${gain.toLocaleString()}</span></div>
+      <div class="result-head"><h2>${it.boss ? "Boss down" : it.redeem ? "Redeemed" : "Correct"}</h2><span class="gain">+${gain.toLocaleString()}</span></div>
       <div class="math">${parts.join("")}</div>
       <p>${esc(it.why)}</p>${guessNote}${quote}
-      <button class="next" id="next">${S.i + 1 < S.items.length ? "Next" : "See rank"}<kbd>Enter</kbd></button></div>`;
+      ${nextBtn}</div>`;
   } else {
-    const hyper = betKey === "sure" ? `<p class="hyper"><b>High-confidence miss.</b> Read this one twice. Corrections to answers you were sure about are the ones people remember best.</p>` : "";
+    // The correction lives on the card, attached to the student's own pick, so it can't be skipped past.
+    const wrongBtn = stage.querySelector(".opt.wrongpick"), rightBtn = stage.querySelector(".opt.correct");
+    rightBtn.insertAdjacentHTML("beforeend", `<span class="ans-tag">Answer</span>`);
+    wrongBtn.insertAdjacentHTML("afterend", `<div class="slip">${betKey === "sure" ? '<span class="stamp">YOU WERE SURE</span>' : ""}<small>Why it's tempting</small><p>${esc(opt.note)}</p></div>`);
+    const what = owe ? `<p><b>Marker issued.</b> This question comes back in a few turns${bet.lose ? `. Get it right and win back your ${bet.lose}` : ""}.</p>`
+      : it.boss ? `<p>Boss questions don't come back this round. It's first on your review list.</p>`
+      : `<p>Missed again. It goes to the top of your review list for tomorrow.</p>`;
     body = `<div class="result lose enter">
       <div class="result-head"><h2>Not this time</h2><span class="gain">${gain ? "−" + Math.abs(gain) : "±0"}</span></div>
-      ${hyper}
-      <p><b>Answer:</b> ${esc(it.a)}</p>
-      <p><b>Why yours is tempting but wrong:</b> ${esc(opt.note)}</p>${quote}
-      <button class="next" id="next">${S.i + 1 < S.items.length ? "Next" : "See rank"}<kbd>Enter</kbd></button></div>`;
+      ${what}${quote}
+      ${nextBtn}</div>`;
   }
   $("below").innerHTML = body;
   $("next").addEventListener("click", next);
   $("next").focus({ preventScroll: true });
-  $("below").scrollIntoView({ behavior: cfg.juice ? "smooth" : "auto", block: "nearest" });
+  S.shownAt = performance.now();
+  (correct ? $("below") : $("card")).scrollIntoView({ behavior: cfg.juice ? "smooth" : "auto", block: "nearest" });
 
-  if (correct) celebrate(card, mult, crit, it.boss);
-  else { card.classList.add("dim"); thud(); }
+  if (correct) { celebrate(card, mult, crit, it.boss); renderMarkers(); }
+  else { card.classList.add("dim"); thud(); if (owe) flyMarker(); else renderMarkers(); }
+}
+
+function flyMarker() {
+  const from = stage.querySelector(".slip"), to = $("markers");
+  if (!cfg.juice || reduced.matches || !from) return renderMarkers();
+  to.dataset.n = Math.max(1, +to.dataset.n);  // make the tray visible so it has a position
+  const a = from.getBoundingClientRect(), b = to.getBoundingClientRect();
+  const el = document.createElement("div");
+  el.className = "marker-fly";
+  el.style.left = a.right - 40 + "px"; el.style.top = a.top + a.height / 2 - 17 + "px";
+  document.body.appendChild(el);
+  setTimeout(() => blip(260, 0.06, "square", 0.04), 400);
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    el.style.transform = `translate(${b.left - a.right + 40 + 8}px, ${b.top - a.top - a.height / 2 + 17 - 8}px) scale(0.55) rotate(360deg)`;
+    el.style.opacity = "0";
+  }));
+  setTimeout(() => { el.remove(); renderMarkers(); }, 760);
 }
 
 function next() {
   if (S.phase !== "reveal") return;
+  const r = S.results[S.i];
+  if (r) r.dwell = (performance.now() - S.shownAt) / 1000;
   S.i++;
   if (S.i >= S.items.length) return renderRank();
   renderQuestion();
@@ -462,29 +521,37 @@ function next() {
 function renderRank() {
   S.phase = "done";
   document.body.classList.remove("onfire");
-  const n = S.results.length, right = S.results.filter((r) => r.correct).length, acc = right / n;
+  const all = S.results.filter(Boolean);
+  const firsts = all.filter((r) => !r.item.redeem), redos = all.filter((r) => r.item.redeem);
+  const n = firsts.length, right = firsts.filter((r) => r.correct).length, acc = right / n;
+  const redeemedQs = new Set(redos.filter((r) => r.correct).map((r) => r.item.q));
+  const median = (xs) => { if (!xs.length) return null; const s = xs.slice().sort((a, b) => a - b), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+  const fmtS = (x) => x == null ? "–" : x.toFixed(1) + " s";
+  const dwellMiss = median(all.filter((r) => !r.correct && r.dwell != null).map((r) => r.dwell));
+  const dwellWin = median(all.filter((r) => r.correct && r.dwell != null).map((r) => r.dwell));
   const L = rankFor(acc);
   let pb = false, prev = 0;
   try { prev = +localStorage.getItem("recall-table-pb") || 0; if (S.score > prev) { localStorage.setItem("recall-table-pb", String(S.score)); pb = prev > 0; } } catch (e) {}
   const lines = { S: "Clean sweep of the table.", A: "Strong round. A couple to review.", B: "Solid. The review list below is your next round.", C: "Rough table. The misses below are where the points are next time." };
 
   const cal = cfg.bets ? Object.entries(BETS).map(([key, b]) => {
-    const rs = S.results.filter((r) => r.bet === key), ok = rs.filter((r) => r.correct).length;
+    const rs = firsts.filter((r) => r.bet === key), ok = rs.filter((r) => r.correct).length;
     const pct = rs.length ? ok / rs.length : 0;
     return `<div class="cal-row"><span>${b.label}</span><div class="bar"><i style="width:${pct * 100}%;background:var(--chip-${key})"></i></div><span class="n">${ok}/${rs.length}</span></div>`;
   }).join("") : "";
-  const sureRs = S.results.filter((r) => r.bet === "sure"), sureOk = sureRs.filter((r) => r.correct).length;
+  const sureRs = firsts.filter((r) => r.bet === "sure"), sureOk = sureRs.filter((r) => r.correct).length;
   const calLine = !sureRs.length ? "You never bet Sure. If you knew some of these cold, say so; Sure pays the most when you are right."
     : sureOk === sureRs.length ? "Every Sure bet was right. Your sense of what you know is well calibrated."
     : `${sureRs.length - sureOk} of your Sure bets missed. Those are the most valuable things to review.`;
 
-  const misses = S.results.filter((r) => !r.correct).sort((a, b) => (b.bet === "sure") - (a.bet === "sure"));
+  const misses = firsts.filter((r) => !r.correct)
+    .sort((a, b) => redeemedQs.has(a.item.q) - redeemedQs.has(b.item.q) || (b.bet === "sure") - (a.bet === "sure"));
   const late = (() => { const h = new Date().getHours(); return h >= 22 || h < 5; })();
 
   stage.innerHTML = `
     <section class="rank enter">
       <div class="letter ${L}" aria-label="Rank ${L}">${L}</div>
-      <div class="rank-copy"><h1>${lines[L]}</h1><p>Rank comes from accuracy only: ${right} of ${n} correct. Points are for fun and do not change it.</p></div>
+      <div class="rank-copy"><h1>${lines[L]}</h1><p>Rank comes from first-try accuracy only: ${right} of ${n} correct. Points are for fun and do not change it.</p></div>
       <div class="stats">
         <div class="stat"><b>${Math.round(acc * 100)}%</b><span>Accuracy</span></div>
         <div class="stat"><b>${S.score.toLocaleString()}</b><span>Points</span></div>
@@ -494,7 +561,14 @@ function renderRank() {
       ${pb ? `<div class="pb">New personal best, beating ${prev.toLocaleString()}</div>` : ""}
     </section>
     ${cfg.bets ? `<section class="panel"><h2>Confidence check</h2><p>How often each bet was right. Ideally Sure is near 100% and Guessing is lower.</p>${cal}<p>${calLine}</p></section>` : ""}
-    ${misses.length ? `<section class="panel"><h2>Review first</h2><p>Your misses, high-confidence ones on top.</p><ul class="review">${misses.map((r) => `<li class="${r.bet === "sure" ? "sure" : ""}"><b>${esc(r.item.q)}</b>${esc(r.item.a)}<br><span>You picked “${esc(r.pick.text)}”${r.bet ? `, bet ${BETS[r.bet].label}` : ""} · Unit 3 notes, p. ${r.item.page}</span></li>`).join("")}</ul></section>` : ""}
+    ${misses.length ? `<section class="panel"><h2>Review first</h2><p>Your first-try misses. Still unredeemed on top, then high-confidence ones.</p><ul class="review">${misses.map((r) => `<li class="${r.bet === "sure" ? "sure" : ""}"><b>${esc(r.item.q)}</b>${esc(r.item.a)}<br><span>You picked “${esc(r.pick.text)}”${r.bet ? `, bet ${BETS[r.bet].label}` : ""} · ${redeemedQs.has(r.item.q) ? "redeemed later" : "not redeemed yet"} · Unit 3 notes, p. ${r.item.page}</span></li>`).join("")}</ul></section>` : ""}
+    <section class="panel"><h2>Playtest data</h2><p>For you, not the student. Did the correction get read?</p>
+      <div class="stats">
+        <div class="stat"><b>${fmtS(dwellMiss)}</b><span>Median time on a miss</span></div>
+        <div class="stat"><b>${fmtS(dwellWin)}</b><span>Median time on a win</span></div>
+        <div class="stat"><b>${redeemedQs.size}/${redos.length}</b><span>Markers redeemed</span></div>
+        <div class="stat"><b>${redos.length ? Math.round((redeemedQs.size / redos.length) * 100) + "%" : "–"}</b><span>Redemption rate</span></div>
+      </div></section>
     ${late ? `<section class="late"><b>It's late. Go sleep.</b><p>Sleep is when this round gets stored. Come back tomorrow and the misses above will be first in line.</p></section>` : ""}
     <div class="actions">
       <button class="${late ? "ghost" : "next"}" id="again">Play again (reshuffled)</button>

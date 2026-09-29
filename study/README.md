@@ -14,3 +14,16 @@ confidence (Sure +200/−150, Maybe +120/−40, Guessing +60/±0) → reveal →
   can compare runs with and without each mechanic.
 - Keyboard: A–D or 1–4 to answer, S/M/G to bet, Enter for next.
 - After 10 pm the rank screen tells the player to go sleep and demotes "Play again".
+
+## Round 2 (after first playtest)
+
+Playtest 1: players replayed unprompted and the bet made them think, but they skipped
+the explanation after a miss, and misses looked flat.
+
+- The correction now tears out as a slip under the player's own wrong pick
+  ("Why it's tempting"), stamped "YOU WERE SURE" on confident misses. The answer is tagged on the card.
+- Every first-try miss (except the boss) issues a **marker**: the same question comes
+  back about 3 turns later, before the boss. Getting it right pays back the lost bet.
+  Reading the slip is now how you win your points back.
+- Rank still uses first-try accuracy only.
+- The rank screen shows playtest data: median seconds on miss vs. win screens and the redemption rate.
