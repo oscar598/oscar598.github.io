@@ -2,6 +2,7 @@
 // If there's no file yet, it draws a procedural placeholder so the layout never looks broken.
 
 import { esc } from "./util.js";
+import { paintPlaceholder } from "./placeholders.js";
 
 export function initMedia() {
   const assets = window.ASSETS || {};
@@ -15,8 +16,14 @@ export function initMedia() {
     } else if (a.img) {
       slot.innerHTML = `<img src="${esc(a.img)}" alt="${esc(a.alt || "")}" loading="lazy"><span class="tag">placeholder · AI</span>`;
     } else {
-      slot.innerHTML = `<canvas></canvas><span class="ph">${esc(a.alt || key)}</span>`;
-      paintFallback(slot.querySelector("canvas"), key);
+      slot.innerHTML = `<span class="tag">placeholder</span>`;
+      slot.setAttribute("role", "img");
+      slot.setAttribute("aria-label", a.alt || key);
+      // Designed animated placeholder if we have one for this key, else a simple gradient.
+      if (!paintPlaceholder(slot, key)) {
+        slot.insertAdjacentHTML("beforeend", `<span class="ph">${esc(a.alt || key)}</span>`);
+        paintFallback(slot.querySelector("canvas"), key);
+      }
     }
   });
 }

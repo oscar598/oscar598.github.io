@@ -916,7 +916,9 @@ body.is-calm .grain, body.is-calm .scroll-cue { display: none; }
   #sound-toggle, #commentary-toggle, .chip--ghost { display: none; }
   .copy--glass { padding: 20px; }
   .mail { width: 100%; }
-  .harvard-card { width: 62%; }
+  .harvard-card { width: 58%; }
+  .odometer { flex-direction: column; align-items: flex-start; gap: 0; max-width: 40%; }
+  .odo-num { font-size: clamp(24px, 7vw, 40px); }
   /* Pinned phone stages fill more of the screen */
   .scene--origin .stage { aspect-ratio: 3 / 4; max-height: calc(100svh - 150px); }
   .stage--email { aspect-ratio: 3 / 4.4; max-height: calc(100svh - 140px); }

@@ -9,7 +9,7 @@ export function runLeader() {
   try {
     seen = sessionStorage.getItem("ol-leader") === "1";
   } catch {}
-  if (seen || reduceMotion) {
+  if (seen || reduceMotion || location.search.includes("debug")) {
     el.remove();
     return Promise.resolve();
   }
