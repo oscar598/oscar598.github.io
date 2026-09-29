@@ -30,7 +30,7 @@
   </header>
 
   <main>
-    <!-- 01 · Hero. Video and poster are Runway renders; the gradient + key SVG stand in if they're missing. -->
+    <!-- 01 · Hero. Key Rain (physics/keyrain.js) falls over the car: one brass key per key sold. -->
     <section class="hero">
       <div class="hero-media media">
         <video autoplay muted loop playsinline poster="assets/car.jpg" onerror="this.remove()">
@@ -38,16 +38,21 @@
         </video>
         <img src="assets/car.jpg" alt="" onerror="this.remove()">
       </div>
+      <canvas class="rain" id="rain" aria-hidden="true"></canvas>
       <div class="hero-copy">
         <p class="kicker mono">An art project by Oscar Lu · Edition of ∞</p>
         <h1>You now own a car.</h1>
         <p class="lede">$50 buys a key to a Lamborghini. There's no limit on keys. Everyone who holds one owns it.</p>
         <div class="cta" id="buy">
           <a class="btn" data-buy="us" href="#">Buy a key · $50</a>
-          <a class="btn btn--ghost" data-buy="intl" href="#">Outside the US · +$15 shipping</a>
+          <a class="btn btn--ghost" data-buy="intl" href="#">International · +$15</a>
         </div>
         <p class="fine">All or nothing: if the goal isn't reached by the deadline, every key is refunded in full, automatically.</p>
+        <p class="rain-note mono"><span id="rain-note">Grab a key. Throw it.</span> <button class="linkbtn" type="button" id="rain-drop">Drop a key</button></p>
       </div>
+    </section>
+
+    <section class="ticker-band" aria-label="Presale">
       <dl class="ticker mono">
         <div><dt>Keys sold</dt><dd id="t-keys">0</dd></div>
         <div><dt>Goal</dt><dd id="t-goal">—</dd></div>
@@ -188,6 +193,7 @@
   </footer>
 
   <script src="own.js"></script>
+  <script src="physics/keyrain.js"></script>
   <script src="physics/shatter.js"></script>
   <script src="physics/names.js"></script>
   <script src="main.js"></script>

@@ -7,6 +7,16 @@
 
   OAC.wireBuy(cfg);
 
+  // Key Rain: one drawn key per key sold (up to what the stage holds).
+  const rain = new OACKeyRain.KeyRain($("rain"), { sold, shown: 140 });
+  const ratio = Math.round(rain.ratio);
+  $("rain-note").textContent = sold === 0 ? "Key Nº 0001 is still available. Grab it, throw it."
+    : ratio > 1 ? `Each key drawn stands for ${ratio} sold. Grab one, throw it.` : "One key drawn per key sold. Grab one, throw it.";
+  $("rain-drop").addEventListener("click", () => {
+    const n = rain.drop();
+    if (n) $("rain-note").textContent = `That one's Nº ${fmt(n)}. It's ${OAC.grams(OAC.shareGrams(cfg, n))} of the car.`;
+  });
+
   // Ticker.
   $("t-keys").textContent = fmt(sold);
   $("t-grams").textContent = OAC.grams(OAC.shareGrams(cfg, Math.max(1, sold)));
