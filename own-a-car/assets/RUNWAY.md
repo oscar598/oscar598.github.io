@@ -13,10 +13,10 @@ then `SKIP_DOWNLOAD=1 bash own-a-car/tools/fetch_assets.sh`.
 
 | File | Status | Runway task | Used on | Prompt (short) |
 |---|---|---|---|---|
-| `car.jpg` | ✅ in repo | 246457ef-0b6e-415f-8abf-ca7a35bbd5a5 | Hero poster, X launch | White mid-2000s wedge supercar, black concrete studio, single spotlight |
+| `car.jpg` | ✅ in repo | 246457ef-0b6e-415f-8abf-ca7a35bbd5a5 | Hero backdrop behind Key Rain, X launch | White mid-2000s wedge supercar, black concrete studio, single spotlight |
 | `key.jpg` | ✅ in repo | a219748a-6b90-441c-b3af-bac795a5af65 | Step 01, X product posts | Brass sculptural key engraved "Nº 0042" on black velvet |
 | `box.jpg` | ✅ in repo | 1f14528a-789e-4c8b-aa96-c7e482c357b6 | "What arrives", X | Open black rigid box, gold-foil OWN A CAR lid, key in velvet |
-| `names.jpg` | ⬇ fetch | 329a424f-f565-4597-9dce-eaca4b7f480b | "Every owner's name", X | Car wrapped in thousands of tiny white names |
+| `names.jpg` | ⬇ fetch | 329a424f-f565-4597-9dce-eaca4b7f480b | X posts (the site draws the name wrap live instead) | Car wrapped in thousands of tiny white names |
 | `crowd.jpg` | ⬇ fetch | a0c3b9ac-96f1-4d07-a2ee-ed1717c56d7d | Step 02, X launch thread | Crowd in a garage holding identical brass keys around the car |
 | `door.jpg` | ⬇ fetch | 663d5bcb-fd63-4897-a0b1-6b5217773605 | Step 03, X | Black box with gold tape on a doorstep |
 | `meme.jpg` | ⬇ fetch | 0ec76528-9716-4f5d-8663-c69eaf7086dd | X meme posts | Person in a hoodie holding up a brass key next to the car, flash |

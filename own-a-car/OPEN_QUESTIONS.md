@@ -48,6 +48,8 @@ in saying 'you own a car'?" If the answer is to soften it, the change is copy on
 | 20 | Label weight | 12 oz + 5 oz per extra key | Estimate; weigh the real sample | `cmd_labels` in `ops.py` |
 | 21 | Launch promotion | $300–500 on the launch thread, only if it's already doing well | Cheap signal boost | X playbook § 8 |
 | 22 | Dark-only site | No light mode | Night-garage brand; everything is designed dark | `style.css` |
+| 23 | Typeface | **Michroma / Saira / JetBrains Mono** | You asked for type that feels like a real Lamborghini. Theirs is proprietary, so these open fonts carry the same wide, squared DNA | `fonts/`, `brand/BRAND.md` |
+| 24 | Site direction | Night Garage + physics (keys pile up, the car shatters, names wrap it) | The wow factor; other directions (Homologation, Certificate) are on the design canvas | Design canvas, `physics/` |
 
 ---
 

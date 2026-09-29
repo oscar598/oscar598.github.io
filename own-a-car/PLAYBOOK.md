@@ -75,7 +75,7 @@ Plus the risk budget: if the goal is missed, refunds cost the unrecoverable card
 ## Who does what
 
 **Automated / built (done):**
-- Site with live counter, share calculator, name-size calculator, stretch goals, open books, owners' wall
+- Site with three physics pieces driven by the live count (Key Rain hero, The Shatter, the Name Wrap), stretch goals, open books, owners' wall
 - Checkout (Stripe Payment Links: name, email, shipping address, tax, wall name, terms consent) created by one command
 - Order registry, private tracking links, public certificates, the "Post it on X" share
 - All-or-nothing: auto-close at the deadline, one-command full refunds

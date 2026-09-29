@@ -64,7 +64,6 @@ main { overflow: hidden; }
 .media img, .media video { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; z-index: 1; }
 .media video { z-index: 2; }
 .media.empty img { display: none; }
-.media--wide { aspect-ratio: 16 / 9; }
 .media--tall { aspect-ratio: 3 / 4; }
 
 /* Hero: the car backdrop, Key Rain canvas over it, copy on top. */

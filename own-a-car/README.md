@@ -15,7 +15,8 @@ python3 -m http.server 8080   # from the repo root, then open http://localhost:8
 | Path | What |
 |---|---|
 | `config.json` | **The one file to edit.** Car, price, goal, stretch goals, dates, Stripe links, Discord, handles |
-| `index.html` · `main.js` · `own.js` · `style.css` | The site: hero, live counter, share calculator, name wrap, how it works, goal, open books, the key, owners' wall, FAQ |
+| `index.html` · `main.js` · `own.js` · `style.css` | The site: Key Rain hero, counter strip, The Shatter share calculator, the Name Wrap, how it works, goal, open books, the key, owners' wall, FAQ |
+| `physics/` | The three physics pieces, plain JS with no libraries: `keyrain.js` (hero: a pile of brass keys, one per key sold, grab and throw), `shatter.js` (Your share: the car breaks into one shard per key), `names.js` (the car wrapped in every owner's name at true scale, with a loupe) |
 | `key.html` · `key.js` | A buyer's private tracking page (`?o=`), a public certificate (`?n=42`) and lookup |
 | `terms.html` · `privacy.html` | Drafts for attorney review |
 | `data/registry.json` | Public order registry (key numbers, wall names). Written by the sync |
