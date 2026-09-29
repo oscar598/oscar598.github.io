@@ -68,6 +68,38 @@ export function renderCopy(site) {
     });
   });
 
+  // Headline letters shy away from the cursor and spring back.
+  if (!reduceMotion && !window.matchMedia("(pointer: coarse)").matches) {
+    document.querySelectorAll(".copy h2").forEach((h2) => {
+      h2.querySelectorAll(".w").forEach((w) => {
+        w.innerHTML = [...w.textContent].map((ch) => `<span class="l">${esc(ch)}</span>`).join("");
+      });
+      const letters = [...h2.querySelectorAll(".l")].map((el) => ({
+        el,
+        x: gsap.quickTo(el, "x", { duration: 0.6, ease: "elastic.out(1, 0.4)" }),
+        y: gsap.quickTo(el, "y", { duration: 0.6, ease: "elastic.out(1, 0.4)" }),
+      }));
+      const RADIUS = 90;
+      h2.addEventListener("pointermove", (e) => {
+        letters.forEach((l) => {
+          const r = l.el.getBoundingClientRect();
+          const dx = r.left + r.width / 2 - e.clientX;
+          const dy = r.top + r.height / 2 - e.clientY;
+          const d = Math.hypot(dx, dy);
+          if (d < RADIUS) {
+            const f = (1 - d / RADIUS) * 22;
+            l.x((dx / (d || 1)) * f);
+            l.y((dy / (d || 1)) * f);
+          } else {
+            l.x(0);
+            l.y(0);
+          }
+        });
+      });
+      h2.addEventListener("pointerleave", () => letters.forEach((l) => (l.x(0), l.y(0))));
+    });
+  }
+
   // Headlines lean with scroll speed (subtle, feels physical).
   if (!reduceMotion) {
     const heads = document.querySelectorAll(".copy h2");
