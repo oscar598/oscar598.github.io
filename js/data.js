@@ -15,8 +15,7 @@ window.SITE = {
     links: [
       { label: "Instagram", url: "https://www.instagram.com/oscarl.u/" },
       { label: "GitHub", url: "https://github.com/oscar598" },
-      // TODO: add your LinkedIn URL
-      { label: "LinkedIn", url: "" },
+      { label: "LinkedIn", url: "https://www.linkedin.com/in/oscarlu23/" },
     ],
   },
 

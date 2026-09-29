@@ -105,7 +105,7 @@ Through-line: **notice a gap → ask the people in charge → build it from zero
 ---
 
 ## Before sharing the link
-- [ ] Add your LinkedIn URL in `js/data.js`
+- [x] Add your LinkedIn URL in `js/data.js`
 - [ ] Add photos to `assets/` and set `image.src` for each chapter, e.g. `"assets/harvard.jpg"`. Use WebP or JPG under 300KB.
 - [ ] Clear the 4 lines marked `UNCONFIRMED` in `js/data.js` (resume dates and titles)
 - [ ] Read each chapter out loud. If a line doesn't sound like you, rewrite it.
