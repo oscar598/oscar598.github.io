@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Own a Car · Oscar Lu</title>
+  <meta name="description" content="An art project. $50 buys a key. Unlimited keys. Every key holder owns the car.">
+  <meta property="og:title" content="Own a Car">
+  <meta property="og:description" content="$50 buys a key. Unlimited keys. Every key holder owns the car.">
+  <meta name="theme-color" content="#0a0a0a">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+</head>
+<body>
+  <header class="bar">
+    <a class="mark" href="./">OWN A CAR</a>
+    <span class="edition mono">Edition of ∞</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <svg class="key" viewBox="0 0 400 140" aria-hidden="true">
+        <defs>
+          <linearGradient id="brass" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#f3dc9a"/><stop offset=".5" stop-color="#c9a24a"/><stop offset="1" stop-color="#7a5a1c"/>
+          </linearGradient>
+        </defs>
+        <circle cx="70" cy="70" r="52" fill="none" stroke="url(#brass)" stroke-width="18"/>
+        <path d="M122 60 H372 V80 H352 V96 H336 V80 H318 V104 H302 V80 H284 V92 H270 V80 H122 Z" fill="url(#brass)"/>
+      </svg>
+      <h1>You now own a car.</h1>
+      <p class="lede">$50 buys a key. There is no limit on keys. Every key holder owns the same car.</p>
+      <div class="cta">
+        <a id="buy" class="btn" href="#" aria-disabled="true">Presale opens soon</a>
+        <p class="fine mono" id="cta-fine">All or nothing. If the goal isn't reached by the deadline, every key is refunded in full.</p>
+      </div>
+    </section>
+
+    <section class="meter" aria-label="Presale progress">
+      <div class="meter-row mono">
+        <span><b id="sold">0</b> keys</span>
+        <span>goal <b id="goal">—</b></span>
+        <span id="left">—</span>
+      </div>
+      <div class="track"><div class="fill" id="fill"></div></div>
+    </section>
+
+    <section class="how">
+      <div><span class="n mono">01</span><h2>Buy a key</h2><p>$50. Name, email, shipping address. That's the whole form.</p></div>
+      <div><span class="n mono">02</span><h2>We buy the car</h2><p>If the presale hits its goal, the car is bought and titled to the project. If it doesn't, you get your money back.</p></div>
+      <div><span class="n mono">03</span><h2>Your key arrives</h2><p>Numbered, boxed, and shipped to you. You join the owners' Discord the day you buy.</p></div>
+    </section>
+
+    <section class="statement">
+      <p>Ownership usually means one person, one title, one set of keys. This piece asks what happens when it means everyone. The more keys exist, the more people own the car, and the less any of them owns it.</p>
+      <p class="sig">— Oscar Lu</p>
+    </section>
+
+    <section class="faq">
+      <h2>Straight answers</h2>
+      <details><summary>Do I legally own part of the car?</summary><p>No. You're buying an artwork: a numbered key and your place in the piece. The car's title stays with the project. Keys carry no share of the car, no resale proceeds and no right to drive it.</p></details>
+      <details><summary>Is this an investment?</summary><p>No. There's no return, no dividend and no promise that the key will be worth anything later. Buy it because you want the key.</p></details>
+      <details><summary>Does the key start the car?</summary><p>No. It's cast from the real key but it's a sculpture, not a working key.</p></details>
+      <details><summary>What if the goal isn't reached?</summary><p>Every buyer is refunded in full to their original payment method within 10 days of the deadline.</p></details>
+      <details><summary>When does it ship?</summary><p id="ship">After the presale closes and the car is bought.</p></details>
+    </section>
+  </main>
+
+  <footer class="foot mono">
+    <a href="terms.html">Terms of sale</a>
+    <span>An art project by <a href="/">Oscar Lu</a>. Not affiliated with or endorsed by any car manufacturer.</span>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
