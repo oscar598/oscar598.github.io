@@ -15,11 +15,12 @@
   $("t-days").textContent = state === "closed" ? "Closed" : OAC.daysLeft(cfg);
   $("f-ship").textContent = `Estimated ${cfg.shipWindow}, after the presale closes and the car is bought. Your key page shows every step.`;
 
-  // Share calculator. Slider is log-scaled from 1 to 100,000 keys; it starts at "you, if you buy now".
+  // Same mapping as The Shatter: owners = 10^(v/200), snapping to round numbers near 1, 10 … 100,000.
   const range = $("s-range");
-  const MAX = 100000;
-  const toKeys = (v) => Math.max(1, Math.round(Math.pow(MAX, v / 1000)));
-  const toValue = (n) => Math.round((Math.log(n) / Math.log(MAX)) * 1000);
+  const toKeys = (v) => OACShatter.owners(v);
+  const toValue = (n) => Math.round(Math.log10(n) * 200);
+  const small = matchMedia("(max-width: 720px)").matches;
+  const shatter = new OACShatter.Shatter($("s-canvas"), { owners: sold + 1, maxShards: small ? 500 : 1200 });
   function renderShare(n) {
     const g = OAC.shareGrams(cfg, n);
     $("s-grams").textContent = OAC.grams(g);
@@ -31,7 +32,10 @@
     $("n-mm").textContent = OAC.nameHeightMm(cfg, n).toFixed(0) + " mm";
   }
   range.value = toValue(sold + 1);
-  range.addEventListener("input", () => renderShare(toKeys(+range.value)));
+  range.addEventListener("input", () => {
+    shatter.setValue(+range.value);
+    renderShare(toKeys(+range.value));
+  });
   renderShare(sold + 1);
 
   // Goal + stretch goals on one bar that runs to the last stretch goal.

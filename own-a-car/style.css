@@ -91,6 +91,9 @@ main { overflow: hidden; }
 .big { font: 400 clamp(52px, 11vw, 150px)/1 var(--display); letter-spacing: -.01em; margin: 28px 0 10px;
        background: linear-gradient(180deg, var(--gold-hi), var(--gold) 55%, var(--gold-lo)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .sub { font: 300 clamp(17px, 2vw, 22px)/1.45 var(--sans); margin: 0 auto; max-width: 36ch; }
+/* The Shatter canvas draws in a 1440×900 space; show the band the car occupies (y 260–700). */
+.shatter { position: relative; aspect-ratio: 1440 / 440; margin: 20px calc(var(--pad) * -1) 0; overflow: hidden; }
+.shatter canvas { position: absolute; left: 0; top: -59.09%; width: 100%; aspect-ratio: 1440 / 900; cursor: crosshair; touch-action: pan-y; }
 .slider { display: grid; gap: 10px; max-width: 560px; margin: 40px auto 0; color: var(--dim); }
 .slider b { color: var(--ink); font-weight: 500; }
 input[type=range] { width: 100%; accent-color: var(--gold); }

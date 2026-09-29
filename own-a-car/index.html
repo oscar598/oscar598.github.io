@@ -62,11 +62,13 @@
       <h2>How much Lamborghini is $50?</h2>
       <p class="big"><span id="s-grams">—</span></p>
       <p class="sub" id="s-line">—</p>
+      <!-- The Shatter: the car, broken into one shard per key (physics/shatter.js) -->
+      <div class="shatter" aria-hidden="true"><canvas id="s-canvas"></canvas></div>
       <label class="slider">
         <span class="mono">Drag to see it at <b id="s-owners">—</b> keys</span>
         <input type="range" id="s-range" min="0" max="1000" value="0" aria-label="Number of owners">
       </label>
-      <p class="note">The more people own it, the less of it each of them owns. That's the piece.</p>
+      <p class="note">Sweep through the car to scatter it. Rest on a shard to find a key. The more people own it, the less of it each of them owns.</p>
     </section>
 
     <!-- 03 · Names on the car. -->
@@ -181,6 +183,7 @@
   </footer>
 
   <script src="own.js"></script>
+  <script src="physics/shatter.js"></script>
   <script src="main.js"></script>
 </body>
 </html>
