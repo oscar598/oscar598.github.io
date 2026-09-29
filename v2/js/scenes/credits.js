@@ -8,6 +8,22 @@ import { scrollTo } from "../core/smooth.js";
 
 const { gsap, ScrollTrigger } = window;
 
+// The mini-game is loaded only when someone asks for it.
+let game = null;
+export async function openGame(site) {
+  if (game) return;
+  const { openLevel } = await import("../game/level.js");
+  game = openLevel(site);
+  const done = () => {
+    if (!document.querySelector(".level")) {
+      game = null;
+      observer.disconnect();
+    }
+  };
+  const observer = new MutationObserver(done);
+  observer.observe(document.body, { childList: true });
+}
+
 export function initCredits(site, scenes) {
   const roll = document.getElementById("credits-roll");
   const p = site.person;
@@ -50,6 +66,8 @@ export function initCredits(site, scenes) {
       { yPercent: -20, ease: "none", scrollTrigger: { trigger: "#credits", start: "top bottom", end: "bottom top", scrub: true } }
     );
   }
+
+  document.getElementById("play-level").addEventListener("click", () => openGame(site));
 
   document.getElementById("replay").addEventListener("click", () => {
     scrollTo(0, { duration: 2.2 });

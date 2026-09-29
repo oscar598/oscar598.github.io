@@ -19,6 +19,7 @@ export function initEggs(scenes) {
 
   window.addEventListener("keydown", (e) => {
     if (e.target.closest("input, textarea, [contenteditable]")) return;
+    if (document.querySelector(".level")) return;
     keys = [...keys, e.key].slice(-KONAMI.length);
     typed = (typed + (e.key.length === 1 ? e.key.toLowerCase() : "")).slice(-12);
 
