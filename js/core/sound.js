@@ -1,9 +1,33 @@
-// Tiny synthesized sound kit (no audio files). Off by default; the header toggle turns it on.
+// Tiny synthesized sound kit (no audio files). On by default; the header toggle turns it off
+// (remembered per visitor). Browsers only allow audio after the first click/tap/keypress,
+// so nothing plays until then.
 // Every sound is a few oscillators with a fast envelope, so it costs nothing to load.
 
 let ctx = null;
 let master = null;
 let lastThump = 0;
+let unlocked = false; // becomes true on the visitor's first gesture
+
+function readPref() {
+  try {
+    return localStorage.getItem("ol-sound") !== "0";
+  } catch {
+    return true;
+  }
+}
+
+// Unlock audio on the first real gesture (wheel scrolling doesn't count in browsers).
+["pointerdown", "keydown", "touchstart"].forEach((type) =>
+  window.addEventListener(
+    type,
+    () => {
+      if (unlocked) return;
+      unlocked = true;
+      if (sound.enabled && ensure()) ctx.resume();
+    },
+    { once: true, passive: true, capture: true }
+  )
+);
 
 function ensure() {
   if (ctx) return ctx;
@@ -17,7 +41,7 @@ function ensure() {
 }
 
 function blip({ freq = 440, type = "sine", attack = 0.002, decay = 0.12, gain = 0.3, slideTo = null }) {
-  if (!sound.enabled || !ensure()) return;
+  if (!sound.enabled || !unlocked || !ensure()) return;
   const t = ctx.currentTime;
   const osc = ctx.createOscillator();
   const g = ctx.createGain();
@@ -33,11 +57,15 @@ function blip({ freq = 440, type = "sine", attack = 0.002, decay = 0.12, gain = 
 }
 
 export const sound = {
-  enabled: false,
+  enabled: readPref(),
 
   toggle() {
     this.enabled = !this.enabled;
+    try {
+      localStorage.setItem("ol-sound", this.enabled ? "1" : "0");
+    } catch {}
     if (this.enabled) {
+      unlocked = true;
       ensure();
       ctx?.resume();
       this.chime();

@@ -35,6 +35,9 @@ async function boot() {
 
   // Sound toggle
   const soundBtn = document.getElementById("sound-toggle");
+  // Reflect the default/remembered state (sound is on unless the visitor turned it off).
+  soundBtn.textContent = sound.enabled ? "sound: on" : "sound: off";
+  soundBtn.setAttribute("aria-pressed", String(sound.enabled));
   soundBtn.addEventListener("click", () => {
     const on = sound.toggle();
     soundBtn.textContent = on ? "sound: on" : "sound: off";
@@ -115,16 +118,6 @@ async function boot() {
   initTab();
   initFilm();
   initResumeDrop(site);
-
-  // Yosemite strip drifts slower than the page (parallax).
-  const strip = document.querySelector(".now-media .media");
-  if (strip && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    window.gsap.fromTo(
-      strip.firstElementChild,
-      { yPercent: -8, scale: 1.15 },
-      { yPercent: 8, scale: 1.15, ease: "none", scrollTrigger: { trigger: strip, start: "top bottom", end: "bottom top", scrub: true } }
-    );
-  }
 
   // In-page links (#open etc.) use the film cut instead of a long scroll.
   document.querySelectorAll('a[href^="#"]').forEach((a) =>

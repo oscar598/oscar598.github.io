@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/v2.css?v=20260930c">
+  <link rel="stylesheet" href="css/v2.css?v=20260930d">
 </head>
 <body>
   <!-- Film-leader countdown shown on first visit -->
@@ -35,7 +35,7 @@
   <header class="chrome">
     <a class="brand" href="#open" data-magnetic>OL<span>/v2</span></a>
     <div class="chrome-right">
-      <button class="chip" id="sound-toggle" type="button" aria-pressed="false" data-magnetic>sound: off</button>
+      <button class="chip" id="sound-toggle" type="button" aria-pressed="true" data-magnetic>sound: on</button>
       <a class="chip chip--solid" href="resume.html" data-magnetic>Resume ↗</a>
     </div>
   </header>
@@ -114,11 +114,11 @@
         <p class="question-line" id="question-line"></p>
       </div>
       <div class="ukraine-body">
-        <div>
-          <div class="copy" data-chapter="3"></div>
-          <figure class="polaroid polaroid--story" style="--tilt:-2deg"><div class="media" data-asset="przemysl"></div><figcaption>Przemyśl, April 2022 · with Medair volunteers</figcaption></figure>
+        <div class="copy" data-chapter="3"></div>
+        <div class="ukraine-side">
+          <div class="bedding" id="bedding" aria-label="400 bedding sets washed per day"></div>
+          <figure class="polaroid polaroid--story" style="--tilt:3deg"><div class="media" data-asset="przemysl"></div><figcaption>Przemyśl, April 2022 · with Medair volunteers</figcaption></figure>
         </div>
-        <div class="bedding" id="bedding" aria-label="400 bedding sets washed per day"></div>
         <div class="stats" id="ukraine-stats"></div>
         <div class="photo-row photo-row--dublin">
           <figure class="polaroid polaroid--inline" style="--tilt:-3deg"><div class="media media--tall" data-asset="dublin"></div><figcaption>Dublin · June 2025</figcaption></figure>
@@ -164,7 +164,7 @@
       </div>
       <div class="now-media">
         <figure class="yosemite-figure">
-          <div class="media media--wide" data-asset="yosemite"></div>
+          <div class="media" data-asset="yosemite"></div>
           <figcaption class="mono">Yosemite, summer 2026 · a week alone, planned three days out</figcaption>
         </figure>
       </div>
@@ -213,9 +213,9 @@
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 
   <!-- Content (shared with v1) + v2 assets manifest -->
-  <script src="js/data.js?v=20260930c"></script>
-  <script src="js/assets.js?v=20260930c"></script>
+  <script src="js/data.js?v=20260930d"></script>
+  <script src="js/assets.js?v=20260930d"></script>
 
-  <script type="module" src="js/app.js?v=20260930c"></script>
+  <script type="module" src="js/app.js?v=20260930d"></script>
 </body>
 </html>
