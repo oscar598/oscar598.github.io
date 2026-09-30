@@ -1,9 +1,7 @@
-// End credits. The roll scrolls up as you scroll down, and includes a "cast of your visit":
-// how many letters you threw, cards you tossed, whether you sent the email, etc.
-// Then: replay (back to the top, letters re-drop) and share.
+// End credits: a short roll that scrolls up as you scroll down, then replay, share, and the
+// hidden mini-game.
 
 import { esc, reduceMotion, toast } from "../core/util.js";
-import { stats } from "../core/stats.js";
 import { scrollTo } from "../core/smooth.js";
 
 const { gsap, ScrollTrigger } = window;
@@ -31,33 +29,14 @@ export function initCredits(site, scenes) {
   const block = (role, names) =>
     `<div class="credit"><span class="mono">${esc(role)}</span><b>${names.map(esc).join("<br>")}</b></div>`;
 
-  function render() {
-    const you = [
-      `${stats.letters} letter${stats.letters === 1 ? "" : "s"} thrown`,
-      `${stats.objects} object${stats.objects === 1 ? "" : "s"} tossed in LA`,
-      `${stats.cards} yearbook card${stats.cards === 1 ? "" : "s"} knocked over`,
-      stats.emailSent ? "1 cold email sent" : "0 cold emails sent (there's still time)",
-      ...(stats.visitorEmail ? ["and 1 written by you, thank you"] : []),
-      `${stats.freshmen} extra freshm${stats.freshmen === 1 ? "an" : "en"} down the slide`,
-    ];
-    roll.innerHTML = `
-      <p class="credits-title">A Life in Seven Chapters</p>
-      ${block("Directed by", [p.name])}
-      ${block("Written by", [p.name])}
-      ${block("Starring", [p.name, "Victor Lu as the twin", "a basketball", "2,000 particles"])}
-      ${block("Featuring your visit", you)}
-      ${block("Physics", ["Matter.js"])}
-      ${block("Motion", ["GSAP · Lenis"])}
-      ${block("Type", ["Fraunces · Inter · JetBrains Mono"])}
-      ${block("Placeholder art", ["drawn in code, frame by frame"])}
-      ${block("Special thanks", ["everyone who answered a cold email", "the Farm", "my family"])}
-      <p class="credits-fin">fin.<br><span class="mono">no letters were harmed. several were thrown.</span></p>
-    `;
-  }
-  render();
-
-  // Re-render when the credits come into view so the numbers are current.
-  ScrollTrigger.create({ trigger: "#credits", start: "top bottom", onEnter: render, onEnterBack: render });
+  roll.innerHTML = `
+    <p class="credits-title">A Life in Seven Chapters</p>
+    ${block("Directed by", [p.name])}
+    ${block("Written by", [p.name])}
+    ${block("Starring", [p.name, "Victor Lu as the twin", "a basketball", "2,000 particles"])}
+    ${block("Type", ["Fraunces · Inter · JetBrains Mono"])}
+    ${block("Special thanks", ["everyone who answered a cold email", "the Farm", "my family"])}
+  `;
 
   if (!reduceMotion) {
     gsap.fromTo(

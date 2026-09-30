@@ -46,9 +46,9 @@ async function boot() {
 
   // Scenes (each in its own module; errors are contained)
   const scenes = {};
-  const load = async (name, path, fn) => {
+  const load = async (name, modulePromise, fn) => {
     try {
-      const mod = await import(path);
+      const mod = await modulePromise;
       scenes[name] = await mod[fn](site);
     } catch (err) {
       console.error(`[v2] scene "${name}" failed:`, err);
@@ -67,7 +67,10 @@ async function boot() {
     ["now", "./scenes/now.js", "initNow"],
     ["next", "./scenes/next.js", "initNext"],
   ];
-  for (const [name, path, fn] of order) await load(name, path, fn);
+  // Fetch every scene module in parallel, then set them up in page order.
+  const modules = order.map(([, path]) => import(path));
+  modules.forEach((m) => m.catch(() => {})); // failures are reported by load()
+  for (let i = 0; i < order.length; i++) await load(order[i][0], modules[i], order[i][2]);
   try {
     const { initCredits } = await import("./scenes/credits.js");
     scenes.credits = initCredits(site, scenes);

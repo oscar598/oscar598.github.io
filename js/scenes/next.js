@@ -5,7 +5,6 @@
 import { createWorld } from "../core/world.js";
 import { esc, rand, pick, reduceMotion } from "../core/util.js";
 import { sound } from "../core/sound.js";
-import { stats } from "../core/stats.js";
 
 const { Bodies, Body } = window.Matter;
 const { ScrollTrigger } = window;
@@ -109,7 +108,6 @@ export function initNext(site) {
       form.animate([{ transform: "translateX(0)" }, { transform: "translateX(-8px)" }, { transform: "translateX(8px)" }, { transform: "translateX(0)" }], { duration: 300 });
       return;
     }
-    stats.visitorEmail = true;
     const btn = form.querySelector("button");
     const r = btn.getBoundingClientRect();
     flyPlane(r.left + r.width / 2, r.top);

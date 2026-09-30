@@ -5,7 +5,6 @@
 import { createWorld } from "../core/world.js";
 import { rand, reduceMotion, onResize } from "../core/util.js";
 import { scrollState } from "../core/smooth.js";
-import { stats } from "../core/stats.js";
 
 const { Bodies, Body, Composite } = window.Matter;
 
@@ -33,7 +32,6 @@ export async function initOpen(site) {
     walls: { floor: true, left: true, right: true, ceiling: false },
     wallInset: 0,
     floorOffset: 78, // keep the pile above the film-strip nav
-    onGrab: () => stats.letters++,
     beforeDraw(ctx, w, h) {
       // Floor line + frame marks
       ctx.strokeStyle = "rgba(242,237,227,0.14)";
@@ -204,7 +202,6 @@ export async function initOpen(site) {
       Body.setVelocity(b, { x: rand(-14, 14), y: rand(-26, -16) });
       Body.setAngularVelocity(b, rand(-0.4, 0.4));
     });
-    stats.letters += letterBodies.length;
   });
 
   // Acrostic: every letter hides a chapter. Hover (or tap) a letter to read it.

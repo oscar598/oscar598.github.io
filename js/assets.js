@@ -21,7 +21,6 @@ window.ASSETS = {
 
   // AI placeholders (Runway)
   origin:   { img: "assets/origin.jpg", alt: "Clay diorama of an LA orange juice stand (placeholder)" },
-  ukraine:  { img: "", alt: "Refugee center, Przemyśl (placeholder)" },
 
   // Sculptural objects used as physics sprites (transparent PNGs, trimmed).
   sprites: {

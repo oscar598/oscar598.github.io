@@ -5,7 +5,6 @@
 
 import { createWorld, drawBodies } from "../core/world.js";
 import { rand, reduceMotion } from "../core/util.js";
-import { stats } from "../core/stats.js";
 
 const { Bodies, Body } = window.Matter;
 const { ScrollTrigger } = window;
@@ -33,7 +32,6 @@ export function initOrigin() {
 
   const world = createWorld(canvas, {
     walls: { floor: true, left: true, right: true, ceiling: false },
-    onGrab: () => stats.objects++,
     // Soft drop shadow; canvas shadows ignore rotation, so they always fall down-right.
     draw(ctx, w, h, api) {
       ctx.save();

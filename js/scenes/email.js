@@ -6,7 +6,6 @@
 import { reduceMotion, formatNumber } from "../core/util.js";
 import { sound } from "../core/sound.js";
 import { scrollTo } from "../core/smooth.js";
-import { stats } from "../core/stats.js";
 
 const { gsap, ScrollTrigger } = window;
 
@@ -82,7 +81,6 @@ export function initEmail() {
   function send() {
     if (sent) return;
     sent = true;
-    stats.emailSent = true;
     sendBtn.classList.add("is-sent");
     sendBtn.textContent = "Sent ✓";
     sound.whoosh();

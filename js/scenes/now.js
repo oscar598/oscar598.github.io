@@ -5,7 +5,6 @@
 import { createWorld } from "../core/world.js";
 import { rand, pick, onVisible } from "../core/util.js";
 import { sound } from "../core/sound.js";
-import { stats } from "../core/stats.js";
 
 const { Bodies, Body, Composite } = window.Matter;
 const COLORS = ["#f2ede3", "#f2ede3", "#ff4b2b", "#ffb13b", "#7dd3fc", "#f2ede3", "#e8c547"];
@@ -180,7 +179,6 @@ export function initNow() {
 
   canvas.addEventListener("click", () => {
     queuedYours += 10;
-    stats.freshmen += 10;
     sound.pop();
   });
 

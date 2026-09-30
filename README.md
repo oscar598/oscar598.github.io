@@ -24,7 +24,7 @@ Then open http://localhost:8080/ (add `?debug` to skip the intro countdown).
 | 06 | Tested | Scroll = the climb: 3 a.m. to sunrise, 10,152 → 14,000 ft, headlamp on the trail, shooting star | `js/scenes/tested.js` |
 | 07 | Now | A working slip 'n slide: 200+ freshmen slide down and get counted; click to add your own | `js/scenes/now.js` |
 | 08 | Next chapter | The visitor writes the cold email to Oscar; paper plane; opens their mail app | `js/scenes/next.js` |
-| 09 | Credits | Personalized: counts what *this* visitor did (letters thrown, cards knocked over…) | `js/scenes/credits.js` |
+| 09 | Credits | A short film-style roll, then replay, share and the hidden level | `js/scenes/credits.js` |
 
 ## Everything around the scenes
 
@@ -43,8 +43,7 @@ Then open http://localhost:8080/ (add `?debug` to skip the intro countdown).
 
 - **Words** → `/js/data.js` (shared with v1 and the resume).
 - **Scene-specific lines** (email text, credits, acrostic facts, director's notes) live at the top of each scene file.
-- **Media** → `js/assets.js`. Every slot currently shows a designed placeholder drawn in code
-  (the Harvard poster, Half Dome at alpenglow). Put a file in `assets/` and set its path, e.g.
+- **Media** → `js/assets.js`. Real photos live in `assets/photos/`; the only AI placeholder left is the LA diorama. Put a file in `assets/` and set its path, e.g.
   `harvard: { img: "assets/harvard.jpg" }`. Video works too (`video: "assets/clip.mp4"`).
 - **Physics sprites** for the Origin scene → `ASSETS.sprites` (transparent PNGs). Prompts ready in `assets/PROMPTS.md`.
 - **Share card** → `assets/og.jpg`, rendered by `tools/og.html` (regenerate after changing the tagline).
