@@ -92,6 +92,7 @@ async function boot() {
         const el = document.getElementById(id);
         y = el.getBoundingClientRect().top + scrollY + Math.max(0, el.offsetHeight - innerHeight) * p;
       }
+      lenis?.resize();
       if (lenis) lenis.scrollTo(y, { immediate: true, force: true });
       else window.scrollTo(0, y);
       ScrollTrigger.update();

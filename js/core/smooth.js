@@ -18,6 +18,9 @@ export function initSmooth() {
       ScrollTrigger.update();
     });
     gsap.ticker.add((time) => lenis.raf(time * 1000));
+    // Pinned scenes grow the page after Lenis first measures it; re-measure whenever
+    // ScrollTrigger re-lays out, or jumps get clamped to the old (shorter) page.
+    ScrollTrigger.addEventListener("refresh", () => lenis.resize());
     gsap.ticker.lagSmoothing(0);
   } else {
     let lastY = window.scrollY;
@@ -58,6 +61,7 @@ export function cutTo(target) {
       // A pinned section reports top=0 while pinned; its pin-spacer wrapper has the real position.
       const box = el.parentElement?.classList.contains("pin-spacer") ? el.parentElement : el;
       const y = box.getBoundingClientRect().top + window.scrollY;
+      lenis?.resize();
       if (lenis) lenis.scrollTo(y, { immediate: true, force: true });
       else window.scrollTo(0, y);
       window.ScrollTrigger.update();
@@ -66,7 +70,10 @@ export function cutTo(target) {
 }
 
 export function scrollTo(target, opts = {}) {
-  if (lenis) lenis.scrollTo(target, { duration: 1.4, ...opts });
+  if (lenis) {
+    lenis.resize();
+    lenis.scrollTo(target, { duration: 1.4, ...opts });
+  }
   else {
     const el = typeof target === "string" ? document.querySelector(target) : target;
     const y = typeof target === "number" ? target : el.getBoundingClientRect().top + window.scrollY;

@@ -17,6 +17,7 @@ window.ASSETS = {
   valedictorian: { img: "assets/photos/valedictorian.jpg", alt: "Oscar giving the valedictorian speech at Church Farm School", real: true },
   lacrosse: { img: "assets/photos/lacrosse.jpg", alt: "Oscar playing varsity lacrosse for the Griffins", real: true },
   hmi:      { img: "assets/photos/hmi-collage.jpg", alt: "High Mountain Institute expedition: canyon camp, crew and cooking", real: true },
+  yosemiteSummit: { img: "assets/photos/yosemite-summit.jpg", alt: "Oscar and another hiker on a granite summit in Yosemite", real: true },
   yosemite: { img: "assets/photos/yosemite-halfdome.jpg", alt: "Oscar hiking above Yosemite Valley at golden hour", real: true },
 
   // AI placeholders (Runway)

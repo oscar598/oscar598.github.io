@@ -896,6 +896,8 @@ picture { display: contents; }
 .yos-story p { margin: 0 0 10px; }
 .yos-story p:last-child { font-family: var(--serif); font-style: italic; font-size: 17px; }
 .polaroid--yos { z-index: 3; width: min(220px, 15vw); right: calc(var(--pad) + 1vw); bottom: 10%; transform: rotate(5deg); }
+.polaroid--yos2 { bottom: auto; top: 14%; right: calc(var(--pad) + 2vw); transform: rotate(-4deg); }
+.polaroid--yos2 img { object-position: center 75%; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* ---------- SC 08 · Next ---------- */
@@ -1268,6 +1270,7 @@ body.is-calm .grain { display: none; }
   .yos-caption { left: var(--pad); }
   .polaroid--yos { width: 34vw; right: var(--pad); bottom: 11%; }
   .polaroid--yos figcaption { font-size: 11px; white-space: nowrap; }
+  .polaroid--yos2 { top: auto; right: auto; left: var(--pad); bottom: 11%; }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .bedding .stack { height: 70px; padding: 0 2px 2px; }
   .bedding i { height: 6px; }
