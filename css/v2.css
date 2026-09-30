@@ -850,19 +850,27 @@ body.has-cursor .cursor { display: grid; place-items: center; }
 }
 .slide-count small { display: block; font-size: 11px; color: var(--muted); }
 .slide-count .slide-you { color: #a3e635; margin-top: 2px; }
-.now-media { padding: 0 var(--pad) 0 calc(var(--pad) + 90px); max-width: 1440px; margin: 0 auto; }
-/* Yosemite: the full portrait photo as a print (matches the 3:4 original, so nothing is cropped) */
-.now-media { display: flex; justify-content: center; }
-.yosemite-figure {
-  width: min(460px, 100%);
-  margin: 24px 0 0;
-  padding: 10px 10px 14px;
-  background: #fbf8f1;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
-  transform: rotate(-2deg);
+/* Yosemite: one photo in three depths. The frame covers the viewport at the photo's 16:9,
+   and every layer shares its coordinates (person box measured on the 2000×1125 original). */
+.yos { position: relative; height: 100vh; height: 100svh; overflow: hidden; margin-top: 40px; background: #7f9cc0; }
+.yos-frame {
+  position: absolute; top: 50%; left: 50%;
+  width: max(100%, 177.78vh); aspect-ratio: 16 / 9;
+  transform: translate(-50%, -50%);
 }
-.yosemite-figure .media { aspect-ratio: 3 / 4; }
-.yosemite-figure figcaption { margin-top: 10px; font-family: var(--serif); font-style: italic; font-size: 14px; color: var(--ink); }
+.yos-l { position: absolute; inset: 0; will-change: transform; }
+.yos-l img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.yos-sky { transform-origin: 50% 40%; }
+.yos-land { transform-origin: 60% 75%; }
+.yos-land img { -webkit-mask: url(../assets/yosemite/land-mask.png) 0 0 / 100% 100%; mask: url(../assets/yosemite/land-mask.png) 0 0 / 100% 100%; }
+.yos-haze { background: linear-gradient(to top, rgba(14, 13, 11, 0.85), rgba(14, 13, 11, 0) 45%); }
+.yos-me { inset: auto; left: 61.35%; top: 33.96%; width: 14.2%; height: 66.04%; transform-origin: 50% 100%; }
+.yos-me img { object-fit: fill; }
+.yos-caption { position: absolute; z-index: 3; left: calc(var(--pad) + 90px); top: 14%; color: #0e0d0b; }
+.yos-caption .mono { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; }
+.yos-line { margin: 8px 0 0; font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(28px, 4vw, 56px); line-height: 1.05; max-width: 12ch; }
+.polaroid--yos { z-index: 3; width: min(240px, 18vw); left: calc(var(--pad) + 90px); bottom: 8%; transform: rotate(-5deg); }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* ---------- SC 08 · Next ---------- */
 
@@ -1225,7 +1233,11 @@ body.is-calm .grain, body.is-calm .scroll-cue { display: none; }
   .pin-inner { padding-top: 88px; padding-bottom: 110px; align-content: center; }
   .pin-inner--overlay { align-content: end; }
   .open-copy { left: var(--pad); }
-  .farm-head, .now-media, .next-inner { padding-left: var(--pad); }
+  .farm-head, .next-inner { padding-left: var(--pad); }
+  .yos-frame { transform: translate(-58%, -50%); }
+  .yos-caption { top: 12%; }
+  .yos-caption, .polaroid--yos { left: var(--pad); }
+  .polaroid--yos { width: 40vw; bottom: 12%; }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .bedding { grid-template-columns: repeat(20, 1fr); }
   .filmstrip { gap: 2px; padding: 5px 6px; }

@@ -70,7 +70,7 @@ window.SITE = {
       place: "Przemyśl, Poland → Dublin",
       title: "“What are you doing about it?”",
       body: [
-        "When Russia invaded Ukraine, I told my dad that people only talked about standing with Ukraine. He asked what I was doing about it. Within a week we had raised money through our church, and we spent seven days at a refugee center in Przemyśl, Poland, on the Ukrainian border.",
+        "When Russia invaded Ukraine, my dad and I talked about it every day. He asked what I was doing about it. Within a week we decided to raise money and booked the flights, then spent seven days at a refugee center in Przemyśl, Poland, on the Ukrainian border.",
         "Meanwhile I was building the tech behind International Youth Tobacco Control. I cold-emailed Google and Wix for funding and directed a WHO film that Dr. Tedros shared with 4M+ people.",
       ],
       proof: ["7 days · 14-hour shifts · 400 bedding sets a day", "$25K+ from Google & Wix", "WHO film shared to 4M+", "Presented at the World Conference on Tobacco Control, Dublin"],
@@ -116,14 +116,14 @@ window.SITE = {
         "Now I'm at Princeton. In my first week the orientation socials were flat, so I pitched ten friends, had a slip 'n slide Instacarted to campus, and 200+ freshmen showed up.",
       ],
       proof: ["Princeton '30 · Economics", "Sales intern · Toyota SoCal", "Weeklong solo, Yosemite", "200+ at the slip 'n slide"],
-      quote: "Gotta play in the arena if you want to get hit.",
+      quote: "",
       image: { src: "", alt: "Half Dome at sunrise", idea: "Your Yosemite footage: the Half Dome summit at first light" },
     },
   ],
 
   next: {
-    title: "Next chapter: your team?",
-    body: "I want to take action on things I'm not satisfied with, and give more than I take. If you're building something like that, let's talk.",
+    title: "Next chapter: your team.",
+    body: "I'm a Princeton freshman looking for internships. I move fast, cold-email first, and finish what I start. If your team is building something, I'd like to help.",
   },
 
   // The resume. Plain, printable, one page.

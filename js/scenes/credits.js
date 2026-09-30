@@ -32,7 +32,7 @@ export function initCredits(site, scenes) {
   roll.innerHTML = `
     <p class="credits-title">A Life in Seven Chapters</p>
     ${block("Directed by", [p.name])}
-    ${block("Written by", [p.name])}
+    ${block("Written by", [p.name, "Claude Code"])}
     ${block("Starring", [p.name, "Victor Lu as the twin", "a basketball", "2,000 particles"])}
     ${block("Type", ["Fraunces · Inter · JetBrains Mono"])}
     ${block("Special thanks", ["everyone who answered a cold email", "the Farm", "my family"])}

@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-<script>(function(){try{if(localStorage.getItem("ol_ok")==="1")return}catch(e){}var p=prompt("Password:");if(p==="1234"){try{localStorage.setItem("ol_ok","1")}catch(e){}}else{document.write("<body style=\"background:#0e0d0b;color:#fff;font-family:sans-serif;padding:40px\">Access denied. Reload to try again.</body>");document.close();throw new Error("locked")}})();</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Oscar Lu · A Life in Seven Chapters</title>
@@ -20,7 +19,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/v2.css?v=20260930e">
+  <link rel="stylesheet" href="css/v2.css?v=20260930f">
 </head>
 <body>
   <!-- Film-leader countdown shown on first visit -->
@@ -164,11 +163,20 @@
           <div class="slide-count"><span id="slide-num">0</span><small class="mono">freshmen showed up</small></div>
         </div>
       </div>
-      <div class="now-media">
-        <figure class="yosemite-figure">
-          <div class="media" data-asset="yosemite"></div>
-          <figcaption class="mono">Yosemite, summer 2026 · a week alone, planned three days out</figcaption>
-        </figure>
+      <!-- Yosemite: one photo split into sky, ridges and Oscar, so scrolling dollies the camera through it -->
+      <div class="yos" id="yos">
+        <div class="yos-frame" aria-hidden="true">
+          <div class="yos-l yos-sky"><img src="assets/yosemite/sky.jpg" alt="" decoding="async" loading="lazy"></div>
+          <div class="yos-l yos-land"><img src="assets/yosemite/land.jpg" alt="" decoding="async" loading="lazy"></div>
+          <div class="yos-l yos-haze"></div>
+          <div class="yos-l yos-me"><img src="assets/yosemite/person.png" alt="" decoding="async" loading="lazy"></div>
+        </div>
+        <p class="sr-only">Oscar on a granite summit above the Yosemite high country.</p>
+        <div class="yos-caption">
+          <p class="mono">Yosemite · summer 2026</p>
+          <p class="yos-line">A week alone, planned three days out.</p>
+        </div>
+        <figure class="polaroid polaroid--yos"><div class="media media--tall" data-asset="yosemite"></div><figcaption>above Yosemite Valley</figcaption></figure>
       </div>
     </section>
 
@@ -215,9 +223,9 @@
   <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 
   <!-- Content (shared with v1) + v2 assets manifest -->
-  <script defer src="js/data.js?v=20260930e"></script>
-  <script defer src="js/assets.js?v=20260930e"></script>
+  <script defer src="js/data.js?v=20260930f"></script>
+  <script defer src="js/assets.js?v=20260930f"></script>
 
-  <script type="module" src="js/app.js?v=20260930e"></script>
+  <script type="module" src="js/app.js?v=20260930f"></script>
 </body>
 </html>

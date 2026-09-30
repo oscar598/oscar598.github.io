@@ -65,6 +65,7 @@ async function boot() {
     ["farm", "./scenes/farm.js", "initFarm"],
     ["tested", "./scenes/tested.js", "initTested"],
     ["now", "./scenes/now.js", "initNow"],
+    ["yosemite", "./scenes/yosemite.js", "initYosemite"],
     ["next", "./scenes/next.js", "initNext"],
   ];
   // Fetch every scene module in parallel, then set them up in page order.
