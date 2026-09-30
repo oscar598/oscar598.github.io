@@ -55,6 +55,12 @@ Runway isn't connected to this workspace yet. To connect it:
 1. In the Claude desktop app: **Settings → Connectors → Add custom connector**, URL `https://mcp.runwayml.com/mcp`, then sign in to Runway.
 2. Enable it for the session, then ask Claude to "generate the v2 placeholders from assets/PROMPTS.md".
 
+## Deploying
+
+Push to `main` and GitHub Pages redeploys in about a minute. Browsers cache files for ~10 minutes,
+so when you change CSS or JS, bump the `?v=` value on the `<link>`/`<script>` tags in `index.html`,
+`resume.html` and `v1/index.html` (e.g. `?v=20260930b`) so visitors get the new files right away.
+
 ## Debugging
 
 `?debug` adds two console helpers: `await __go("farm", 0.5)` jumps halfway through a scene, and `__stepAll(300)` advances every physics world (useful when the tab is in the background and animation frames are paused).

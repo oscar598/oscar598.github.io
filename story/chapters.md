@@ -19,7 +19,6 @@ Through-line: **notice a gap → ask the people in charge → build it from zero
 > Money was tight. Before boarding school I slept in the living room and biked an hour to school, which is exactly why I learned to make things happen myself.
 
 **Proof:** orange juice stand, age 8 · eBay store, age 10 · A Better Chance Scholar, 2018
-**Quote:** "I'm a creator, not a consumer."
 **Shot:** a childhood photo in LA (beach, or the orange juice stand).
 **v2 motion:** the photo parallaxes slower than the text, and the year ticks up from 2008.
 **Why it's here:** the founder story starts with *why* you hustle. It's honest without asking for sympathy.

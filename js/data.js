@@ -32,7 +32,7 @@ window.SITE = {
         "Money was tight. Before boarding school I slept in the living room and biked an hour to school, which is exactly why I learned to make things happen myself.",
       ],
       proof: ["Orange juice stand, age 8", "eBay store, age 10", "A Better Chance Scholar, 2018"],
-      quote: "I'm a creator, not a consumer.",
+      quote: "",
       image: { src: "", alt: "Oscar as a kid in Los Angeles", idea: "Childhood photo in LA: the beach, or the orange juice stand if one exists" },
     },
     {
