@@ -40,9 +40,9 @@ export function initYosemite() {
   // Look-around: inner images shift by depth as the pointer moves.
   if (matchMedia("(pointer: fine)").matches) {
     const layers = [
-      [sky.firstElementChild, 0.4],
-      [land.firstElementChild, 1],
-      [me.firstElementChild, 2.2],
+      [sky.querySelector("img"), 0.4],
+      [land.querySelector("img"), 1],
+      [me.querySelector("img"), 2.2],
     ].map(([el, depth]) => ({ x: gsap.quickTo(el, "x", { duration: 0.8, ease: "power3" }), y: gsap.quickTo(el, "y", { duration: 0.8, ease: "power3" }), depth }));
     root.addEventListener("pointermove", (e) => {
       const r = root.getBoundingClientRect();

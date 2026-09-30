@@ -3,9 +3,7 @@
 export const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 export const isTouch = window.matchMedia("(pointer: coarse)").matches;
 
-export const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
 export const lerp = (a, b, t) => a + (b - a) * t;
-export const mapRange = (v, a, b, c, d) => c + ((v - a) / (b - a)) * (d - c);
 export const rand = (min, max) => min + Math.random() * (max - min);
 export const pick = (list) => list[Math.floor(Math.random() * list.length)];
 

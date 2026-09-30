@@ -16,7 +16,6 @@ Through-line: **notice a gap → ask the people in charge → build it from zero
 
 ## SC. 01 · Origin: *The hustle before the hustle* · 2008–2020 · Los Angeles
 > I grew up in LA with my twin brother, Victor. At 8 I was selling orange juice. At 10 it was phone accessories on eBay.
-> Money was tight. Before boarding school I slept in the living room and biked an hour to school, which is exactly why I learned to make things happen myself.
 
 **Proof:** orange juice stand, age 8 · eBay store, age 10 · A Better Chance Scholar, 2018
 **Shot:** a childhood photo in LA (beach, or the orange juice stand).

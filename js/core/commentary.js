@@ -5,7 +5,7 @@ import { esc } from "./util.js";
 
 const NOTES = {
   open: "Your name is a toy. People remember what they touched: every letter is a physics body, and each one hides a chapter (hover them).",
-  origin: "The hustle, told with objects instead of adjectives. Scrolling pours them in, in story order: juice at 8, eBay at 10, the bike ride.",
+  origin: "The hustle, told with objects instead of adjectives. Scrolling pours them in, in story order: juice at 8, eBay at 10, then coins.",
   spark: "2,000 particles = 2,000 community members. They assemble into the tools and the handle that started it. Move your cursor through them.",
   "cold-email": "The key moment is a message. Scroll types it, you press Send, and the reply lands. The visitor re-enacts the cold email.",
   ukraine: "The one scene with no toys. Black screen, one question, then the work counted out: 400 cells = 400 bedding sets in a day.",

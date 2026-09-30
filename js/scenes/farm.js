@@ -6,6 +6,7 @@
 
 import { createWorld } from "../core/world.js";
 import { rand, reduceMotion, onVisible, onResize } from "../core/util.js";
+import { picture } from "../core/media.js";
 
 const { Bodies, Body } = window.Matter;
 
@@ -49,7 +50,7 @@ export function initFarm() {
     const asset = data.photo && window.ASSETS?.[data.photo];
     // Photo cards have a fixed size in CSS, so measuring works before the image loads.
     el.innerHTML = asset
-      ? `<img src="${asset.img}" alt="${asset.alt}" draggable="false"><span>${data.small}</span>`
+      ? `${picture(asset.img, asset.alt, 'draggable="false" decoding="async"')}<span>${data.small}</span>`
       : `<b>${data.big}</b><span>${data.small}</span>`;
     pile.appendChild(el);
     const r = el.getBoundingClientRect();

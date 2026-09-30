@@ -1,7 +1,6 @@
 // SC 01 · Origin
 // Pinned while you scroll: the objects of a kid's hustle pour into the frame and pile up.
-// Oranges and juice cups (age 8), eBay boxes and phone cases (age 10), a bike wheel (the hour-long ride),
-// coins for every sale. You can grab and throw everything.
+// Oranges and juice cups (age 8), eBay boxes and phone cases (age 10), coins for every sale. You can grab and throw everything.
 
 import { createWorld, drawBodies } from "../core/world.js";
 import { rand, reduceMotion } from "../core/util.js";
@@ -12,9 +11,8 @@ const { ScrollTrigger } = window;
 // Waves of objects, in story order. `at` = scroll progress when the wave starts.
 const WAVES = [
   { at: 0.0, caption: "age 8 · orange juice, $1 a cup", kinds: ["orange", "orange", "juice", "coin", "orange", "juice", "coin", "orange", "orange", "juice", "coin", "orange"] },
-  { at: 0.3, caption: "age 10 · phone accessories on eBay", kinds: ["box", "phone", "box", "coin", "phone", "box", "coin", "phone", "box", "phone", "coin"] },
-  { at: 0.6, caption: "an hour each way · the bike ride to school", kinds: ["bike", "coin", "coin", "orange", "box"] },
-  { at: 0.85, caption: "→ it all adds up", kinds: ["coin", "coin", "coin", "coin", "coin", "coin", "coin", "coin", "coin", "coin", "coin", "coin"] },
+  { at: 0.35, caption: "age 10 · phone accessories on eBay", kinds: ["box", "phone", "box", "coin", "phone", "box", "coin", "phone", "box", "phone", "coin"] },
+  { at: 0.7, caption: "→ it all adds up", kinds: ["coin", "coin", "coin", "coin", "coin", "coin", "coin", "coin", "coin", "coin", "coin", "coin"] },
 ];
 
 export function initOrigin() {
@@ -154,31 +152,6 @@ export function initOrigin() {
           roundRect(c, -w * 0.32, -h * 0.4, w * 0.3, w * 0.3, 3);
           c.fill();
         }, (c) => roundRect(c, -w / 2, -h / 2, w, h, w * 0.2));
-        break;
-      }
-      case "bike": {
-        const r = u * 1.6;
-        body = Bodies.circle(x, y, r, { ...common, restitution: 0.5, density: 0.0009 });
-        body.plugin.draw = spriteOr("bike", r * 2, r * 2, (c) => {
-          c.strokeStyle = "#f2ede3";
-          c.lineWidth = u * 0.28;
-          c.beginPath();
-          c.arc(0, 0, r - u * 0.14, 0, Math.PI * 2);
-          c.stroke();
-          c.lineWidth = 1;
-          c.strokeStyle = "rgba(242,237,227,0.7)";
-          for (let i = 0; i < 16; i++) {
-            const a = (i / 16) * Math.PI * 2;
-            c.beginPath();
-            c.moveTo(0, 0);
-            c.lineTo(Math.cos(a) * (r - u * 0.3), Math.sin(a) * (r - u * 0.3));
-            c.stroke();
-          }
-          c.fillStyle = "#ff4b2b";
-          c.beginPath();
-          c.arc(0, 0, u * 0.22, 0, Math.PI * 2);
-          c.fill();
-        });
         break;
       }
       default: {

@@ -7,7 +7,7 @@ import { scrollState } from "./smooth.js";
 
 const { gsap } = window;
 
-export const perf = { lowPower: false };
+const perf = { lowPower: false };
 
 export function initFilm() {
   const grain = document.querySelector(".grain");

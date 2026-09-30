@@ -359,6 +359,7 @@ body.has-cursor .cursor { display: grid; place-items: center; }
   overflow: hidden;
   background: var(--ink-3);
 }
+picture { display: contents; }
 .media.is-empty { background: linear-gradient(135deg, var(--ink-3), var(--ink-2)); }
 .media img, .media video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .media .tag {
@@ -1209,7 +1210,7 @@ body.show-notes .director-note { opacity: 1; transform: rotate(2deg) translateY(
 .skip-link:focus { top: 12px; }
 
 .chip--ghost { opacity: 0.8; }
-body.is-calm .grain, body.is-calm .scroll-cue { display: none; }
+body.is-calm .grain { display: none; }
 
 /* Film cut used by chapter navigation */
 .cut {

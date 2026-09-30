@@ -28,7 +28,6 @@ window.ASSETS = {
     juice:  "assets/sprites/juice.png",
     box:    "", // procedural box keeps the "eBay" label
     phone:  "assets/sprites/phone.png",
-    bike:   "", // procedural wheel has see-through spokes
     lax:    "assets/sprites/lax.png",
   },
 };
