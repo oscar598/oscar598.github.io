@@ -41,11 +41,20 @@ export function initUkraine() {
   }
 
   // ---- 400 bedding sets ----
+  // Folded sets land on laundry shelves: 40 stacks of 10, filled one stack at a time.
+  const LINENS = ["#f4f1ea", "#e9edf2", "#c9d8e8", "#f1e3d3", "#cfdcc8", "#efd6d6", "#f4f1ea", "#dfe6ee"];
   const cells = [];
-  for (let i = 0; i < 400; i++) {
-    const c = document.createElement("i");
-    bedding.appendChild(c);
-    cells.push(c);
+  for (let s = 0; s < 40; s++) {
+    const stack = document.createElement("div");
+    stack.className = "stack";
+    for (let k = 0; k < 10; k++) {
+      const c = document.createElement("i");
+      c.style.setProperty("--c", LINENS[(s * 7 + k * 3) % LINENS.length]);
+      c.style.setProperty("--dx", `${((s * 13 + k * 7) % 5) - 2}px`);
+      stack.appendChild(c);
+      cells.push(c);
+    }
+    bedding.appendChild(stack);
   }
   const cap = document.createElement("p");
   cap.className = "bedding-cap";

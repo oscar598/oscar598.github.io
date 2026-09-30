@@ -14,7 +14,6 @@ window.SITE = {
     email: "ol7039@princeton.edu",
     links: [
       { label: "Instagram", url: "https://www.instagram.com/oscarl.u/" },
-      { label: "GitHub", url: "https://github.com/oscar598" },
       { label: "LinkedIn", url: "https://www.linkedin.com/in/oscarlu23/" },
     ],
   },

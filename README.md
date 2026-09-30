@@ -1,6 +1,6 @@
 # Oscar Lu: "A Life in Seven Chapters"
 
-The homepage (`/`) is the physics + motion version: every chapter is a scene you can play with. The calm, readable v1 lives at `/v1/`. Live at https://oscar598.github.io/
+The homepage (`/`) is the physics + motion version: every chapter is a scene you can play with. Live at https://oscar598.github.io/
 Both read the **same words** from `/js/data.js`, and both link to the same `/resume.html`.
 
 Run it locally:
@@ -41,7 +41,7 @@ Then open http://localhost:8080/ (add `?debug` to skip the intro countdown).
 
 ## Editing
 
-- **Words** → `/js/data.js` (shared with v1 and the resume).
+- **Words** → `/js/data.js` (shared with the resume).
 - **Scene-specific lines** (email text, credits, acrostic facts, director's notes) live at the top of each scene file.
 - **Media** → `js/assets.js`. Real photos live in `assets/photos/`; the only AI placeholder left is the LA diorama. Put a file in `assets/` and set its path, e.g.
   `harvard: { img: "assets/harvard.jpg" }`. Video works too (`video: "assets/clip.mp4"`).
@@ -57,8 +57,8 @@ Runway isn't connected to this workspace yet. To connect it:
 ## Deploying
 
 Push to `main` and GitHub Pages redeploys in about a minute. Browsers cache files for ~10 minutes,
-so when you change CSS or JS, bump the `?v=` value on the `<link>`/`<script>` tags in `index.html`,
-`resume.html` and `v1/index.html` (e.g. `?v=20260930b`) so visitors get the new files right away.
+so when you change CSS or JS, bump the `?v=` value on the `<link>`/`<script>` tags in `index.html`
+and `resume.html` (e.g. `?v=20260930b`) so visitors get the new files right away.
 
 ## Debugging
 

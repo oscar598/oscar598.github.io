@@ -40,11 +40,6 @@ if (location.hash === "#print") {
   window.addEventListener("load", () => setTimeout(() => window.print(), 400));
 }
 
-// Came here from the calm version (v1)? Send "← Watch the story" back there instead of the homepage.
-if (document.referrer.includes("/v1/")) {
-  document.getElementById("back-link")?.setAttribute("href", "v1/");
-}
-
 document.getElementById("resume").innerHTML = `
   <header>
     <h1>${esc(p.name)}</h1>

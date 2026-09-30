@@ -98,7 +98,7 @@ Through-line: **notice a gap → ask the people in charge → build it from zero
 ## SC. 08 · Next chapter: *your team?* · 20??
 > I want to take action on things I'm not satisfied with, and give more than I take. If you're building something like that, let's talk.
 
-**Buttons:** Email me · Resume · Instagram · GitHub · LinkedIn (add the URL in `data.js`)
+**Buttons:** Email me · Resume · Instagram · LinkedIn
 **v2 motion:** the red timeline runs into an empty page with a blinking cursor. The blank page is the ask.
 
 ---
