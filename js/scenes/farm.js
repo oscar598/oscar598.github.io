@@ -18,6 +18,8 @@ const CARDS = [
   { big: "Editor-in-Chief", small: "40-person team" },
   { big: "$3K", small: "raised · first print in a decade" },
   { big: "Captain", small: "varsity lacrosse → championship game", style: "ink" },
+  // A real photo you can throw around with the rest of the pile
+  { photo: "lacrosse", small: "#11 · Griffins lacrosse" },
   { big: "All-League", small: "Penn-Jersey First Team" },
   { big: "Co-President", small: "class government" },
   { big: "J-Term", small: "outdoor program, built from zero", style: "accent" },
@@ -45,8 +47,12 @@ export function initFarm() {
 
   function makeCard(data, i) {
     const el = document.createElement("div");
-    el.className = "card" + (data.style ? ` card--${data.style}` : "");
-    el.innerHTML = `<b>${data.big}</b><span>${data.small}</span>`;
+    el.className = "card" + (data.style ? ` card--${data.style}` : "") + (data.photo ? " card--photo" : "");
+    const asset = data.photo && window.ASSETS?.[data.photo];
+    // Photo cards have a fixed size in CSS, so measuring works before the image loads.
+    el.innerHTML = asset
+      ? `<img src="${asset.img}" alt="${asset.alt}" draggable="false"><span>${data.small}</span>`
+      : `<b>${data.big}</b><span>${data.small}</span>`;
     pile.appendChild(el);
     const r = el.getBoundingClientRect();
     const w = r.width;

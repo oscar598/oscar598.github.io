@@ -27,7 +27,7 @@ Through-line: **notice a gap → ask the people in charge → build it from zero
 
 ## SC. 02 · The Spark: *Stuck at home with Photoshop* · 2020–2021
 > COVID locked me inside in 7th grade, so I taught myself Photoshop by reverse-engineering NBA graphics.
-> A Michael Pittman Jr. fan page grew into @mpjgfx, a 2,000-member sports design community with free resources and contests. My first paid design came in February 2021. I spent all of it on candy.
+> An Instagram fan page grew into a 2,000-member sports design community with free resources and contests. My first paid design came in February 2021. I spent all of it on candy.
 
 **Proof:** 2,000+ community members · first paid design, Feb 2021
 **Shot:** an early @mpjgfx graphic inside a phone frame.

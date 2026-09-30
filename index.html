@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,900;1,9..144,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/v2.css?v=20260930b">
+  <link rel="stylesheet" href="css/v2.css?v=20260930c">
 </head>
 <body>
   <!-- Film-leader countdown shown on first visit -->
@@ -102,7 +102,7 @@
             <div class="media" data-asset="harvard"></div>
             <figcaption class="mono">my graphic on the board at Lavietes Pavilion</figcaption>
           </figure>
-          <figure class="polaroid polaroid--meeting" id="meeting-photo"><div class="media media--tall" data-asset="meeting"></div><figcaption>the call became a meeting</figcaption></figure>
+          <figure class="polaroid polaroid--meeting" id="meeting-photo"><div class="media media--tall" data-asset="meeting"></div><figcaption>the call became a visit</figcaption></figure>
           <div class="odometer" id="impressions"><span class="odo-num">0</span><span class="odo-label mono">years with Harvard Men's Basketball</span></div>
         </div>
       </div>
@@ -114,7 +114,10 @@
         <p class="question-line" id="question-line"></p>
       </div>
       <div class="ukraine-body">
-        <div class="copy" data-chapter="3"></div>
+        <div>
+          <div class="copy" data-chapter="3"></div>
+          <figure class="polaroid polaroid--story" style="--tilt:-2deg"><div class="media" data-asset="przemysl"></div><figcaption>Przemyśl, April 2022 · with Medair volunteers</figcaption></figure>
+        </div>
         <div class="bedding" id="bedding" aria-label="400 bedding sets washed per day"></div>
         <div class="stats" id="ukraine-stats"></div>
         <div class="photo-row photo-row--dublin">
@@ -129,10 +132,13 @@
     <section class="scene scene--farm" id="farm" data-label="The Farm">
       <div class="farm-head">
         <div class="copy" data-chapter="4"></div>
-        <figure class="polaroid polaroid--farm"><div class="media media--tall" data-asset="farm"></div><figcaption>printed again, 2024</figcaption></figure>
+        <div class="farm-photos">
+          <figure class="polaroid polaroid--farm"><div class="media" data-asset="valedictorian"></div><figcaption>valedictorian speech, 2026</figcaption></figure>
+          <figure class="polaroid polaroid--farm-back"><div class="media media--tall" data-asset="farm"></div><figcaption>printed again, 2024</figcaption></figure>
+        </div>
       </div>
       <div class="pile" id="pile" data-cursor="throw">
-        <div class="pile-hint mono">grab a card · throw the ball · click to toss a cap</div>
+        <div class="pile-hint mono">grab a card (even the photo) · throw the ball · click to toss a cap</div>
       </div>
     </section>
 
@@ -144,6 +150,7 @@
       <div class="pin-inner pin-inner--overlay">
         <div class="copy copy--light" data-chapter="5"></div>
       </div>
+      <figure class="polaroid polaroid--hmi"><div class="media media--tall" data-asset="hmi"></div><figcaption>HMI · Rockies &amp; Utah canyons</figcaption></figure>
     </section>
 
     <!-- SC 07: freshmen slide down a physics slip 'n slide -->
@@ -156,7 +163,10 @@
         </div>
       </div>
       <div class="now-media">
-        <div class="media media--wide" data-asset="yosemite"></div>
+        <figure class="yosemite-figure">
+          <div class="media media--wide" data-asset="yosemite"></div>
+          <figcaption class="mono">Yosemite, summer 2026 · a week alone, planned three days out</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -203,9 +213,9 @@
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 
   <!-- Content (shared with v1) + v2 assets manifest -->
-  <script src="js/data.js?v=20260930b"></script>
-  <script src="js/assets.js?v=20260930b"></script>
+  <script src="js/data.js?v=20260930c"></script>
+  <script src="js/assets.js?v=20260930c"></script>
 
-  <script type="module" src="js/app.js?v=20260930b"></script>
+  <script type="module" src="js/app.js?v=20260930c"></script>
 </body>
 </html>

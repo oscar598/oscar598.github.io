@@ -480,10 +480,21 @@ body.has-cursor .cursor { display: grid; place-items: center; }
   .photo-row { gap: 12px; }
 }
 .polaroid--origin { width: 34%; top: -26px; right: -18px; transform: rotate(5deg); }
-.polaroid--farm { position: relative; width: 100%; margin-top: 70px; transform: rotate(-4deg); }
+/* Farm: valedictorian photo in front, Griffin Review cover tucked behind it */
+.farm-photos { position: relative; margin-top: 70px; padding-bottom: 150px; }
+.polaroid--farm { position: relative; z-index: 2; width: 100%; transform: rotate(-3deg); }
+.polaroid--farm-back { position: absolute; z-index: 1; width: 56%; right: -8%; bottom: 0; transform: rotate(6deg); }
+
+/* Ukraine: the tent photo sits under the story text */
+.polaroid--story { position: relative; width: min(460px, 100%); margin-top: 32px; transform: rotate(var(--tilt, 0deg)); }
+
+/* Tested: HMI collage pinned over the sunrise (right side on desktop) */
+.polaroid--hmi { z-index: 2; width: min(300px, 24vw); right: calc(var(--pad) + 1vw); top: 50%; transform: translateY(-40%) rotate(4deg); }
+
 @media (max-width: 860px) {
   .polaroid--origin { width: 38%; top: -14px; right: -6px; }
-  .polaroid--farm { width: 62%; margin: 24px 0 0 auto; }
+  .farm-photos { width: 72%; margin: 24px 0 0 auto; padding-bottom: 110px; }
+  .polaroid--hmi { width: 36%; top: 118px; right: 12px; transform: rotate(4deg); }
 }
 
 /* ---------- SC 02 · Spark ---------- */
@@ -724,6 +735,9 @@ body.has-cursor .cursor { display: grid; place-items: center; }
 }
 .card b { display: block; font-family: var(--serif); font-weight: 900; font-size: 26px; line-height: 1.05; letter-spacing: -0.02em; }
 .card span { font-family: var(--mono); font-size: 11px; color: #6b665d; }
+.card--photo { width: 150px; padding: 8px 8px 10px; }
+.card--photo img { display: block; width: 134px; height: 168px; object-fit: cover; border-radius: 2px; pointer-events: none; }
+.card--photo span { display: block; margin-top: 6px; }
 .card--accent { background: var(--accent); }
 .card--accent span { color: var(--ink); }
 .card--ink { background: var(--ink); color: var(--paper); }
@@ -846,6 +860,12 @@ body.has-cursor .cursor { display: grid; place-items: center; }
 .slide-count .slide-you { color: #a3e635; margin-top: 2px; }
 .now-media { padding: 0 var(--pad) 0 calc(var(--pad) + 90px); max-width: 1440px; margin: 0 auto; }
 .media--wide { aspect-ratio: 21 / 9; border-radius: 6px; }
+/* The real Yosemite shot is portrait: frame the valley and the hiker in the wide strip */
+.yosemite-figure { margin: 0; }
+.yosemite-figure .media--wide { aspect-ratio: 16 / 9; }
+.yosemite-figure img { object-position: center 64%; }
+.yosemite-figure figcaption { margin-top: 10px; font-size: 12px; color: var(--muted); }
+@media (max-width: 860px) { .yosemite-figure .media--wide { aspect-ratio: 4 / 5; } }
 
 /* ---------- SC 08 · Next ---------- */
 

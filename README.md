@@ -45,7 +45,7 @@ Then open http://localhost:8080/ (add `?debug` to skip the intro countdown).
 - **Scene-specific lines** (email text, credits, acrostic facts, director's notes) live at the top of each scene file.
 - **Media** → `js/assets.js`. Every slot currently shows a designed placeholder drawn in code
   (the Harvard poster, Half Dome at alpenglow). Put a file in `assets/` and set its path, e.g.
-  `harvard: { img: "assets/harvard.jpg" }`. Video works too (`video: "assets/yosemite.mp4"`).
+  `harvard: { img: "assets/harvard.jpg" }`. Video works too (`video: "assets/clip.mp4"`).
 - **Physics sprites** for the Origin scene → `ASSETS.sprites` (transparent PNGs). Prompts ready in `assets/PROMPTS.md`.
 - **Share card** → `assets/og.jpg`, rendered by `tools/og.html` (regenerate after changing the tagline).
 

@@ -1,7 +1,7 @@
 // v2 entry point. Wires global chrome (smooth scroll, cursor, rope, film strip, sound, easter eggs)
 // and boots each scene. Scenes are loaded independently, so one failing never blanks the page.
 
-import { initSmooth, cutTo } from "./core/smooth.js";
+import { initSmooth, cutTo, lenis } from "./core/smooth.js";
 import { initCursor } from "./core/cursor.js";
 import { initRope } from "./core/rope.js";
 import { runLeader } from "./core/leader.js";
@@ -85,7 +85,8 @@ async function boot() {
         const el = document.getElementById(id);
         y = el.getBoundingClientRect().top + scrollY + Math.max(0, el.offsetHeight - innerHeight) * p;
       }
-      window.scrollTo(0, y);
+      if (lenis) lenis.scrollTo(y, { immediate: true, force: true });
+      else window.scrollTo(0, y);
       ScrollTrigger.update();
       await new Promise((r) => setTimeout(r, 200));
       ScrollTrigger.update();
