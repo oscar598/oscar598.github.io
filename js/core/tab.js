@@ -5,7 +5,7 @@ const { ScrollTrigger } = window;
 
 export function initTab() {
   const base = "Oscar Lu";
-  let current = `${base} · A Life in Seven Chapters`;
+  let current = `${base} · The Story So Far`;
 
   const link = document.querySelector('link[rel="icon"]') || document.head.appendChild(Object.assign(document.createElement("link"), { rel: "icon" }));
   const c = document.createElement("canvas");
@@ -37,7 +37,7 @@ export function initTab() {
       end: "bottom center",
       onToggle(self) {
         if (!self.isActive) return;
-        current = i === 0 ? `${base} · A Life in Seven Chapters` : `${n} · ${label} · ${base}`;
+        current = i === 0 ? `${base} · The Story So Far` : `${n} · ${label} · ${base}`;
         if (!document.hidden) document.title = current;
         favicon(i === 0 ? "OL" : n);
       },

@@ -8,7 +8,7 @@ window.SITE = {
   person: {
     name: "Oscar Lu",
     tagline: "I cold-emailed Harvard Basketball at 13. They said yes.",
-    subtitle: "A life in seven chapters. Scroll.",
+    subtitle: "The story so far. Scroll.",
     thesis: "Getting things done has always been my motto.",
     location: "Los Angeles → Princeton",
     email: "ol7039@princeton.edu",

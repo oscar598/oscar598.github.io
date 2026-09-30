@@ -1,4 +1,4 @@
-# Chapter Scripts: "A Life in Seven Chapters"
+# Chapter Scripts: "The Story So Far"
 
 These are the scripts behind the site. The words match `js/data.js` exactly, and this file adds the director's notes: the shot, the v2 motion, and why each chapter exists.
 **To change the site, edit `js/data.js`** (or mark up this file and ask me to sync it).
@@ -8,7 +8,7 @@ Through-line: **notice a gap → ask the people in charge → build it from zero
 ---
 
 ## SC. 00 · Cold open
-**On screen:** Oscar Lu / *"I cold-emailed Harvard Basketball at 13. They said yes."* / "A life in seven chapters. Scroll."
+**On screen:** Oscar Lu / *"I cold-emailed Harvard Basketball at 13. They said yes."* / "The story so far. Scroll."
 **Job:** earn the scroll in two seconds. The hook is the strongest true fact about you.
 **v2 motion:** the letters of your name assemble, the red timeline starts drawing, and the year reads 2008.
 

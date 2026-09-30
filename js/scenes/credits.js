@@ -30,7 +30,7 @@ export function initCredits(site, scenes) {
     `<div class="credit"><span class="mono">${esc(role)}</span><b>${names.map(esc).join("<br>")}</b></div>`;
 
   roll.innerHTML = `
-    <p class="credits-title">A Life in Seven Chapters</p>
+    <p class="credits-title">The Story So Far</p>
     ${block("Directed by", [p.name])}
     ${block("Written by", [p.name, "Claude Code"])}
     ${block("Starring", [p.name, "Victor Lu as the twin", "a basketball", "2,000 particles"])}
@@ -55,7 +55,7 @@ export function initCredits(site, scenes) {
 
   document.getElementById("share").addEventListener("click", async () => {
     const url = location.href.split("#")[0].replace(/\?debug.*/, "");
-    const data = { title: `${p.name}: a life in seven chapters`, text: p.tagline, url };
+    const data = { title: `${p.name}: the story so far`, text: p.tagline, url };
     try {
       if (navigator.share) await navigator.share(data);
       else {

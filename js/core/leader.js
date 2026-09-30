@@ -93,7 +93,7 @@ export function runLeader() {
       // Label
       ctx.fillStyle = "#ff4b2b";
       ctx.font = `500 12px "JetBrains Mono", monospace`;
-      ctx.fillText("OSCAR LU · A LIFE IN SEVEN CHAPTERS", cx, cy + r + 28);
+      ctx.fillText("OSCAR LU · THE STORY SO FAR", cx, cy + r + 28);
 
       requestAnimationFrame(frame);
     }

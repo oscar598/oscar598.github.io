@@ -1,4 +1,4 @@
-# Oscar Lu: "A Life in Seven Chapters"
+# Oscar Lu: "The Story So Far"
 
 The homepage (`/`) is the physics + motion version: every chapter is a scene you can play with. Live at https://oscar598.github.io/
 Both read the **same words** from `/js/data.js`, and both link to the same `/resume.html`.
