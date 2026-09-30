@@ -12,9 +12,10 @@ export function initYosemite() {
   const [sky, land, haze, me] = [".yos-sky", ".yos-land", ".yos-haze", ".yos-me"].map($);
   const caption = $(".yos-caption");
   const print = $(".polaroid--yos");
+  const story = root.querySelectorAll(".yos-story p");
 
   if (reduceMotion) {
-    gsap.set([caption, print], { opacity: 1 });
+    gsap.set([caption, print, ...story], { opacity: 1 });
     return {};
   }
 
@@ -29,7 +30,8 @@ export function initYosemite() {
       .fromTo(haze, { opacity: 0 }, { opacity: 0.55 }, 0)
       .fromTo(me, { scale: 1, xPercent: 0 }, { scale: meScale, xPercent: -2 }, 0)
       .fromTo(caption, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" }, 0.1)
-      .fromTo(print, { opacity: 0, y: 120, rotate: -12 }, { opacity: 1, y: 0, rotate: -5, duration: 0.35, ease: "power2.out" }, 0.45);
+      .fromTo(story, { opacity: 0, y: 20 }, { opacity: 1, y: 0, stagger: 0.08, duration: 0.2, ease: "power2.out" }, 0.22)
+      .fromTo(print, { opacity: 0, y: 120, rotate: 12 }, { opacity: 1, y: 0, rotate: 5, duration: 0.35, ease: "power2.out" }, 0.45);
   };
   const mm = gsap.matchMedia();
   mm.add("(min-width: 861px)", () => build(1.36, "+=160%"));

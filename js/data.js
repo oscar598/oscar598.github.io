@@ -111,10 +111,10 @@ window.SITE = {
       place: "Princeton, NJ",
       title: "Playing in the arena",
       body: [
-        "This summer I sold cars at Toyota Southern California. Then I wanted to go backpacking, and three days later I was alone in Yosemite for a week.",
+        "This summer I sold cars at Toyota Southern California. Then I found one wilderness permit left for Yosemite, bought it, and two days later I was at the trailhead alone.",
         "Now I'm at Princeton. In my first week the orientation socials were flat, so I pitched ten friends, had a slip 'n slide Instacarted to campus, and 200+ freshmen showed up.",
       ],
-      proof: ["Princeton '30 · Economics", "Sales intern · Toyota SoCal", "Weeklong solo, Yosemite", "200+ at the slip 'n slide"],
+      proof: ["Princeton '30 · Economics", "Sales intern · Toyota SoCal", "5-day solo trip, Yosemite", "200+ at the slip 'n slide"],
       quote: "",
       image: { src: "", alt: "Half Dome at sunrise", idea: "Your Yosemite footage: the Half Dome summit at first light" },
     },
