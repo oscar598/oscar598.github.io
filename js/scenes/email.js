@@ -1,7 +1,7 @@
 // SC 03 · The cold email
 // Pinned. Scrolling types the email (a reconstruction of the one Oscar sent at 13).
 // Hit Send (or keep scrolling): the paper plane flies, Harvard replies, the recruiting
-// graphic slams onto the table, and the impressions counter spins up to 1,000,000.
+// graphic slams onto the table, and the counter ticks up to four years together.
 
 import { reduceMotion, formatNumber } from "../core/util.js";
 import { sound } from "../core/sound.js";
@@ -110,7 +110,7 @@ export function initEmail() {
     type(1);
     send();
     flight.progress(1);
-    odo.textContent = "1,000,000+";
+    odo.textContent = "4";
     return {};
   }
 
@@ -119,10 +119,10 @@ export function initEmail() {
     type(Math.min(1, p / 0.5));
     if (p > 0.58) send();
     else unsend();
-    // Impressions odometer runs in the last third
+    // The years counter runs in the last third: 0 → 4 years with Harvard MBB
     const o = Math.max(0, Math.min(1, (p - 0.66) / 0.3));
     const eased = 1 - Math.pow(1 - o, 3);
-    odo.textContent = formatNumber(eased * 1_000_000) + (o >= 1 ? "+" : "");
+    odo.textContent = formatNumber(eased * 4);
   };
   // Desktop pins the whole scene; phones pin just the stage.
   const mm = gsap.matchMedia();

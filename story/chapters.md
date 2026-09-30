@@ -41,7 +41,7 @@ Through-line: **notice a gap → ask the people in charge → build it from zero
 > At 13, with an improvised portfolio, I emailed Harvard Men's Basketball. A few emails later we were on a call, and by the end of it we were in business: four years of recruiting graphics, social and arena work.
 > At 14 I turned it into Oscar Lu Design Co. I led a four-person team, worked with Big Baller Brand, and ran it to five-figure profit before closing it after high school.
 
-**Proof:** 4-year client: Harvard Men's Basketball · Big Baller Brand · 1M+ impressions · five-figure profit
+**Proof:** 4-year client: Harvard Men's Basketball · Big Baller Brand · five-figure profit
 **Quote:** "That one bold move gave me the confidence to launch my own design agency."
 **Shot:** your best Harvard MBB graphic, full-bleed. **This is the single most important image on the site.**
 **v2 motion:** an email types itself out → "Sent" → the reply lands → the Harvard graphic slams in.
@@ -85,10 +85,10 @@ Through-line: **notice a gap → ask the people in charge → build it from zero
 ---
 
 ## SC. 07 · Now: *Playing in the arena* · 2026 · Princeton
-> This summer I sold cars at Toyota: eight sales from my leads. Then I wanted to go backpacking, and three days later I was alone in Yosemite for a week.
+> This summer I sold cars at Toyota Southern California. Then I wanted to go backpacking, and three days later I was alone in Yosemite for a week.
 > Now I'm at Princeton. In my first week the orientation socials were flat, so I pitched ten friends, had a slip 'n slide Instacarted to campus, and 200+ freshmen showed up.
 
-**Proof:** Princeton '30 · Economics · 8 sales · Toyota SoCal · weeklong solo, Yosemite · 200+ at the slip 'n slide
+**Proof:** Princeton '30 · Economics · Sales intern · Toyota SoCal · weeklong solo, Yosemite · 200+ at the slip 'n slide
 **Quote:** "Gotta play in the arena if you want to get hit."
 **Shot:** your Yosemite footage, Half Dome at first light. (Could be a muted looping video in v2.)
 **v2 motion:** a 3-second silent Half Dome loop, then the slip 'n slide count ticks up to 200+.

@@ -59,7 +59,7 @@ window.SITE = {
         "At 13, with an improvised portfolio, I emailed Harvard Men's Basketball. A few emails later we were on a call, and by the end of it we were in business: four years of recruiting graphics, social and arena work.",
         "At 14 I turned it into Oscar Lu Design Co. I led a four-person team, worked with Big Baller Brand, and ran it to five-figure profit before closing it after high school.",
       ],
-      proof: ["4-year client: Harvard Men's Basketball", "Big Baller Brand", "1M+ impressions", "Five-figure profit"],
+      proof: ["4-year client: Harvard Men's Basketball", "Big Baller Brand", "Five-figure profit"],
       quote: "That one bold move gave me the confidence to launch my own design agency.",
       image: { src: "", alt: "Harvard Men's Basketball recruiting graphic designed by Oscar", idea: "Your best Harvard MBB graphic, full-bleed" },
     },
@@ -112,10 +112,10 @@ window.SITE = {
       place: "Princeton, NJ",
       title: "Playing in the arena",
       body: [
-        "This summer I sold cars at Toyota: eight sales from my leads. Then I wanted to go backpacking, and three days later I was alone in Yosemite for a week.",
+        "This summer I sold cars at Toyota Southern California. Then I wanted to go backpacking, and three days later I was alone in Yosemite for a week.",
         "Now I'm at Princeton. In my first week the orientation socials were flat, so I pitched ten friends, had a slip 'n slide Instacarted to campus, and 200+ freshmen showed up.",
       ],
-      proof: ["Princeton '30 · Economics", "8 sales · Toyota SoCal", "Weeklong solo, Yosemite", "200+ at the slip 'n slide"],
+      proof: ["Princeton '30 · Economics", "Sales intern · Toyota SoCal", "Weeklong solo, Yosemite", "200+ at the slip 'n slide"],
       quote: "Gotta play in the arena if you want to get hit.",
       image: { src: "", alt: "Half Dome at sunrise", idea: "Your Yosemite footage: the Half Dome summit at first light" },
     },
@@ -148,14 +148,14 @@ window.SITE = {
         role: "Founder & Creative Director", org: "Oscar Lu Design Co.", place: "Los Angeles, CA", dates: "Jun 2022 – 2026",
         bullets: [
           "Turned self-taught design skills into a business with five-figure profit, using a social-media portfolio and cold outreach to win Harvard Men's Basketball, Big Baller Brand, and other direct clients.",
-          "Created brand identities, recruiting graphics, and uniform concepts generating 1M+ impressions; led a four-person team from pitch through final delivery.",
+          "Created brand identities, recruiting graphics, and uniform concepts; led a four-person team from pitch through final delivery.",
         ],
       },
       {
         role: "Sales Intern", org: "Toyota Southern California", place: "Costa Mesa, CA", dates: "Jun–Aug 2026",
         bullets: [
           "Opened conversations with walk-in customers, uncovered their needs and budgets, and guided them toward relevant vehicles.",
-          "Qualified prospects for sales representatives, generating leads that resulted in eight completed vehicle sales over three months.",
+          "Qualified prospects and handed off leads to the sales team.",
         ],
       },
       {
@@ -180,7 +180,6 @@ window.SITE = {
         // UNCONFIRMED: exact years as class co-president
         role: "Class Co-President", org: "Church Farm School", place: "Exton, PA", dates: "2024 – 2026",
         bullets: [
-          "Led a two-year campaign using resident surveys and learning-design research that secured Board approval for a $1M dormitory renovation.",
           "Created an outdoor program from zero: recruited 15 students, secured funding, piloted camping trips, and persuaded leadership to establish an outdoor-education J-Term course.",
         ],
       },

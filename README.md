@@ -18,7 +18,7 @@ Then open http://localhost:8080/ (add `?debug` to skip the intro countdown).
 | 00 | Cold open | "OSCAR LU" drops in as physics letters; grab/throw them, hover for the acrostic, a basketball joins | `js/scenes/open.js` |
 | 01 | Origin | Scrolling pours in the hustle: oranges, juice cups, eBay boxes, phones, the bike wheel, coins | `js/scenes/origin.js` |
 | 02 | Spark | 2,000 particles (one per community member) morph: scatter → "Ps" → @mpjgfx → 2,000 | `js/scenes/spark.js` |
-| 03 | Cold email | Scroll types the email → Send → paper plane → Harvard replies → poster slams down → 1,000,000 | `js/scenes/email.js` |
+| 03 | Cold email | Scroll types the email → Send → paper plane → Harvard replies → poster slams down → 4 years | `js/scenes/email.js` |
 | 04 | "What are you doing about it?" | Calm on purpose: the question, 400 bedding sets lighting up, the numbers, the network to Dublin | `js/scenes/ukraine.js` |
 | 05 | The Farm | Yearbook cards are physical; the lacrosse ball knocks them over; click to toss grad caps | `js/scenes/farm.js` |
 | 06 | Tested | Scroll = the climb: 3 a.m. to sunrise, 10,152 → 14,000 ft, headlamp on the trail, shooting star | `js/scenes/tested.js` |
