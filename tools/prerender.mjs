@@ -31,9 +31,9 @@ const person = {
   url: URL_BASE,
   image: URL_BASE + "assets/photos/portrait.jpg",
   email: "mailto:" + p.email,
-  jobTitle: "Graphic designer and founder",
+  jobTitle: "Graphic designer, founder and event organizer",
   description:
-    "Self-taught sports graphic designer and founder from Los Angeles, studying at Princeton University (Class of 2030). At 13 he cold-emailed Harvard Men's Basketball and designed their recruiting graphics for four years, then founded Oscar Lu Design Co.",
+    "Self-taught sports graphic designer and founder from Los Angeles, studying at Princeton University (Class of 2030). At 13 he cold-emailed Harvard Men's Basketball and designed their recruiting graphics for four years, then founded Oscar Lu Design Co. He also throws events and launches projects that get people talking, like a 200+ person slip 'n slide in his first week at Princeton.",
   homeLocation: { "@type": "Place", name: "Los Angeles, California" },
   affiliation: { "@type": "CollegeOrUniversity", name: "Princeton University", url: "https://www.princeton.edu/" },
   alumniOf: [{ "@type": "HighSchool", name: "Church Farm School", address: "Exton, Pennsylvania" }],
@@ -41,6 +41,7 @@ const person = {
   knowsAbout: [
     "Graphic design", "Sports graphic design", "Recruiting graphics", "Brand identity", "Social media design",
     "Video production", "Entrepreneurship", "Sales", "Youth advocacy", "Tobacco control",
+    "Event planning", "Event organizing", "Community building", "Grassroots marketing", "Experiential marketing", "Fundraising",
     "Adobe Photoshop", "Adobe Illustrator", "Adobe Premiere Pro", "Adobe After Effects", "Figma",
   ],
   award: ["Valedictorian, Church Farm School (2026)", "DECA Pennsylvania State Champion", "QuestBridge Finalist", "A Better Chance Scholar (2018)"],
