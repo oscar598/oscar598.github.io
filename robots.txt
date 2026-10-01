@@ -1,0 +1,27 @@
+# Everyone, including AI assistants and search crawlers, is welcome to read this site.
+User-agent: *
+Allow: /
+Disallow: /tools/
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://oscarludesign.com/sitemap.xml

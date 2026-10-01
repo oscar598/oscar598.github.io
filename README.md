@@ -41,7 +41,7 @@ Then open http://localhost:8080/ (add `?debug` to skip the intro countdown).
 
 ## Editing
 
-- **Words** → `/js/data.js` (shared with the resume).
+- **Words** → `/js/data.js` (shared with the resume). After editing it, run `node tools/prerender.mjs`: it bakes the words into `index.html` and `resume.html` (so search engines and AI crawlers can read them) and regenerates `llms.txt` and `sitemap.xml`.
 - **Scene-specific lines** (email text, credits, acrostic facts, director's notes) live at the top of each scene file.
 - **Media** → `js/assets.js`. Real photos live in `assets/photos/`; the only AI placeholder left is the LA diorama. Put a file in `assets/` and set its path, e.g.
   `harvard: { img: "assets/harvard.jpg" }`. Video works too (`video: "assets/clip.mp4"`).
