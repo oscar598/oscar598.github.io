@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0e15">
+  <title>Design · Oscar Lu</title>
+  <meta name="description" content="Design work by Oscar Lu: Griffin Review, Church Farm School's art and literature magazine.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../site.css">
+  <link rel="stylesheet" href="design.css">
+</head>
+<body>
+  <div class="orb" aria-hidden="true"></div>
+
+  <main class="work">
+    <a class="mark in" href="../">oscar lu</a>
+    <h1 class="in" style="--d: 80ms">Design</h1>
+    <p class="sub in" style="--d: 140ms">Griffin Review, editions V–VII</p>
+
+    <!-- Oldest first. Each issue's pages live in assets/griffin/<year>/01.jpg … -->
+    <ul class="issues in" style="--d: 200ms">
+      <li><button class="issue" data-year="2024" data-pages="36"><img src="../assets/griffin/2024/cover.jpg" alt="Griffin Review, Edition V cover"><span class="tag">Edition V · 2024</span></button></li>
+      <li><button class="issue" data-year="2025" data-pages="36"><img src="../assets/griffin/2025/cover.jpg" alt="Griffin Review, Edition VI cover"><span class="tag">Edition VI · 2025</span></button></li>
+      <li><button class="issue" data-year="2026" data-pages="36"><img src="../assets/griffin/2026/cover.jpg" alt="Griffin Review, Edition VII cover"><span class="tag">Edition VII · 2026</span></button></li>
+    </ul>
+  </main>
+
+  <dialog class="reader" aria-label="Magazine reader">
+    <div class="bar">
+      <span class="count" aria-live="polite"></span>
+      <button class="close" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="stage"><div class="spread"></div></div>
+    <button class="turn prev" aria-label="Previous page">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+    </button>
+    <button class="turn next" aria-label="Next page">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </dialog>
+
+  <script src="reader.js"></script>
+</body>
+</html>

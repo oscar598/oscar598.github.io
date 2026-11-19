@@ -1,0 +1,165 @@
+/* Design page: three covers, and a reader that turns pages. */
+
+.work {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 100svh;
+  flex-direction: column;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: max(24px, env(safe-area-inset-top)) 16px max(48px, env(safe-area-inset-bottom));
+  text-align: center;
+}
+.work h1 { margin-top: 56px; }
+
+.issues {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 48px;
+  padding: 0;
+  list-style: none;
+}
+@media (max-width: 720px) {
+  .issues { grid-template-columns: 1fr; max-width: 340px; margin-inline: auto; gap: 14px; }
+}
+
+.issue {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 612 / 792;
+  overflow: hidden;
+  border: 0;
+  border-radius: 24px;
+  padding: 0;
+  background: rgb(255 255 255 / 0.08);
+  cursor: pointer;
+  box-shadow: 0 20px 50px -20px rgb(0 0 0 / 0.7);
+  transition: transform 420ms cubic-bezier(0.2, 0.9, 0.3, 1);
+}
+.issue img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.issue:active { transform: scale(0.98); transition-duration: 80ms; }
+.issue:focus-visible { outline: 3px solid rgb(120 170 220 / 0.6); outline-offset: 3px; }
+@media (hover: hover) { .issue:hover { transform: translateY(-4px); } }
+
+.tag {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  border-radius: 999px;
+  padding: 7px 12px;
+  background: rgb(10 14 21 / 0.35);
+  border: 1px solid rgb(255 255 255 / 0.16);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  backdrop-filter: blur(22px) saturate(140%);
+  color: #fff;
+  font: 500 13px/1 "Inter Tight", system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+a.mark { align-self: center; }
+
+/* ── Reader ──────────────────────────────────────────────────────── */
+
+.reader {
+  width: 100vw;
+  height: 100svh;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background: rgb(6 9 14 / 0.96);
+  color: #fff;
+  overflow: hidden;
+}
+.reader::backdrop { background: rgb(6 9 14 / 0.6); }
+.reader[open] { display: grid; grid-template-rows: auto 1fr; }
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: max(12px, env(safe-area-inset-top)) 16px 8px;
+}
+.count { font-size: 14px; color: rgb(255 255 255 / 0.6); font-variant-numeric: tabular-nums; }
+
+.close, .turn {
+  display: flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #0a0e15;
+  cursor: pointer;
+  transition: transform 320ms cubic-bezier(0.2, 1.7, 0.4, 1), opacity 200ms;
+}
+.close:active, .turn:active { transform: scale(0.9); transition-duration: 70ms; }
+.turn:disabled { opacity: 0.25; cursor: default; }
+
+.turn {
+  position: absolute;
+  top: 50%;
+  margin-top: -22px;
+  z-index: 2;
+}
+.prev { left: 16px; }
+.next { right: 16px; }
+@media (max-width: 720px) {
+  .turn { top: auto; bottom: max(16px, env(safe-area-inset-bottom)); margin: 0; }
+  .prev { left: calc(50% - 56px); }
+  .next { right: calc(50% - 56px); }
+}
+
+.stage {
+  display: flex;
+  min-height: 0;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 80px 24px;
+  perspective: 2200px;
+  touch-action: pan-y;
+}
+@media (max-width: 720px) { .stage { padding: 4px 12px 84px; } }
+
+.spread {
+  display: flex;
+  height: 100%;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.spread img {
+  display: block;
+  height: auto;
+  max-height: 100%;
+  width: auto;
+  max-width: 100%;
+  aspect-ratio: 612 / 792;
+  background: rgb(255 255 255 / 0.06);
+  box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.9);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.spread.two img { max-width: 50%; }
+.spread.two img:first-child { border-radius: 6px 0 0 6px; }
+.spread.two img:last-child { border-radius: 0 6px 6px 0; }
+.spread:not(.two) img { border-radius: 6px; }
+
+/* Page turn: the outgoing spread swings away around its spine, the new one
+   settles in from the other side. */
+@media (prefers-reduced-motion: no-preference) {
+  .spread.out-next { animation: out-next 260ms cubic-bezier(0.4, 0, 1, 1) forwards; transform-origin: left center; }
+  .spread.out-prev { animation: out-prev 260ms cubic-bezier(0.4, 0, 1, 1) forwards; transform-origin: right center; }
+  .spread.in-next { animation: in-next 420ms cubic-bezier(0.2, 0.9, 0.3, 1) both; transform-origin: right center; }
+  .spread.in-prev { animation: in-prev 420ms cubic-bezier(0.2, 0.9, 0.3, 1) both; transform-origin: left center; }
+}
+@keyframes out-next { to { transform: rotateY(-28deg) translateX(-6%); opacity: 0; } }
+@keyframes out-prev { to { transform: rotateY(28deg) translateX(6%); opacity: 0; } }
+@keyframes in-next { from { transform: rotateY(22deg) translateX(6%); opacity: 0; } }
+@keyframes in-prev { from { transform: rotateY(-22deg) translateX(-6%); opacity: 0; } }
