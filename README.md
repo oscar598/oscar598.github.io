@@ -1,12 +1,11 @@
 # Oscar Lu
 
-One page: LinkedIn, resume, a few photos. Plain HTML and CSS, no build step.
+One page: LinkedIn and design work. Plain HTML and CSS, no build step.
 Look borrowed from the Leo request page (dark navy, drifting orb, white pills, Inter Tight).
 
-- `index.html`: the page. Photos are `<figure>`s near the bottom.
+- `index.html`: the page.
+- `design/`: Griffin Review reader; pages in `assets/griffin/<year>/`.
 - `site.css`: all styles.
-- `assets/oscar-lu-resume.pdf`: replace this file to update the resume.
-- `assets/album/`: photos (4:5 portrait crops look best).
 
 Run it locally:
 
